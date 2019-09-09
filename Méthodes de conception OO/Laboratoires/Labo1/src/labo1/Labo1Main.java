@@ -17,8 +17,8 @@ public class Labo1Main extends JFrame {
 	
 	
 	/*
-	 * Cette fonction initialise le dessin. Elle lit un Point
-	 * au clavier ou à partir du fichier. 
+	 * Cette belle fonction initialise le dessin. Elle lit un Point
+	 * au clavier ou à partir du fichier
 	 */
 	
 	private Point initDessin(Scanner reader){
