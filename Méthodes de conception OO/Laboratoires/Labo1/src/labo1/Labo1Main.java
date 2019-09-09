@@ -18,7 +18,7 @@ public class Labo1Main extends JFrame {
 	
 	/*
 	 * Cette belle fonction initialise le dessin. Elle lit un Point
-	 * au clavier ou à partir du fichier
+	 * au clavier ou ï¿½ partir du fichier
 	 */
 	
 	private Point initDessin(Scanner reader){
@@ -30,6 +30,7 @@ public class Labo1Main extends JFrame {
 		return p;		
 		
 		
+		
 	}
 	
 	
@@ -37,9 +38,9 @@ public class Labo1Main extends JFrame {
 	
 	/*
 	 * Initialisation de la classe de test.
-	 * On obtient un nom de fichier des paramètres d'exécution.
+	 * On obtient un nom de fichier des paramï¿½tres d'exï¿½cution.
 	 * Si on n'a pas de parametre ou un fichier inexistant, on utilise
-	 * le clavier comme flot d'entrée.
+	 * le clavier comme flot d'entrï¿½e.
 	 */
 	
 	public Labo1Main(String[] args) {	
@@ -56,13 +57,13 @@ public class Labo1Main extends JFrame {
 		}
 
 		catch (FileNotFoundException e) {
-			System.out.println("Fichier non trouvé...");
+			System.out.println("Fichier non trouvï¿½...");
 			reader = new Scanner(new InputStreamReader(System.in));
 		}
     	}
 		else
 		{
-			System.out.println("Aucun fichier en paramètre. Entrez les données dans la console.");
+			System.out.println("Aucun fichier en paramï¿½tre. Entrez les donnï¿½es dans la console.");
 			reader = new Scanner(System.in);
 		}
 
@@ -71,11 +72,11 @@ public class Labo1Main extends JFrame {
 
 	
 	/*
-	 * Initialisation de la fenêtre.
+	 * Initialisation de la fenï¿½tre.
 	 */
     private void initUI(Scanner reader) {
     	
-    	//Obtention d'un point à partir du fichier ou du clavier
+    	//Obtention d'un point ï¿½ partir du fichier ou du clavier
     	Point lepoint = initDessin(reader);    	
 
     	//Affichage sur la console de la valeur du point
@@ -84,10 +85,10 @@ public class Labo1Main extends JFrame {
     	//Panneau qui sert de surface pour dessiner.
         PanneauDessin surface = new PanneauDessin(lepoint);
         
-        //La surface de dessin est placée dans la fenêtre.
+        //La surface de dessin est placï¿½e dans la fenï¿½tre.
         add(surface);
         
-        //Configurations relatives à la fenêtre.
+        //Configurations relatives ï¿½ la fenï¿½tre.
         setTitle("Labo 1");
         setSize(800, 600);
         setLocationRelativeTo(null);
