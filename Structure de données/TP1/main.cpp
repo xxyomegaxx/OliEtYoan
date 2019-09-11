@@ -98,6 +98,16 @@ int main(){
   cout << endl;
 
   //Test de Triangle
+  cout << "Test de Rectangle " << endl ;
+  cout << "=================" << endl ;
+
+  Rectangle r1(Point(1,1),Point(1,3),Point(4,3),Point(4,1));
+
+  cout << "AIREEEEE RECT : " << r1.calculerAire();
+
+  
+
+  //Test de Triangle
   cout << "Test de Triangle " << endl ;
   cout << "=================" << endl ;
 

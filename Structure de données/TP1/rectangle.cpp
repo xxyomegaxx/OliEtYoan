@@ -49,5 +49,8 @@ float Rectangle::calculerAire(void){
         
     }
 
-    return smallest * SecondSmallest;
+    float aire = smallest * SecondSmallest;
+
+    return aire;
+
 }
