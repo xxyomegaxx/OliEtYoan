@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4F9FD4F6232877F000C9B769 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FD4F5232877F000C9B769 /* main.cpp */; };
+		4F9FD5082328786100C9B769 /* point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FD5012328786100C9B769 /* point.cpp */; };
+		4F9FD5092328786100C9B769 /* cercle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FD5022328786100C9B769 /* cercle.cpp */; };
+		4F9FD50A2328786100C9B769 /* polygone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FD5042328786100C9B769 /* polygone.cpp */; };
+		4F9FD50B2328786100C9B769 /* plan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FD5052328786100C9B769 /* plan.cpp */; };
+		4F9FD50C2328786100C9B769 /* triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F9FD5072328786100C9B769 /* triangle.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +30,18 @@
 /* Begin PBXFileReference section */
 		4F9FD4F2232877F000C9B769 /* Tp1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tp1; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F9FD4F5232877F000C9B769 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		4F9FD4FC2328786000C9B769 /* triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = triangle.h; path = "../../../../../Downloads/CodeDepart 2/triangle.h"; sourceTree = "<group>"; };
+		4F9FD4FD2328786100C9B769 /* compilation_et_execution.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = compilation_et_execution.sh; path = "../../../../../Downloads/CodeDepart 2/compilation_et_execution.sh"; sourceTree = "<group>"; };
+		4F9FD4FE2328786100C9B769 /* cercle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cercle.h; path = "../../../../../Downloads/CodeDepart 2/cercle.h"; sourceTree = "<group>"; };
+		4F9FD4FF2328786100C9B769 /* point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = point.h; path = "../../../../../Downloads/CodeDepart 2/point.h"; sourceTree = "<group>"; };
+		4F9FD5002328786100C9B769 /* plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = plan.h; path = "../../../../../Downloads/CodeDepart 2/plan.h"; sourceTree = "<group>"; };
+		4F9FD5012328786100C9B769 /* point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = point.cpp; path = "../../../../../Downloads/CodeDepart 2/point.cpp"; sourceTree = "<group>"; };
+		4F9FD5022328786100C9B769 /* cercle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cercle.cpp; path = "../../../../../Downloads/CodeDepart 2/cercle.cpp"; sourceTree = "<group>"; };
+		4F9FD5032328786100C9B769 /* figure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = figure.h; path = "../../../../../Downloads/CodeDepart 2/figure.h"; sourceTree = "<group>"; };
+		4F9FD5042328786100C9B769 /* polygone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = polygone.cpp; path = "../../../../../Downloads/CodeDepart 2/polygone.cpp"; sourceTree = "<group>"; };
+		4F9FD5052328786100C9B769 /* plan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = plan.cpp; path = "../../../../../Downloads/CodeDepart 2/plan.cpp"; sourceTree = "<group>"; };
+		4F9FD5062328786100C9B769 /* polygone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = polygone.h; path = "../../../../../Downloads/CodeDepart 2/polygone.h"; sourceTree = "<group>"; };
+		4F9FD5072328786100C9B769 /* triangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = triangle.cpp; path = "../../../../../Downloads/CodeDepart 2/triangle.cpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +74,18 @@
 		4F9FD4F4232877F000C9B769 /* Tp1 */ = {
 			isa = PBXGroup;
 			children = (
+				4F9FD5022328786100C9B769 /* cercle.cpp */,
+				4F9FD4FE2328786100C9B769 /* cercle.h */,
+				4F9FD4FD2328786100C9B769 /* compilation_et_execution.sh */,
+				4F9FD5032328786100C9B769 /* figure.h */,
+				4F9FD5052328786100C9B769 /* plan.cpp */,
+				4F9FD5002328786100C9B769 /* plan.h */,
+				4F9FD5012328786100C9B769 /* point.cpp */,
+				4F9FD4FF2328786100C9B769 /* point.h */,
+				4F9FD5042328786100C9B769 /* polygone.cpp */,
+				4F9FD5062328786100C9B769 /* polygone.h */,
+				4F9FD5072328786100C9B769 /* triangle.cpp */,
+				4F9FD4FC2328786000C9B769 /* triangle.h */,
 				4F9FD4F5232877F000C9B769 /* main.cpp */,
 			);
 			path = Tp1;
@@ -118,6 +147,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F9FD5092328786100C9B769 /* cercle.cpp in Sources */,
+				4F9FD50C2328786100C9B769 /* triangle.cpp in Sources */,
+				4F9FD5082328786100C9B769 /* point.cpp in Sources */,
+				4F9FD50A2328786100C9B769 /* polygone.cpp in Sources */,
+				4F9FD50B2328786100C9B769 /* plan.cpp in Sources */,
 				4F9FD4F6232877F000C9B769 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
