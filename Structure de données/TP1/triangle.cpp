@@ -25,14 +25,14 @@ float Triangle::calculerAire(void){
   float angle_entre_sommets_0_et_1 = p.calculerAngle();
   //Rotation de la figure pour ramener [s0,s1] a l'horizontal
   tourner(sommets[0], -angle_entre_sommets_0_et_1);
-  //Calcul de la base du triangle 
+  //Calcul de la base du triangle
   float nouvel_abcisse1 = sommets[1].calculerAbcisse();
   float base = abs(abcisse0 - nouvel_abcisse1);
-  //Calcul de la hauteur du triangle 
+  //Calcul de la hauteur du triangle
   float ordonnee2 = sommets[2].calculerOrdonnee();
   float hauteur = abs(ordonnee0 - ordonnee2);
   //Rotation inverse pour ramener la figure a sa place initiale
   tourner(sommets[0], angle_entre_sommets_0_et_1);
   float aire = base * hauteur / 2 ;
-  return aire; 
+  return aire;
 }

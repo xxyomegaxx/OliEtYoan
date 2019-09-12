@@ -103,9 +103,9 @@ int main(){
 
 
 
-  Rectangle r1(Point(1,1),Point(1,3),Point(4,3),Point(4,1));
-
-  cout << "AIREEEEE RECT : " << r1.calculerAire();
+  // Rectangle r1(Point(1,1),Point(1,3),Point(4,3),Point(4,1));
+  Triangle t8(Point(1,1),Point(1,3),Point(4,3));
+  cout << "AIREEEEE RECT : " << t8.calculerAire();
 
 
 

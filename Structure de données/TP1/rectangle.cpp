@@ -25,33 +25,33 @@ float Rectangle::calculerAire(void){
     // float abcisse2 = sommets[2].calculerAbcisse();
     // float ordonnee2 = sommets[2].calculerOrdonnee();
 
-    
-    int dist1 = sommets[0].calculerDistance(sommets[1]);
-    int dist2 = sommets[0].calculerDistance(sommets[2]);
-    int dist3 = sommets[1].calculerDistance(sommets[2]);
 
-    int allDist[3] = {dist1,dist2,dist3};
-    
-    int smallest;
-    int secondSmallest;
-
-    if(allDist[0] < allDist[1]){
-        allDist[0] = smallest;
-        allDist[1] = secondSmallest;
-    }
-    else {
-        allDist[0] = secondSmallest;
-        allDist[1] = smallest;
-    }
-
-    if(smallest > allDist[2]){
-        secondSmallest = smallest;
-        smallest = allDist[2]; 
-        
-    }
-
-    float aire = smallest * secondSmallest;
-
-    return aire;
+    // int dist1 = sommets[0].calculerDistance(sommets[1]);
+    // int dist2 = sommets[0].calculerDistance(sommets[2]);
+    // int dist3 = sommets[1].calculerDistance(sommets[2]);
+    //
+    // int allDist[3] = {dist1,dist2,dist3};
+    //
+    // int smallest;
+    // int secondSmallest;
+    //
+    // if(allDist[0] < allDist[1]){
+    //     allDist[0] = smallest;
+    //     allDist[1] = secondSmallest;
+    // }
+    // else {
+    //     allDist[0] = secondSmallest;
+    //     allDist[1] = smallest;
+    // }
+    //
+    // if(smallest > allDist[2]){
+    //     secondSmallest = smallest;
+    //     smallest = allDist[2];
+    //
+    // }
+    //
+    // float aire = smallest * secondSmallest;
+    //
+    // return aire;
 
 }
