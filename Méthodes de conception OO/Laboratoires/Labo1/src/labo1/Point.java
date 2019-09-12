@@ -33,6 +33,23 @@ public class Point {
 		
 	}
 	
+	public void setX(int val)
+	{
+		x=val;
+	}
+	public void setY(int val)
+	{
+		y=val;
+	}
+	
+	public int getX()
+	{
+		return x;
+	}
+	public int getY()
+	{
+		return y;
+	}
 	
 	
 	

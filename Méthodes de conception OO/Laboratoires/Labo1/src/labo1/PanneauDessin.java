@@ -22,12 +22,12 @@ class PanneauDessin extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	
 	//L'objet qui sera dessiné sur la surface.
-	private Point contenu;
+	private NuagePoints contenu;
 	
 	//La surface de dessin doit être créée avec un objet à dessiner.
-    public PanneauDessin(Point lepoint) {
+    public PanneauDessin(NuagePoints leNuage) {
 
-        contenu = lepoint;
+        contenu = leNuage;
     }    
 
     /*
