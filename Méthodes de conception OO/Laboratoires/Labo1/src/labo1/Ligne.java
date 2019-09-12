@@ -35,6 +35,10 @@ public class Ligne {
 		b.setX(reader.nextInt());
 		b.setY(reader.nextInt());
 	}
-	
+	public String toString()
+	{
+		
+		return a.toString()+"->"+b.toString();
+	}
 
 }

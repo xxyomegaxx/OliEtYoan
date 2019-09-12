@@ -80,7 +80,7 @@ public class Labo1Main extends JFrame {
     	 NuagePoints leNuage = initDessin(reader);    	
 
     	//Affichage sur la console de la valeur du point
-    	System.out.println(leNuage);
+    	System.out.println(leNuage.toString());
     	
     	//Panneau qui sert de surface pour dessiner.
         PanneauDessin surface = new PanneauDessin(leNuage);

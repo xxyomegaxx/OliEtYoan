@@ -51,7 +51,11 @@ public class Point {
 		return y;
 	}
 	
-	
+	public String toString()
+	{
+		
+		return "("+Integer.toString(x)+ ","+Integer.toString(y)+")";
+	}
 	
 	
 }

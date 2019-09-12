@@ -34,6 +34,15 @@ public class NuagePoints {
 
 		
 	}
-	
+	public String toString()
+	{
+		String retour = "";
+		for(int i=0;i<nbPoints;i++)
+		{
+			retour+=(listePoints.get(i).toString()+"\n");
+		}
+		
+		return retour;
+	}
 
 }
