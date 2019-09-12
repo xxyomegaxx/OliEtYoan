@@ -73,10 +73,11 @@ float Point::calculerAngle(){
 
 
 void Point::translater(Point vector){
+  
   abcisse = abcisse + vector.calculerAbcisse();
   ordonnee = ordonnee + vector.calculerOrdonnee();
-}
 
+}
 void Point::tournerOrigine(float angle_degres){
   //Calcul des coordonnees polaires (rayon, angle)
   float rayon = calculerRayon();

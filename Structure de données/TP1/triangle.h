@@ -21,6 +21,7 @@ class Triangle : public Polygone{
   Triangle(Point, Point, Point);
     
   // calcul de l'aire
+  
   float calculerAire();
   
 };

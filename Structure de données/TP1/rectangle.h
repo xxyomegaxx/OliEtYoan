@@ -22,6 +22,7 @@ class Rectangle : public Polygone{
     
   // calcul de l'aire
   float calculerAire();
+
   
 };
 #endif

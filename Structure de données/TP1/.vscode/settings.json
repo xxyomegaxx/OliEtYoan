@@ -5,7 +5,7 @@
     },
 
     "code-runner.executorMap": {
-        "cpp": "cd $dir && g++ -std=c++ $fileName -o $fileNameWithoutExt &&"
+        "cpp": "cd $dir && g++ -std=c++11 $fileName -o $fileNameWithoutExt &&"
     }
 }
 
