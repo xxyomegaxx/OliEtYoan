@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 /*
  * Panneau qui représente une surface pour dessiner.
- * S'initialise avec un Point à dessiner.
+ * S'initialise avec un Point à dessiner. salut
  * Dessine le point.
  */
 
