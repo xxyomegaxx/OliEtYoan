@@ -8,7 +8,7 @@
 
 
 #include "cercle.h"
-//#include "rectangle.h"
+#include "r        ectangle.h"
 #include "triangle.h"
 #include "plan.h"
 
@@ -104,7 +104,7 @@ int main(){
 
 
   // Rectangle r1(Point(1,1),Point(1,3),Point(4,3),Point(4,1));
-  Triangle t8(Point(1,1),Point(1,3),Point(4,3));
+  Rectangle t8(Point(1,1),Point(1,3),Point(4,3));
   cout << "AIREEEEE RECT : " << t8.calculerAire();
 
 
