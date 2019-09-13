@@ -32,8 +32,8 @@ public class NuagePoints extends Dessin{
 					Point temp = new Point();
 					temp.setX(reader.nextInt());
 					temp.setY(reader.nextInt());
-					boolean ans = listePoints.contains(temp);
-				    if(ans)
+		
+				    if(listePoints.contains(temp))
 				    {
 				  	      minus++;//est ce qu'on doit delete temp?
 				    }
