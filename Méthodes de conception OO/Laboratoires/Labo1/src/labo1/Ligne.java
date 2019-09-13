@@ -12,6 +12,11 @@ public class Ligne extends Dessin {
 		a = new Point();
 		b = new Point();
 	}
+	public Ligne(Point pa, Point pb)
+	{
+		a=pa;
+		b=pb;
+	}
 	
 	/*
 	 * Fonction qui dessine le point sur la surface 2D.

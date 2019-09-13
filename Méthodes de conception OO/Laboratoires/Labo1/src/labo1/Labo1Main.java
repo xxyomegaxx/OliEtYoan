@@ -23,7 +23,7 @@ public class Labo1Main extends JFrame {
 	
 	private Dessin initDessin(Scanner reader){
 		
-		Dessin dessin = new Ligne();
+		Dessin dessin = new Polygone();
 		
 			dessin.lire(reader);		
 		

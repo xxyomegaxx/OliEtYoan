@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class NuagePoints extends Dessin{
 	
-	ArrayList<Point> listePoints = new ArrayList<Point>();
-	int nbPoints;
+	private ArrayList<Point> listePoints = new ArrayList<Point>();
+	private int nbPoints;
 	
 	public void dessiner(Graphics2D graph){
 		for(int i=0;i<nbPoints;i++)
@@ -63,6 +63,14 @@ public class NuagePoints extends Dessin{
 		}
 		
 		return retour;
+	}
+	public int getNbPoints()
+	{
+		return nbPoints;
+	}
+	public Point getPointFromList(int i)
+	{
+		return listePoints.get(i);
 	}
 
 }
