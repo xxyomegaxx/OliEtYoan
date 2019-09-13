@@ -20,12 +20,14 @@ public class DessinCompose extends Dessin {
 
 	public void lire(Scanner reader) {	
 		Dessin temp = null;
+		int value;
 		while(reader.hasNextInt())
 		{
-			if(reader.nextInt()==-1) temp=new Point();
-			else if(reader.nextInt()==-2)temp=new Ligne();	
-			else if(reader.nextInt()==-3)temp=new NuagePoints();
-			else if(reader.nextInt()==-4)temp=new Polygone();
+			value = reader.nextInt();
+			if(value==-1) temp=new Point();
+			else if(value==-2)temp=new Ligne();	
+			else if(value==-3)temp=new NuagePoints();
+			else if(value==-4)temp=new Polygone();
 			temp.lire(reader);
 			listeDessins.add(temp);
 		}
