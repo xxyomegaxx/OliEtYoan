@@ -56,9 +56,9 @@ public class Point {
 		
 		return "("+Integer.toString(x)+ ","+Integer.toString(y)+")";
 	}
-	
-	boolean equals(Point point) {
-		if(x==point.getX() && y==point.getY()) return true;
+	@Override
+	public boolean equals(Object point) {
+		if(x==((Point) point).getX() && y==((Point) point).getY()) return true;
 		else return false;
 		
 	}

@@ -23,24 +23,33 @@ public class NuagePoints {
 	 */
 	public void lire(Scanner reader) {		
 		nbPoints = reader.nextInt();
-		for(int i=0;i<nbPoints;i++)
+		if (nbPoints > 0)
 		{
-			try {
-				Point temp = new Point();
-				temp.setX(reader.nextInt());
-				temp.setY(reader.nextInt());
-			    if(listePoints.contains(temp))
-			    {
-			  	      nbPoints--;//est ce qu'on doit delete temp?
-			    }
-			    else listePoints.add(temp);
-			}
-			catch(NoSuchElementException e)
+			int minus = 0;
+			for(int i=0;i<nbPoints;i++)
 			{
-				nbPoints =i;
+				try {
+					Point temp = new Point();
+					temp.setX(reader.nextInt());
+					temp.setY(reader.nextInt());
+					boolean ans = listePoints.contains(temp);
+				    if(ans)
+				    {
+				  	      minus++;//est ce qu'on doit delete temp?
+				    }
+				    else listePoints.add(temp);
+				}
+				catch(NoSuchElementException e)
+				{
+					nbPoints =i;
+				}
+
+							
 			}
-						
+			
+			nbPoints = nbPoints-minus;
 		}
+		else ;
 
 		
 	}
