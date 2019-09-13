@@ -21,13 +21,13 @@ public class Labo1Main extends JFrame {
 	 * au clavier ou à partir du fichier
 	 */
 	
-	private NuagePoints initDessin(Scanner reader){
+	private Dessin initDessin(Scanner reader){
 		
-		NuagePoints l = new NuagePoints();
+		Dessin dessin = new Ligne();
 		
-			l.lire(reader);		
+			dessin.lire(reader);		
 		
-		return l;		
+		return dessin;		
 		
 		
 		
@@ -77,13 +77,13 @@ public class Labo1Main extends JFrame {
     private void initUI(Scanner reader) {
     	
     	//Obtention d'un point à partir du fichier ou du clavier
-    	 NuagePoints leNuage = initDessin(reader);    	
+    	 Dessin dessin = initDessin(reader);    	
 
     	//Affichage sur la console de la valeur du point
-    	System.out.println(leNuage.toString());
+    	System.out.println(dessin.toString());
     	
     	//Panneau qui sert de surface pour dessiner.
-        PanneauDessin surface = new PanneauDessin(leNuage);
+        PanneauDessin surface = new PanneauDessin(dessin);
         
         //La surface de dessin est placée dans la fenêtre.
         add(surface);

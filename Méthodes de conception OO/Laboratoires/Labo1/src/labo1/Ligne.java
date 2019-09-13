@@ -3,7 +3,7 @@ package labo1;
 import java.awt.Graphics2D;
 import java.util.Scanner;
 
-public class Ligne {
+public class Ligne extends Dessin {
 	
 	private Point a;
 	private Point b;

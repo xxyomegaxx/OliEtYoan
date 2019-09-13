@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class NuagePoints {
+public class NuagePoints extends Dessin{
 	
 	ArrayList<Point> listePoints = new ArrayList<Point>();
 	int nbPoints;
