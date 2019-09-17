@@ -68,8 +68,11 @@ float Plan::calculerCirconference(){
 }
 
 float Plan::calculerAire(){
-  float  aire = 0.0;
+  float  aire;
   /*... a completer ...*/
+  for(int i = 0; i < nb_figures; i++){
+    aire += (figures[i] -> calculerAire());
+  }
   return aire;
 }
 

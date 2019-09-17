@@ -217,6 +217,10 @@ int main(){
   cout << "Circonference totale : " << p.calculerCirconference();
   cout << endl;
 
+
+  cout << "Aire totale : " << p.calculerAire();
+  cout << endl;
+
   //Suppression de figure a position non atteinte
   cout << "tentative de suppression en dehors de dimension :  p.supprimer_figure(5) :" ;
   p.supprimerFigure(5);
