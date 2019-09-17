@@ -41,6 +41,11 @@ int main(){
   r.afficher();
   cout << endl<< endl;
 
+  //Rotation autour d'un Point donne
+  r.tourner(Point(0,2),-180);
+  cout << "r apres tourner(Point(0,2),-180): " ;
+  r.afficher();
+  cout << endl<< endl;
 
 
 
@@ -134,6 +139,7 @@ int main(){
   cout << "Test de Triangle " << endl ;
   cout << "=================" << endl ;
 
+
   //Creation de triangle
   Triangle t1(Point(0,0), Point(1,-1), Point(1,1));
   cout << "t1 : " ;
@@ -182,6 +188,7 @@ int main(){
 
   //Ajout de figures
   p.ajouterFigure(&c1);
+
 
   p.ajouterFigure(&t1);
   Triangle t2(Point(0,0), Point(1,0), Point(0,1));

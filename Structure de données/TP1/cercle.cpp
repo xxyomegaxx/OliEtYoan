@@ -12,8 +12,7 @@ Cercle::Cercle(Point p, float ray): centre(p), rayon(ray) {
 
 void Cercle::translater(Point vector) {
     /*... a completer ...*/
-     // -> translater(vector);
-
+    centre.translater(vector);
 }
 
 void Cercle::tournerOrigine(float angle_degres){
