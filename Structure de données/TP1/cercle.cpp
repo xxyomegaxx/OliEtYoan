@@ -17,6 +17,7 @@ void Cercle::translater(Point vector) {
 
 void Cercle::tournerOrigine(float angle_degres){
     /*... a completer ...*/
+    centre.tournerOrigine(angle_degres);
 }
 
 void Cercle::tourner(Point p, float angle_degres){
