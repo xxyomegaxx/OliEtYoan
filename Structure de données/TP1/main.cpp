@@ -23,15 +23,23 @@ int main(){
   Rectangle r(Point(1,1),Point(4,1),Point(4,3),Point(1,3));
   cout << "r : " ;
   r.afficher();
-  cout << endl;
+  cout << endl<< endl;
 
   //Aire
   cout << "Aire de r : "  << r.calculerAire() << endl ;
-  cout << endl;
+  cout << endl<< endl;
 
+  //Translation rectangle
   cout << "Translation vers Point(3,1) :" <<endl;
   r.translater(Point(3,1));
   r.afficher();
+  cout << endl<< endl;
+
+  //Tourner a l'origine pour un rectangle
+  r.tournerOrigine(90);
+  cout << "p1 apres tournerOrigine(90): " ;
+  r.afficher();
+  cout << endl<< endl;
 
 
 
@@ -62,10 +70,7 @@ int main(){
   p1.afficher();
   cout << endl<< endl;
 
-  p2.translater(Point(3,1));
-  cout << "p2 apres translater(Point(3,1)): " ;
-  p2.afficher();
-  cout << endl<< endl;
+
 
   //Translation suivant un vecteur
   p1.translater(Point(3,1));

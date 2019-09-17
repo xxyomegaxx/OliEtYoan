@@ -23,7 +23,10 @@ void Polygone::translater(Point vector){
 
 void Polygone::tournerOrigine(float angle_degres){
   /*... a completer ...*/
-  
+  for(int i = 0; i < nb_sommets; i++){
+    sommets[i].tournerOrigine(angle_degres);
+  }
+
 }
 
 void Polygone::tourner(Point p, float angle_degres){
