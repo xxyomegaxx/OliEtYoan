@@ -131,6 +131,12 @@ int main(){
   cout << "Circonference de c1 : "  << c1.calculerCirconference() << endl ;
   cout << endl;
 
+  Cercle c3(Point(2,2),4);
+  //Circonference
+  cout << "Circonference de c3 : "  << c3.calculerCirconference() << endl ;
+  cout << endl;
+
+
   //Circonference
   cout << "Aire de c1 : "  << c1.calculerAire() << endl ;
   cout << endl;
@@ -190,17 +196,25 @@ int main(){
   p.ajouterFigure(&c1);
 
 
-  p.ajouterFigure(&t1);
-  Triangle t2(Point(0,0), Point(1,0), Point(0,1));
-  p.ajouterFigure(&t2);
+  Cercle c2(p2,4);
+  p.ajouterFigure(&c2);
+
+  // p.ajouterFigure(&t1);
+
+  // Triangle t2(Point(0,0), Point(1,0), Point(0,1));
+  // p.ajouterFigure(&t2);
   cout << "p apres p.ajouter_figure(...) pour &c1, &t1, et &t2 : " ;
   p.afficher();
   cout << endl;
 
-  //Ajout de figure avec capacite atteinte
-  Cercle c2(p2,2);
-  cout << "tentative d'ajout de figure avec capacite max atteinte : " ;
-  p.ajouterFigure(&c2);
+  // //Ajout de figure avec capacite atteinte
+  // Cercle c2(p2,2);
+  // cout << "tentative d'ajout de figure avec capacite max atteinte : " ;
+  // p.ajouterFigure(&c2);
+  // cout << endl;
+
+
+  cout << "Circonference totale : " << p.calculerCirconference();
   cout << endl;
 
   //Suppression de figure a position non atteinte

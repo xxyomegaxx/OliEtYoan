@@ -39,9 +39,9 @@ void Plan::supprimerFigure(int position){
 }
 
 void Plan::translater(Point vector){
-  // for(int i = 0; i < nb_figures; i++){
-  //   figures[i] -> translater(vector);
-  // }
+  for(int i = 0; i < nb_figures; i++){
+    figures[i] -> translater(vector);
+  }
 }
 
 
@@ -59,9 +59,11 @@ void Plan::tourner(Point p, float angle_degres){
 }
 
 float Plan::calculerCirconference(){
-  float  circonference = 0.0;
-
+  float  circonference;
   /*... a completer ...*/
+  for(int i = 0; i < nb_figures; i++){
+    circonference = (figures[i] -> calculerCirconference());
+  }
   return circonference;
 }
 

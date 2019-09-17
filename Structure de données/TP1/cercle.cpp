@@ -31,7 +31,6 @@ float Cercle::calculerCirconference(){
 }
 
 float Cercle::calculerAire(){
-  
   /*... a completer ...*/
   float aire = PI * pow(rayon,2);
   return aire;
