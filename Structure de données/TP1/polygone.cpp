@@ -15,6 +15,8 @@ Polygone::Polygone(int nb) : nb_sommets(nb){
 
 void Polygone::translater(Point vector){
   /*... a completer ...*/
+  abcisse = abcisse + vector.calculerAbcisse();
+  ordonnee = ordonnee + vector.calculerOrdonnee();
 }
 
 void Polygone::tournerOrigine(float angle_degres){

@@ -2,17 +2,34 @@
 * \ file main.cpp
 * \ author Aida Ouangraoua
 * \ brief Ce fichier contient des tests des opérations
-* des types Point, Cercle, Polygone, Rectangle, Triangle 
+* des types Point, Cercle, Polygone, Rectangle, Triangle
 * et Plan
 */
 
 
 #include "cercle.h"
-//#include "rectangle.h"
+#include "rectangle.h"
 #include "triangle.h"
 #include "plan.h"
 
 int main(){
+
+  //Test de Rectangle
+  cout << "Test de Rectangle " << endl ;
+  cout << "=============" << endl ;
+
+
+  // Creation d'un rectangle
+  Rectangle r(Point(1,1),Point(4,1),Point(4,3),Point(1,3));
+  cout << "r : " ;
+  r.afficher();
+  cout << endl;
+
+  //Aire
+  cout << "Aire de r : "  << r.calculerAire() << endl ;
+  cout << endl;
+
+
 
   //Test de Point
   cout << "Test de Point " << endl ;
@@ -26,31 +43,31 @@ int main(){
   cout << "p2 : " ;
   p2.afficher();
   cout << endl<< endl;
-  
+
   //Initialisation a partir de coordonnes cartesiennes
   p1.initDeCoordCartesiennes(1,2);
   cout << "p1 apres p1.initDeCoordCartesiennes(1,2): " ;
   p1.afficher();
   cout << endl<< endl;
-  
+
   //Initialisation a partir de coordonnes polaires
   p1.initDeCoordPolaires(sqrt(2), 135);
   cout << "p1 apres p1.initDeCoordPolaires(sqrt(2), 135): " ;
   p1.afficher();
   cout << endl<< endl;
-  
+
   //Translation suivant un vecteur
   p1.translater(Point(3,1));
   cout << "p1 apres translater(Point(3,1)): " ;
   p1.afficher();
   cout << endl<< endl;
-  
+
   //Rotation autour de l'origine du plan
   p1.tournerOrigine(90);
   cout << "p1 apres tournerOrigine(90): " ;
   p1.afficher();
   cout << endl<< endl;
-  
+
   //Rotation autour d'un Point donne
   p1.tourner(Point(0,2),-180);
   cout << "p1 apres tourner(Point(0,2),-180): " ;
@@ -65,15 +82,15 @@ int main(){
   cout << "Test de Cercle " << endl ;
   cout << "===============" << endl ;
 
-  //Creation de cercle  
+  //Creation de cercle
   Cercle c1(Point(-1,1),2);
   cout << "c1 : " ;
   c1.afficher();
   cout << endl;
-  
+
   //Translation suivant un vecteur
   c1.translater(Point(3,1));
-  cout << "c1 apres translater(Point(3,1)): " ; 
+  cout << "c1 apres translater(Point(3,1)): " ;
   c1.afficher();
   cout << endl;
 
@@ -82,7 +99,7 @@ int main(){
   cout << "c1 apres tournerOrigine(90): " ;
   c1.afficher();
   cout << endl;
-  
+
   //Rotation autour d'un Point donne
   c1.tourner(Point(0,2),-180);
   cout << "c1 apres tourner(Point(0,2),-180): ";
@@ -101,7 +118,7 @@ int main(){
   cout << "Test de Triangle " << endl ;
   cout << "=================" << endl ;
 
-  //Creation de triangle  
+  //Creation de triangle
   Triangle t1(Point(0,0), Point(1,-1), Point(1,1));
   cout << "t1 : " ;
   t1.afficher();
@@ -109,7 +126,7 @@ int main(){
 
   //Translation suivant un vecteur
   t1.translater(Point(3,1));
-  cout << "t1 apres translater(Point(3,1)): "  ; 
+  cout << "t1 apres translater(Point(3,1)): "  ;
   t1.afficher();
   cout << endl;
 
@@ -118,7 +135,7 @@ int main(){
   cout << "t1 apres tournerOrigine(90): "   ;
   t1.afficher();
   cout << endl;
-  
+
   //Rotation autour d'un Point donne
   t1.tourner(Point(0,2),-180);
   cout << "t1 apres tourner(Point(0,2),-180): "   ;
@@ -133,12 +150,12 @@ int main(){
   cout << "Aire de t1 : "  << t1.calculerAire() << endl ;
   cout << endl;
 
-  
+
   //Test de Plan
   cout << "Test de Plan " << endl ;
   cout << "=============" << endl ;
 
-  //Creation de plan 
+  //Creation de plan
   Plan p;
   cout << "p : " ;
   p.afficher();
@@ -175,11 +192,11 @@ int main(){
   cout << "p apres p.ajouter_figure(&c2) : " ;
   p.afficher();
   cout << endl;
-  
+
   return 0;
 
 
-  
+
+
+
 }
-
-

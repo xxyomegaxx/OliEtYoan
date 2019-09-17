@@ -5,16 +5,18 @@
 * des operations specifiques au type Triangle
 */
 
-#include "triangle.h"
+#include "rectangle.h"
 
-Triangle::Triangle(Point p1, Point p2, Point p3){
-  nb_sommets = 3;
+Rectangle::Rectangle(Point p1, Point p2, Point p3, Point p4){
+  nb_sommets = 4;
   sommets[0] = p1;
   sommets[1] = p2;
   sommets[2] = p3;
+  sommets[3] = p4;
+
 }
 
-float Triangle::calculerAire(void){
+float Rectangle::calculerAire(void){
   //Calcul des coordonnes de Sommets s0 et s1
   float abcisse0 = sommets[0].calculerAbcisse();
   float ordonnee0 = sommets[0].calculerOrdonnee();
@@ -34,5 +36,5 @@ float Triangle::calculerAire(void){
   //Rotation inverse pour ramener la figure a sa place initiale
   tourner(sommets[0], angle_entre_sommets_0_et_1);
   float aire = base * hauteur / 2 ;
-  return aire;
+  return aire*2;
 }

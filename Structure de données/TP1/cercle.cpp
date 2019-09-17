@@ -7,11 +7,13 @@
 
 #include "cercle.h"
 
-Cercle::Cercle(Point p, float ray) : centre(p), rayon(ray){
+Cercle::Cercle(Point p, float ray): centre(p), rayon(ray) {
 }
 
-void Cercle::translater(Point vector){
+void Cercle::translater(Point vector) {
     /*... a completer ...*/
+     // -> translater(vector);
+
 }
 
 void Cercle::tournerOrigine(float angle_degres){

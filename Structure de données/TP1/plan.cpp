@@ -24,7 +24,7 @@ void Plan::ajouterFigure(Figure *f){
     cout << "Figure non ajoutee : capacite maximum atteinte (" << MAXFIGURES << ")" << endl;
   }
 }
-  
+
 void Plan::supprimerFigure(int position){
   if(position < nb_figures){
     for(int i = position; i < nb_figures-1; i++){
@@ -40,9 +40,10 @@ void Plan::supprimerFigure(int position){
 
 void Plan::translater(Point vector){
   for(int i = 0; i < nb_figures; i++){
-    figures[i]->translater(vector);
+    figures[i] -> translater(vector);
   }
 }
+
 
 void Plan::tournerOrigine(float angle_degres){
   /*... a completer ...*/
