@@ -22,6 +22,7 @@ void Cercle::tournerOrigine(float angle_degres){
 
 void Cercle::tourner(Point p, float angle_degres){
     /*... a completer ...*/
+    centre.tourner(p,angle_degres);
 }
 
 float Cercle::calculerCirconference(){
