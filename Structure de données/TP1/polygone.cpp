@@ -15,12 +15,15 @@ Polygone::Polygone(int nb) : nb_sommets(nb){
 
 void Polygone::translater(Point vector){
   /*... a completer ...*/
-  abcisse = abcisse + vector.calculerAbcisse();
-  ordonnee = ordonnee + vector.calculerOrdonnee();
+  for(int i = 0; i < nb_sommets; i++){
+    sommets[i].translater(vector);
+  }
+
 }
 
 void Polygone::tournerOrigine(float angle_degres){
   /*... a completer ...*/
+  
 }
 
 void Polygone::tourner(Point p, float angle_degres){
@@ -40,5 +43,4 @@ void Polygone::afficher(void){
     sommets[i].afficher();
   }
   cout << endl;
-
 }

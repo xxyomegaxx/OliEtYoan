@@ -25,19 +25,19 @@ class Polygone : public Figure{
 
   // translation suivant un vecteur represente par un Point
   void translater(Point);
-  
+
   // rotation autour de l'origine du plan suivant un angle donne en degres
   void tournerOrigine(float);
-  
+
   // rotation autour d'un Point donne suivant un angle donne en degres
   void tourner(Point, float);
-  
+
   // calcul de la circonference
   float calculerCirconference();
-    
+
   // affichage des coordonnees
   void afficher(void);
-  
+
  protected:
   static const int MAXSOMMETS = 4;
   int nb_sommets;

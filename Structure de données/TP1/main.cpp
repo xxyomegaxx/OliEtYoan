@@ -29,6 +29,12 @@ int main(){
   cout << "Aire de r : "  << r.calculerAire() << endl ;
   cout << endl;
 
+  cout << "Translation vers Point(3,1) :" <<endl;
+  r.translater(Point(3,1));
+  r.afficher();
+
+
+
 
 
   //Test de Point
@@ -54,6 +60,11 @@ int main(){
   p1.initDeCoordPolaires(sqrt(2), 135);
   cout << "p1 apres p1.initDeCoordPolaires(sqrt(2), 135): " ;
   p1.afficher();
+  cout << endl<< endl;
+
+  p2.translater(Point(3,1));
+  cout << "p2 apres translater(Point(3,1)): " ;
+  p2.afficher();
   cout << endl<< endl;
 
   //Translation suivant un vecteur
@@ -161,8 +172,12 @@ int main(){
   p.afficher();
   cout << endl;
 
+
+
+
   //Ajout de figures
   p.ajouterFigure(&c1);
+
   p.ajouterFigure(&t1);
   Triangle t2(Point(0,0), Point(1,0), Point(0,1));
   p.ajouterFigure(&t2);
