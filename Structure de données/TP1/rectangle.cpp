@@ -36,5 +36,6 @@ float Rectangle::calculerAire(void){
   //Rotation inverse pour ramener la figure a sa place initiale
   tourner(sommets[0], angle_entre_sommets_0_et_1);
   float aire = base * hauteur / 2 ;
+
   return aire*2;
 }

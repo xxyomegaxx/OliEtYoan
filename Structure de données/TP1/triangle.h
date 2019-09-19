@@ -19,9 +19,8 @@ class Triangle : public Polygone{
 
   //Constructeur
   Triangle(Point, Point, Point);
-    
+
   // calcul de l'aire
   float calculerAire();
-  
 };
 #endif

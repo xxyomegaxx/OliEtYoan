@@ -37,9 +37,16 @@ void Polygone::tourner(Point p, float angle_degres){
 }
 
 float Polygone::calculerCirconference(){
-  float  circonference = 0.0;
+  float  circonference;
   /*... a completer ...*/
-
+  for(int i = 0; i <= nb_sommets-1; i++){
+    if(i == nb_sommets-1){
+      circonference += sommets[i].calculerDistance(sommets[0]);
+    }
+    else{
+     circonference += sommets[i].calculerDistance(sommets[i+1]);
+    }
+  }
 
   return circonference;
 }

@@ -25,6 +25,10 @@ int main(){
   r.afficher();
   cout << endl<< endl;
 
+  //perimetre
+  cout << "Circonference de c1 : "  << r.calculerCirconference() << endl ;
+  cout << endl;
+
   //Aire
   cout << "Aire de r : "  << r.calculerAire() << endl ;
   cout << endl<< endl;
@@ -46,9 +50,6 @@ int main(){
   cout << "r apres tourner(Point(0,2),-180): " ;
   r.afficher();
   cout << endl<< endl;
-
-
-
 
   //Test de Point
   cout << "Test de Point " << endl ;
