@@ -21,5 +21,10 @@ public class BoolAtom extends AbstractAtom{
 		
 		return ""+value;
 	}
+	
+	public boolean getValue()
+	{
+		return value;
+	}
 
 }

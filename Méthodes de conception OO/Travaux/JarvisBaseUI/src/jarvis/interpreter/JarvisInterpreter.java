@@ -19,11 +19,16 @@ import jarvis.atoms.ListAtom;
 import jarvis.atoms.ObjectAtom;
 import jarvis.atoms.StringAtom;
 import jarvis.atoms.primitives.OperatorNewPrimitive;
-
+import jarvis.atoms.primitives.booleans.BooleanPrimitiveNot;
 import jarvis.atoms.primitives.integers.IntegerPrimitiveAdd;
 import jarvis.atoms.primitives.integers.IntegerPrimitiveEquals;
 import jarvis.atoms.primitives.integers.IntegerPrimitiveMultiply;
 import jarvis.atoms.primitives.integers.IntegerPrimitiveSubtract;
+import jarvis.atoms.primitives.integers.IntegerPrimitivePlusPetit;
+import jarvis.atoms.primitives.integers.IntegerPrimitivePlusGrand;
+
+
+
 import jarvis.exceptions.UndefinedSymbolException;
 import jarvis.ui.MainWindow;
 
@@ -135,7 +140,10 @@ public class JarvisInterpreter {
 		environment.put("_integerMultiplyPrimitive", new IntegerPrimitiveMultiply());
 		environment.put("_integerEqualsPrimitive", new IntegerPrimitiveEquals());
 		environment.put("_operatorNewPrimitive", new OperatorNewPrimitive());
-
+		environment.put("_integerPlusPetitPrimitive", new IntegerPrimitivePlusPetit());
+		environment.put("_integerPlusGrandPrimitive", new IntegerPrimitivePlusGrand());
+		
+		environment.put("_booleanNotPrimitive", new BooleanPrimitiveNot());
 	}
 
 	// HÉRITAGE

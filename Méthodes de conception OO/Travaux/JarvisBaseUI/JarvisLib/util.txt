@@ -10,9 +10,9 @@
 !ref pint
 
 #Fonction qui imprime la valeur d'un objet de type booléen
-!{ tv .
+!{ val .
 	
-	!(tv value)
+	!(val value)
 	!p
 	!c
 }
