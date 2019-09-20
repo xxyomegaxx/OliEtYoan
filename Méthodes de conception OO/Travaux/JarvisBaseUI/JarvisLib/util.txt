@@ -19,5 +19,44 @@
 !ref pbool
 
 
+#Fonction valeur absolue
+!{.
+	
+	!(x - x)
+	!ref k
+	!(k - x)
+}
+!ref fonctionVrai
+!{.
+	
+	x
+}
+!ref fonctionFaux
+
+!(ifelse new fonctionVrai fonctionFaux)
+!ref calcCondition
+
+!{ x .
+	!(x < 0)
+	!ref resultaTest		
+	
+	!(resultaTest value)
+	!ref vraiFaux
+	
+	!(calcCondition vraiFaux)
+}
+!ref calcFinal
+
+
+
+!{ valeurachanger .
+
+	valeurachanger
+	calcFinal
+	
+}
+!ref valeurAbsolue		
+
+	
 
 !unmute
