@@ -16,6 +16,7 @@
 		!ref y1
 		!(self y2)
 		!(!a - y1)
+		valeurAbsolue
 	}
 	!ref fonctionHauteur
 		
@@ -27,6 +28,7 @@
 		!ref x1
 		!(self x2)
 		!(!a - x1)
+		valeurAbsolue
 	}
 	!ref fonctionLargeur	
 	
