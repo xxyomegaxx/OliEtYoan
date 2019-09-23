@@ -1,6 +1,6 @@
 /**
 * \ file triangle.h
-* \ author Aida Ouangraoua
+* \ author  Olivier Côté(18116913) et Yoan David()
 * \ brief Ce fichier contient les specifications
 * du type Triangle (Ensemble de triangles)
 */

@@ -1,6 +1,6 @@
 /**
 * \ file cercle.cpp
-* \ author Aida Ouangraoua
+* \ author Olivier Côté(18116913) et Yoan David()
 * \ brief Ce fichier contient l'implementation
 * des operations du type Cercle
 */
