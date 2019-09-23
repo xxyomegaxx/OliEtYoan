@@ -1,6 +1,6 @@
 /**
 * \ file triangle.cpp
-* \ author  Olivier Côté(18116913) et Yoan David()
+* \ author  Olivier Côté(18116913) et Yoan David(19089763)
 * \ brief Ce fichier contient l'implementation
 * des operations specifiques au type Triangle
 */
