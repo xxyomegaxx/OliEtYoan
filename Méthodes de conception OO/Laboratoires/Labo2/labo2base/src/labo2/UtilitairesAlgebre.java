@@ -43,7 +43,7 @@ public class UtilitairesAlgebre {
 		System.out.println(l1);
 
 		Matrice mat = new Matrice(systeme1);
-		mat.Gauss();
+		//mat.Gauss();
 		System.out.println(mat);
 
 		constante = lireEquation(equation, variables, coefficients);

@@ -18,6 +18,11 @@ public class Matrice {
 
 		}
 	}
+	
+	int dimensions()
+	{
+		return lignes.length*lignes[0].taille();
+	}
 
 	/*
 	 * Élimination Gaussienne. Let me google that for you... Implémentation
@@ -47,6 +52,11 @@ public class Matrice {
 		}
 	}
 	
+	public Vecteur getVecteur(int x)
+	{
+		return lignes[x];
+	}
+	
 	public String toString() {
 
 		String res = "";
@@ -56,6 +66,21 @@ public class Matrice {
 		}
 
 		return res;
+	}
+	
+	@Override
+	public boolean equals(Object mat)
+	{
+		if(this.dimensions() == ((Matrice)mat).dimensions())
+		{
+			for(int i=0;i<lignes.length;i++)
+			{
+				if(!lignes[i].equals(((Matrice)mat).getVecteur(i))) return false;
+			}
+			return true;
+		}
+		else return false;
+
 	}
 
 }

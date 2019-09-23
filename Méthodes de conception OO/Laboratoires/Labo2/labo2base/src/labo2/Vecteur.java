@@ -39,6 +39,22 @@ public class Vecteur {
 	public void setValeur(int pos,double val){
 		valeurs[pos]=val;
 	}
+	@Override
+	public boolean equals(Object vec)
+	{
+		if(valeurs.length == ((Vecteur)vec).taille())
+		{
+			for(int i=0;i<valeurs.length;i++)
+			{
+				if(valeurs[i]!=((Vecteur)vec).getValeur(i)) return false;
+			}
+			return true;
+		}
+		else return false;
+
+	}
+	
+	
 
 	
 }
