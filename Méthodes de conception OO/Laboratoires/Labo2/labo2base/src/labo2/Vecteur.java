@@ -6,6 +6,7 @@ package labo2;
  */
 
 public class Vecteur {
+	public static final double EPSILON = 0.01;
 	
 	private double valeurs[];
 	
@@ -46,7 +47,7 @@ public class Vecteur {
 		{
 			for(int i=0;i<valeurs.length;i++)
 			{
-				if(valeurs[i]!=((Vecteur)vec).getValeur(i)) return false;
+				if(Math.abs(valeurs[i]-((Vecteur)vec).getValeur(i))>EPSILON) return false;
 			}
 			return true;
 		}

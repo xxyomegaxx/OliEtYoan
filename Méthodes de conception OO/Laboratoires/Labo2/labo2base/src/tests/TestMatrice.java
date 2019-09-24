@@ -27,11 +27,7 @@ public class TestMatrice {
 	@Test
 	public void testToString() {
 
-		double[][] s1l1 = {{ 3, 5, -3, 15 },
-				{ 7, 10, 1, 2 },
-				{ -3, 2, -5, 6 }};		
 
-		Matrice l1 = new Matrice(s1l1);	
 		
 		String resAttendu = "[3.0 5.0 -3.0 15.0]\n" + 
 				"[7.0 10.0 1.0 2.0]\n" + 
@@ -50,12 +46,24 @@ public class TestMatrice {
 				{ 7, 10, 1, 2 },
 				{ -3, 2, -5, 6 }};	
 
-		Matrice l1 = new Matrice(s1);	
 		
 		Matrice resAttendu = new Matrice(s2);	
 		
 		assertEquals(l1,resAttendu);		
 		
+	}
+	
+	@Test
+	public void testGauss()
+	{
+		double[][] s2 = {{ 1, 0, 0, 4.15625 },
+				{ 0, 1, 0, -2.25 },
+				{ 0, 0, 1, -4.59375 }};	
+
+		
+		Matrice resAttendu = new Matrice(s2);
+		l1.Gauss();
+		assertEquals(l1,resAttendu);
 	}
 	
 
