@@ -152,40 +152,40 @@ public class JarvisInterpreter {
 
 	}
 
-	// Hï¿½RITAGE
+	// HÉRITAGE
 	// VARIABLESCLASSE
 	/*
-	 * Cette fonction crï¿½e la classe des classes. Celle-ci spï¿½cifie qu'une
-	 * classe a deux champs: attributes et methods. Pour crï¿½er une classe
-	 * valide, attributes doit ï¿½tre une liste de StringAtom et methods doit ï¿½tre
+	 * Cette fonction crée la classe des classes. Celle-ci spécifie qu'une
+	 * classe a deux champs: attributes et methods. Pour créer une classe
+	 * valide, attributes doit étre une liste de StringAtom et methods doit être
 	 * un dictionnaire de paires StringAtom:JarvisAtom.
 	 * 
-	 * Cette classe ne contient qu'une mï¿½thode: la fonction tricheuse
+	 * Cette classe ne contient qu'une méthode: la fonction tricheuse
 	 * OperatorNewPrimitive.
 	 * 
-	 * Cette classe ne devrait pas ï¿½tre codï¿½e en Jarvis. Un changement dans
+	 * Cette classe ne devrait pas être cod.e en Jarvis. Un changement dans
 	 * l'organisation des membres de cette classe implique aussi potentiellement
-	 * un changement de l'algorithme d'interprï¿½tation de messages se trouvant
+	 * un changement de l'algorithme d'interprétation de messages se trouvant
 	 * dans ObjectAtom (JarvisObjet.message( ... )). De plus, cette classe doit
-	 * ï¿½tre sa propre classe. Le symbole Class ne peut pas ï¿½tre rï¿½solu par
-	 * l'interprï¿½teur avant d'exister! La rï¿½fï¿½rence ï¿½ la classe doit ï¿½galement
-	 * demeurer un lien direct vers l'objet-classe en question. Si c'ï¿½tait
-	 * uniquement un symbole ï¿½ interprï¿½ter, on pourrait dï¿½finir avec le mï¿½me nom
-	 * qu'une classe et ainsi empï¿½cher les objets de retrouver leur classe.
+	 * être sa propre classe. Le symbole Class ne peut pas être résolu par
+	 * l'interpreteur avant d'exister! La référence à la classe doit également
+	 * demeurer un lien direct vers l'objet-classe en question. Si c'était
+	 * uniquement un symbole à interpréter, on pourrait définir avec le même nom
+	 * qu'une classe et ainsi empêcher les objets de retrouver leur classe.
 	 */
 
 	private void createClassClass() {
 
 		/*
-		 * Crï¿½ation de la liste de membres. Un objet instanciï¿½ par cette classe
+		 * Création de la liste de membres. Un objet instancié par cette classe
 		 * comprend deux membres, la liste des attributs, ainsi que le
-		 * dictionnaire des mï¿½thodes. ATTENTION! Rien ne garantit qu'une
-		 * instance sera crï¿½ï¿½e avec une liste et un dictionnaire comme
-		 * arguments! Lisez bien les dï¿½finitions des classes de base
+		 * dictionnaire des méthodes. ATTENTION! Rien ne garantit qu'une
+		 * instance sera créée avec une liste et un dictionnaire comme
+		 * arguments! Lisez bien les définitions des classes de base
 		 * (basictypes.txt) pour avoir des exemples. Si vous modifiez
 		 * l'organisation de Class, il faut aussi modifier comment instancier
 		 * des classes. Il est possible que vous deviez changer toutes les
-		 * dï¿½finitions de classes de basictypes.txt.
+		 * définitions de classes de basictypes.txt.
 		 */
 		ListAtom members = new ListAtom();
 		members.add(new StringAtom("attributes"));
@@ -195,17 +195,17 @@ public class JarvisInterpreter {
 		DictionnaryAtom methods = new DictionnaryAtom(m);
 
 		/*
-		 * Cette classe ne contient qu'une mï¿½thode, new. Celle-ci fait usage de
-		 * la fonction tricheuse OperatorNewPrimitive. Comme un objet rï¿½sultant
-		 * de !(Class new) est instance de Class, il supportera nï¿½cessairement
+		 * Cette classe ne contient qu'une méthode, new. Celle-ci fait usage de
+		 * la fonction tricheuse OperatorNewPrimitive. Comme un objet résultant
+		 * de !(Class new) est instance de Class, il supportera nécessairement
 		 * new aussi (C'est donc une classe). Class supporte new parce qu'elle
-		 * est instance d'elle-mï¿½me.
+		 * est instance d'elle-même.
 		 */
 		methods.put("new", new OperatorNewPrimitive());
 
 		/*
-		 * Crï¿½ation d'un objet qui sera instance de Class Ses donnï¿½es seront la
-		 * liste des attributs dictionnaire de mï¿½thodes crï¿½ï¿½s plus haut.
+		 * Création d'un objet qui sera instance de Class Ses données seront la
+		 * liste des attributs dictionnaire de méthodes créés plus haut.
 		 */
 		ArrayList<AbstractAtom> data = new ArrayList<AbstractAtom>();
 
@@ -215,14 +215,14 @@ public class JarvisInterpreter {
 		ObjectAtom ClassClass = new ObjectAtom(null, data, this);
 
 		/*
-		 * Cet objet contient la dï¿½finition d'une classe et est instance de
-		 * lui-mï¿½me.
+		 * Cet objet contient la définition d'une classe et est instance de
+		 * lui-même.
 		 */
 		ClassClass.setClass(ClassClass);
 
 		/*
 		 * Ajout de la classe de base dans l'environnement. Elle s'appelle
-		 * Class, bien sï¿½r. L'appeler Hippopotamme n'aurait pas ï¿½tï¿½ trï¿½s
+		 * Class, bien sûr. L'appeler Hippopotamme n'aurait pas été très
 		 * pratique.
 		 */
 		environment.put("Class", ClassClass);
@@ -230,17 +230,16 @@ public class JarvisInterpreter {
 	}
 
 	/*
-	 * Cette fonction implante une partie de la boucle d'interprï¿½tation. Elle
-	 * lit une commande ï¿½ partir du flot d'entrï¿½e et l'interprï¿½te. Les
-	 * exceptions lancï¿½es un peu partout dans l'interprï¿½teur sont attrappï¿½es
-	 * ici. Lorsqu'une exception survient, l'interprï¿½teur tente de redï¿½marrer
-	 * afin que l'utilisateur puisse avoir un peu de contrï¿½le aprï¿½s l'erreur.
-	 * Pour dï¿½terminer oï¿½ se trouve une erreur dans du code Jarvis, il faut
-	 * ajouter des points d'arrï¿½t dans le fichier de code avec la commande
-	 * CMD_DEBUG. L'ï¿½tat de l'environnement n'est pas nï¿½cessairement correct
-	 * aprï¿½s qu'une erreur soit survenue.
+	 * Cette fonction implante une partie de la boucle d'interprétation. Elle
+	 * lit une commande à partir du flot d'entrée et l'interprète. Les
+	 * exceptions lancées un peu partout dans l'interpréteur sont attrappées
+	 * ici. Lorsqu'une exception survient, l'interpréteur tente de redémarrer
+	 * afin que l'utilisateur puisse avoir un peu de contrôle après l'erreur.
+	 * Pour déterminer où se trouve une erreur dans du code Jarvis, il faut
+	 * ajouter des points d'arrêt dans le fichier de code avec la commande
+	 * CMD_DEBUG. L'état de l'environnement n'est pas nécessairement correct
+	 * après qu'une erreur soit survenue.
 	 */
-
 	public void run() {
 
 		CommandAtom cmd;

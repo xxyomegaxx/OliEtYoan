@@ -1,12 +1,12 @@
 
 !mute
 
-#Hï¿½RITAGE: il manque la classe Object.
-# Vous devriez la dï¿½finir ici.
+#HÉRITAGE: il manque la classe Object.
+# Vous devriez la définir ici.
+("superClass")
 
 
-
-#MUTATEUR: c'est une fonctionnalitï¿½ 
+#MUTATEUR: c'est une fonctionnalité 
 #de base de tous les objets...
 
 
@@ -14,7 +14,7 @@
 
 
 
-#Classe servant ï¿½ faire des conditions
+#Classe servant à faire des conditions
 ("true" "false")
 []
 
