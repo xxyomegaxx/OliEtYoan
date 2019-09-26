@@ -29,27 +29,33 @@ public class Matrice {
 	 * suivant le pseudo-code classique.
 	 */
 	public void Gauss() {
-
-		int noLigne = 0;
-		for (Vecteur ligne : lignes) {
-			double pivot = ligne.getValeur(noLigne);
-			if (pivot != 0) {
-				double pivotInverse = 1.0 / pivot;
-				for (int i = 0; i < ligne.taille(); i++) {
-					ligne.setValeur(i, ligne.getValeur(i) * pivotInverse);
-				}
-			}
-
-			for (Vecteur ligneElim : lignes) {
-				if (ligneElim != ligne) {
-					double f = ligneElim.getValeur(noLigne);
-					for (int i = 0; i < ligneElim.taille(); ++i) {
-						ligneElim.setValeur(i, ligneElim.getValeur(i) - f * ligne.getValeur(i));
+		
+		if(lignes[0].taille()-lignes.length==1)
+		{
+			int noLigne = 0;
+			for (Vecteur ligne : lignes) {
+				double pivot = ligne.getValeur(noLigne);
+				if (pivot != 0) {
+					double pivotInverse = 1.0 / pivot;
+					for (int i = 0; i < ligne.taille(); i++) {
+						ligne.setValeur(i, ligne.getValeur(i) * pivotInverse);
 					}
 				}
+
+				for (Vecteur ligneElim : lignes) {
+					if (ligneElim != ligne) {
+						double f = ligneElim.getValeur(noLigne);
+						for (int i = 0; i < ligneElim.taille(); ++i) {
+							ligneElim.setValeur(i, ligneElim.getValeur(i) - f * ligne.getValeur(i));
+						}
+					}
+				}
+				noLigne++;
 			}
-			noLigne++;
 		}
+		else throw new IllegalArgumentException("blabla erreur bouhouhou");
+
+		
 	}
 	
 	public Vecteur getVecteur(int x)
@@ -82,5 +88,31 @@ public class Matrice {
 		else return false;
 
 	}
+	
+	public Matrice sousMatrice(int h,int l)
+	{
+		
+		if(h<=lignes.length)
+		{			
+			double[][] tab = new double[h][l];
+			for (int i =0;i<h;i++)
+			{
+				for (int j = 0; j<l;j++)
+				{
+					if(l<lignes[i].taille())
+					{
+						tab[i][j]=lignes[i].getValeur(j);
+					}
+					else throw new IllegalArgumentException("blabla erreur bouhouhou");
+					
+				}
+			}
+			return new Matrice(tab);
+		}
+		else throw new IllegalArgumentException("blabla erreur bouhouhou");
+
+	
+	}
+	
 
 }

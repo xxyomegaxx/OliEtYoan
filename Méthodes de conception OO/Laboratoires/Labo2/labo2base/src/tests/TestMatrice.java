@@ -66,5 +66,30 @@ public class TestMatrice {
 		assertEquals(l1,resAttendu);
 	}
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void testSousMatriceHException()
+	{
+		
+		int h = 7;
+		int l = 2;
+		l1.sousMatrice(h,l);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testSousMatriceLException()
+	{
+		double[][] s1 = {{ 3, 5, -3, 15,1 },
+				{ 7, 10, 1, 2 ,7},
+				{ -3, 2, -5, 6 ,1}};			
+		Matrice l1 = new Matrice(s1);
+		l1.Gauss();
+
+	}
+	
+	
+
+	
+	
+	
 
 }

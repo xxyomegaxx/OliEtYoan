@@ -56,6 +56,22 @@ public class Vecteur {
 	}
 	
 	
+	Vecteur sousVecteur(int size)
+	{
+		if(size<=taille())
+		{
+			double[] tab = new double[size];
+			for (int i =0;i<size;i++)
+			{
+				tab[i]=valeurs[i];
+			}
+			return new Vecteur(tab);
+		}
+		else throw new IllegalArgumentException("blabla erreur bouhouhou");
+
+	
+	}
+	
 
 	
 }
