@@ -93,11 +93,9 @@ public class TestMatrice {
 	@Test(expected=IllegalArgumentException.class)
 	public void testSousMatriceLException()
 	{
-		double[][] s1 = {{ 3, 5, -3, 15,1 },
-				{ 7, 10, 1, 2 ,7},
-				{ -3, 2, -5, 6 ,1}};			
-		Matrice l1 = new Matrice(s1);
-		l1.Gauss();
+		int h = 3;
+		int l = 5;
+		l1.sousMatrice(h,l);
 
 	}
 	
@@ -113,8 +111,30 @@ public class TestMatrice {
 		
 	}
 	
+	@Test
+	public void testMatriceIdentite()
+	{
+		Matrice m = Matrice.creerMatriceIdentite(4);
+		double[][] s2 = {{ 1, 0, 0, 0 },{ 0, 1, 0, 0 },{ 0, 0, 1, 0 },{ 0, 0, 0, 1 }};	
+		
+		Matrice resAttendu = new Matrice(s2);	
+		
+		assertEquals(m,resAttendu);		
+		
+	}
 
-	
+	@Test
+	public void testGaussI()
+	{
+		
+		l1.Gauss();
+		Matrice test = l1.sousMatrice(3,3);
+		System.out.println(l1);
+		Matrice resAttendu = Matrice.creerMatriceIdentite(3);
+		
+		assertEquals(test,resAttendu);		
+		
+	}
 	
 	
 

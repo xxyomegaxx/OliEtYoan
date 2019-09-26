@@ -42,6 +42,17 @@ public class Matrice {
 		return retour;
 	}
 	
+	public static Matrice creerMatriceIdentite(int size)
+	{
+		Matrice retour = new Matrice(size,size);
+		for(int i=0;i<size;i++)
+		{
+			retour.lignes[i] = Vecteur.creerVecteurNul(size);
+			retour.lignes[i].setValeur(i,1);
+		}
+		return retour;
+	}
+	
 	int dimensions()
 	{
 		return lignes.length*lignes[0].taille();
@@ -122,7 +133,7 @@ public class Matrice {
 			{
 				for (int j = 0; j<l;j++)
 				{
-					if(l<lignes[i].taille())
+					if(l<=lignes[i].taille())
 					{
 						tab[i][j]=lignes[i].getValeur(j);
 					}

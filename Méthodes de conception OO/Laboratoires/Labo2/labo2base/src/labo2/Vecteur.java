@@ -71,7 +71,9 @@ public class Vecteur {
 	
 	public Vecteur sousVecteur(int size)
 	{
-		if(size<=taille())
+		int val = taille();
+		System.out.println(size +" <= " + val);
+		if(size<=val)
 		{
 			double[] tab = new double[size];
 			for (int i =0;i<size;i++)

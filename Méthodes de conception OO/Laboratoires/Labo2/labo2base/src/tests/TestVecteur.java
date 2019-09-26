@@ -65,7 +65,7 @@ public class TestVecteur {
 	public void testSousVecteurException()
 	{
 		
-		int l = 8;
+		int l = 5;
 		l1.sousVecteur(l);
 	}
 	
