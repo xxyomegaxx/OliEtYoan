@@ -11,12 +11,15 @@ template <typename TYPE>
 vector<TYPE>::vector(size_t D)
 {
   /*... a completer ...*/
+
+
 }
 
 template <typename TYPE>
 void vector<TYPE>::reserve(size_t nCAP)
 {
   /*... a completer ...*/
+
 }
 
 template <typename TYPE>
@@ -29,6 +32,7 @@ TYPE& vector<TYPE>::back()
 
 template <typename TYPE>
 const TYPE& vector<TYPE>::back()const
+  cout<<"what the friicckkk"
 {
   /*... a effacer et completer ...*/
   TYPE* x = new TYPE();
