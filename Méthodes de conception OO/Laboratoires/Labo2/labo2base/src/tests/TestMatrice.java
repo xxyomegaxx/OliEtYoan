@@ -66,6 +66,21 @@ public class TestMatrice {
 		assertEquals(l1,resAttendu);
 	}
 	
+	@Test
+	public void testSousMatrice()
+	{
+		
+		int h = 2;
+		int l = 2;
+		Matrice test = l1.sousMatrice(h,l);		
+		double[][] s2 = {{ 3, 5},
+				{ 7, 10}};	
+
+		Matrice resAttendu = new Matrice(s2);
+		assertEquals(test,resAttendu);
+	}
+	
+	
 	@Test(expected=IllegalArgumentException.class)
 	public void testSousMatriceHException()
 	{
@@ -86,6 +101,17 @@ public class TestMatrice {
 
 	}
 	
+	@Test
+	public void testMatriceNul()
+	{
+		Matrice m = Matrice.creerMatriceNul(4, 4);
+		double[][] s2 = {{ 0, 0, 0, 0 },{ 0, 0, 0, 0 },{ 0, 0, 0, 0 },{ 0, 0, 0, 0 }};	
+		
+		Matrice resAttendu = new Matrice(s2);	
+		
+		assertEquals(m,resAttendu);		
+		
+	}
 	
 
 	

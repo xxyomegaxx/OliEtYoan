@@ -10,7 +10,10 @@ public class Vecteur {
 	
 	private double valeurs[];
 	
-	
+	private Vecteur(int size)
+	{
+		this.valeurs = new double[size];
+	}
 	public Vecteur(double [] valeurs){
 		
 		this.valeurs = new double[valeurs.length];
@@ -18,6 +21,16 @@ public class Vecteur {
 			
 			this.valeurs[i]=valeurs[i];			
 		}		
+	}
+	
+	public static Vecteur creerVecteurNul (int taille)
+	{
+		Vecteur retour = new Vecteur(taille);
+		for(int i=0;i<taille;i++)
+		{
+			retour.valeurs[i]=0;
+		}
+		return retour;
 	}
 	
 	public String toString(){
@@ -56,7 +69,7 @@ public class Vecteur {
 	}
 	
 	
-	Vecteur sousVecteur(int size)
+	public Vecteur sousVecteur(int size)
 	{
 		if(size<=taille())
 		{

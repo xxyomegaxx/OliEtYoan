@@ -8,6 +8,9 @@ public class Matrice {
 
 	private Vecteur[] lignes;
 
+
+	
+	
 	public Matrice(double[][] dat) {
 
 		lignes = new Vecteur[dat.length];
@@ -17,6 +20,26 @@ public class Matrice {
 			lignes[i] = new Vecteur(dat[i]);
 
 		}
+	}
+	
+	private Matrice(int h,int l)
+	{
+		this.lignes = new Vecteur[h];
+		for(int i = 0;i<h;i++)
+		{
+			this.lignes[i]=Vecteur.creerVecteurNul(l);
+		}
+		
+	}
+	
+	public static Matrice creerMatriceNul (int h, int l)
+	{
+		Matrice retour = new Matrice(h,l);
+		for(int i=0;i<h;i++)
+		{
+			retour.lignes[i] = Vecteur.creerVecteurNul(l);
+		}
+		return retour;
 	}
 	
 	int dimensions()
