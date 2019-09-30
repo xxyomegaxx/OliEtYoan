@@ -124,12 +124,11 @@ public class TestMatrice {
 	}
 
 	@Test
-	public void testGaussI()
+	public void testGaussIdentite()
 	{
 		
 		l1.Gauss();
 		Matrice test = l1.sousMatrice(3,3);
-		System.out.println(l1);
 		Matrice resAttendu = Matrice.creerMatriceIdentite(3);
 		
 		assertEquals(test,resAttendu);		
