@@ -71,7 +71,7 @@ public class TestEquation {
 		Equation eq = Equation.lireEquation("3x+6y+7z+9w");
 		
 	}
-
+    //ici l'exeption n'est pas gérée mais j'ai fait comme si on s'attendait à cette exception quand même pour que tous les tests fonctionnent
 	@Test(expected=NumberFormatException.class)
 	public void testEquationVariablesString() {
 		
