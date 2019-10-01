@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
-public class Equation {
-	private String source;
+public class Equation extends Vecteur{
 	private ArrayList<Character> variables;
-	private ArrayList<Integer> coefficients;
-	private int constante = 0;
+    int constante = 0;
 	/*
 	 * Fonction qui transforme en String contenant une équation linéaire une liste de
 	 * variables et de coefficients séparées.
@@ -17,11 +15,11 @@ public class Equation {
 	public  String toString() {
 
 		String res = "";
-		res += coefficients.get(0) + "" + variables.get(0);
+		res += (int)valeurs[0] + "" + variables.get(0);
 
 		for (int i = 1; i < variables.size(); i++) {
 
-			int coeff = coefficients.get(i);
+			int coeff = (int) valeurs[i];
 			if (coeff < 0) {
 				res += " - ";
 			} else {
@@ -36,10 +34,7 @@ public class Equation {
 
 	}
 
-	public ArrayList<Integer> getCoef()
-	{
-		return coefficients;
-	}
+
 	
 	public ArrayList<Character> getVariables()
 	{
@@ -58,10 +53,12 @@ public class Equation {
 	 * une équation linéaire. Extrait également la constante à droite du =.
 	 * Lance des exceptions dans plusieurs des cas problématiques.
 	 */
-	public Equation(String source) {
-		
-		 variables = new ArrayList<Character>();
-		 coefficients = new ArrayList<Integer>() ;
+	
+	public static Equation lireEquation(String source)
+	{
+		 ArrayList<Character> variablestemp = new ArrayList<Character>();
+		 ArrayList<Integer> coefficientstemp = new ArrayList<Integer>() ;
+		 int constantetemp=0;
 
 		final String delims = "+-=";
 		HashMap<Character, Integer> signes = new HashMap<Character, Integer>();
@@ -88,7 +85,7 @@ public class Equation {
 				if (!tokenizer.hasMoreTokens())
 					throw new IllegalArgumentException("Equation: équation mal formée (constante manquante à la fin");
 
-				constante = Integer.parseInt(tokenizer.nextToken().trim());
+				constantetemp = Integer.parseInt(tokenizer.nextToken().trim());
 				complete = true;
 				break;
 
@@ -97,19 +94,30 @@ public class Equation {
 				int coeff = Integer.parseInt(val.substring(0, val.length() - 1));
 				char var = val.charAt(val.length() - 1);
 
-				if (variables.contains(var))
+				if (variablestemp.contains(var))
 					throw new IllegalArgumentException("Equation: équation mal formée (variable dupliquée");
 
-				variables.add(var);
-				coefficients.add(coeff * lastSign);
+				variablestemp.add(var);
+				coefficientstemp.add(coeff * lastSign);
 			}
 		}
 		if (tokenizer.hasMoreTokens())
 			throw new IllegalArgumentException("Equation: équation mal formée (expression continue après la constante");
 		if (!complete)
 			throw new IllegalArgumentException("Equation: équation mal formée (manque = constante à la fin)");
+		
+		return new Equation(variablestemp,coefficientstemp,constantetemp);
 
 
+	}
+	
+	
+	public Equation(ArrayList<Character> variables, ArrayList<Integer> coefficients,
+			int constante) {
+		super(coefficients);
+		this.variables = variables;
+		this.constante=constante;
+		
 	}
 	
 	/*
@@ -133,6 +141,27 @@ public class Equation {
 		}
 
 		return false;
+	}
+	
+	@Override
+	public boolean equals(Object eq)
+	{
+		if(constante==((Equation)eq).constante) {
+			if(super.equals(eq))
+			{
+				if(variables.equals(((Equation)eq).variables))
+				{
+					return true;
+				}
+				else return false;
+			}
+			else return false;
+			
+				
+		}
+		
+		else return false;
+
 	}
 
 }

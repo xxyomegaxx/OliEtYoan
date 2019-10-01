@@ -21,7 +21,7 @@ public class UtilitairesAlgebre {
 		/*
 		 * Ensemble de données déclarées pour effectuer des tests.
 		 */
-		Equation eq = new Equation("3x+6y+7z+9w=9");
+		Equation eq = Equation.lireEquation("3x+6y+7zj+9w=9");
 		System.out.println(eq);
 		ArrayList<Character> variables = new ArrayList<Character>();
 		ArrayList<Integer> coefficients = new ArrayList<Integer>();

@@ -1,5 +1,6 @@
 package labo2;
 
+import java.util.ArrayList;
 
 /*
  * Classe représentant un vecteur. 
@@ -8,9 +9,8 @@ package labo2;
 public class Vecteur {
 	public static final double EPSILON = 0.01;
 	
-	private double valeurs[];
-	
-	private Vecteur(int size)
+	protected double valeurs[];
+	protected Vecteur(int size)
 	{
 		this.valeurs = new double[size];
 	}
@@ -23,6 +23,14 @@ public class Vecteur {
 		}		
 	}
 	
+    public Vecteur(ArrayList<Integer> valeurs){
+		
+		this.valeurs = new double[valeurs.size()];
+		for(int i=0;i<valeurs.size();i++){
+			
+			this.valeurs[i]=valeurs.get(i);			
+		}		
+	}
 	public static Vecteur creerVecteurNul (int taille)
 	{
 		Vecteur retour = new Vecteur(taille);
@@ -45,7 +53,10 @@ public class Vecteur {
 	public int taille(){
 		return valeurs.length;
 	}
-	
+	public double[] getTableau()
+	{
+		return valeurs;
+	}
 	public double getValeur(int pos){
 		return valeurs[pos];
 	}
