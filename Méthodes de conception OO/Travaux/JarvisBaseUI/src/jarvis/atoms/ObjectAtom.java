@@ -1,6 +1,7 @@
 package jarvis.atoms;
 
 import jarvis.interpreter.JarvisInterpreter;
+import sun.awt.SunHints.Value;
 
 import java.util.ArrayList;
 
@@ -42,8 +43,8 @@ public class ObjectAtom extends AbstractAtom {
 
 		classReference = theClass;
 
-		values = new ArrayList<AbstractAtom>();
-		values.addAll(vals);
+		setValues(new ArrayList<AbstractAtom>());
+		getValues().addAll(vals);
 		
 		this.ji=ji;
 	}
@@ -78,37 +79,35 @@ public class ObjectAtom extends AbstractAtom {
 		
 		
 		//Va chercher les attributs
-		ListAtom members = (ListAtom) classReference.values.get(ATTRIBUTE_FIELD);
+		ListAtom members = (ListAtom) classReference.getValues().get(ATTRIBUTE_FIELD);
 
 		//Vérifie si c'est un attribut 
 		int pos = members.find(selector);
 		
 		
 		if (pos == -1) {
-			return classReference.VerifyMethod(selector);
+			return classReference.verifyMethod(selector);
 		}
 
 		else {
 			//C'est un attribut.
-			return values.get(pos);
+			return getValues().get(pos);
 		}
 	}
 
-	public AbstractAtom VerifyMethod(AbstractAtom selector)
+	public AbstractAtom verifyMethod(AbstractAtom selector)
 	{
-		DictionnaryAtom methods = (DictionnaryAtom) this.values.get(METHOD_FIELD);
+		DictionnaryAtom methods = (DictionnaryAtom) this.getValues().get(METHOD_FIELD);
 		
 		AbstractAtom res = methods.get(selector.makeKey());
 		if (res == null) {
 			try {
-			ObjectAtom parent  = (ObjectAtom) this.values.get(SUPERCLASS_FIELD);
-			return parent.VerifyMethod(selector);
+			ObjectAtom parent  = (ObjectAtom) this.getValues().get(SUPERCLASS_FIELD);
+			return parent.verifyMethod(selector);
 			}catch(ClassCastException e)
 			{
-				System.out.println("whats up people of beachclub");
 				return new StringAtom("ComprendPas "+ selector);
 			}
-			//return new StringAtom("ComprendPas "+ selector);
 		} else {
 			//C'est une méthode.
 			return res;
@@ -130,9 +129,9 @@ public class ObjectAtom extends AbstractAtom {
 		
 		s += "\""+ji.getEnvironment().reverseLookup(classReference)+"\":";
 		
-		for (AbstractAtom atom : values) {
+		for (AbstractAtom atom : getValues()) {
 			
-			s+=" "+((ListAtom)classReference.values.get(0)).get(i).makeKey()+":";
+			s+=" "+((ListAtom)classReference.getValues().get(0)).get(i).makeKey()+":";
 			if(atom instanceof ClosureAtom)
 			{
 				s+=atom;
@@ -152,6 +151,19 @@ public class ObjectAtom extends AbstractAtom {
 		
 		return ji.getEnvironment().reverseLookup(classReference);
 		
+	}
+
+	public ArrayList<AbstractAtom> getValues() {
+		return values;
+	}
+
+	public void setValues(ArrayList<AbstractAtom> values) {
+		this.values = values;
+	}
+	
+	public void setAttribute(int pos,AbstractAtom val)
+	{
+		values.set(pos, val);
 	}
 
 }

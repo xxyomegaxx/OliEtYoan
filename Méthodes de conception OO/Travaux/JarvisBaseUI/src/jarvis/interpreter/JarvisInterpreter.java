@@ -20,6 +20,7 @@ import jarvis.atoms.NullAtom;
 import jarvis.atoms.ObjectAtom;
 import jarvis.atoms.StringAtom;
 import jarvis.atoms.primitives.OperatorNewPrimitive;
+import jarvis.atoms.primitives.OperatorSetPrimitive;
 import jarvis.atoms.primitives.booleans.BooleanPrimitiveAnd;
 import jarvis.atoms.primitives.booleans.BooleanPrimitiveNot;
 import jarvis.atoms.primitives.booleans.BooleanPrimitiveOr;
@@ -149,6 +150,10 @@ public class JarvisInterpreter {
 		environment.put("_booleanNotPrimitive", new BooleanPrimitiveNot());
 		environment.put("_booleanAndPrimitive", new BooleanPrimitiveAnd());
 		environment.put("_booleanOrPrimitive", new BooleanPrimitiveOr());
+		
+		environment.put("_operatorSetPrimitive", new OperatorSetPrimitive());
+		
+		
 
 
 	}
