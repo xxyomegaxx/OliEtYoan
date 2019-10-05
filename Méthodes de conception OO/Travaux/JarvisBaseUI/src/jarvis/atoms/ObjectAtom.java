@@ -23,6 +23,7 @@ public class ObjectAtom extends AbstractAtom {
 	 */
 	public static final int ATTRIBUTE_FIELD =0;
 	public static final int METHOD_FIELD =1;
+	public static final int SUPERCLASS_FIELD =2;
 	
 	/*
 	 * Référence à la classe de cet objet.
@@ -84,29 +85,35 @@ public class ObjectAtom extends AbstractAtom {
 		
 		
 		if (pos == -1) {
-			// pas un attribut...
-			// Va chercher les méthodes
-			DictionnaryAtom methods = (DictionnaryAtom) classReference.values
-					.get(METHOD_FIELD);
-
-			// Cherche dans le dictionnaire
-			AbstractAtom res = methods.get(selector.makeKey());
-
-			if (res == null) {
-				
-				// Rien ne correspond au message
-				return new StringAtom("ComprendPas "+ selector);
-			} else {
-				//C'est une méthode.
-				return res;
-			}
-
+			return classReference.VerifyMethod(selector);
 		}
 
 		else {
 			//C'est un attribut.
 			return values.get(pos);
 		}
+	}
+
+	public AbstractAtom VerifyMethod(AbstractAtom selector)
+	{
+		DictionnaryAtom methods = (DictionnaryAtom) this.values.get(METHOD_FIELD);
+		
+		AbstractAtom res = methods.get(selector.makeKey());
+		if (res == null) {
+			try {
+			ObjectAtom parent  = (ObjectAtom) this.values.get(SUPERCLASS_FIELD);
+			return parent.VerifyMethod(selector);
+			}catch(ClassCastException e)
+			{
+				System.out.println("whats up people of beachclub");
+				return new StringAtom("ComprendPas "+ selector);
+			}
+			//return new StringAtom("ComprendPas "+ selector);
+		} else {
+			//C'est une méthode.
+			return res;
+		}
+		
 	}
 
 	public void setClass(ObjectAtom theClass) {

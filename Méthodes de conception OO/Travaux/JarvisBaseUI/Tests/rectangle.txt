@@ -51,7 +51,7 @@
 	
 	#définition des méthodes
 	["hauteur" fonctionHauteur "largeur" fonctionLargeur "perimetre" fonctionPerimetre]
-	
+	Object
 	#Définition de la classe
 	!(Class new)	
 }

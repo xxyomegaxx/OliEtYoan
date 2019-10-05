@@ -16,6 +16,7 @@ import jarvis.atoms.AbstractAtom;
 import jarvis.atoms.CommandAtom;
 import jarvis.atoms.DictionnaryAtom;
 import jarvis.atoms.ListAtom;
+import jarvis.atoms.NullAtom;
 import jarvis.atoms.ObjectAtom;
 import jarvis.atoms.StringAtom;
 import jarvis.atoms.primitives.OperatorNewPrimitive;
@@ -190,6 +191,7 @@ public class JarvisInterpreter {
 		ListAtom members = new ListAtom();
 		members.add(new StringAtom("attributes"));
 		members.add(new StringAtom("methods"));
+		members.add(new StringAtom("SuperClass"));
 
 		HashMap<String, AbstractAtom> m = new HashMap<String, AbstractAtom>();
 		DictionnaryAtom methods = new DictionnaryAtom(m);
@@ -207,10 +209,15 @@ public class JarvisInterpreter {
 		 * Création d'un objet qui sera instance de Class Ses données seront la
 		 * liste des attributs dictionnaire de méthodes créés plus haut.
 		 */
+		NullAtom superClass = new NullAtom();
+		
 		ArrayList<AbstractAtom> data = new ArrayList<AbstractAtom>();
 
+		
+		
 		data.add(members);
 		data.add(methods);
+		data.add(superClass);
 
 		ObjectAtom ClassClass = new ObjectAtom(null, data, this);
 

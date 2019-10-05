@@ -4,8 +4,10 @@
 #HÉRITAGE: il manque la classe Object.
 # Vous devriez la définir ici.
 ("superClass")
-
-
+[]
+null
+!(Class new)
+!ref Object
 #MUTATEUR: c'est une fonctionnalité 
 #de base de tous les objets...
 
@@ -17,7 +19,7 @@
 #Classe servant à faire des conditions
 ("true" "false")
 []
-
+Object
 !(Class new)
 !ref ifelse
 
@@ -25,6 +27,7 @@
 #dï¿½finition incomplï¿½te del a classe int.
 ("value")
 ["+" _integerAddPrimitive "-" _integerSubtractPrimitive "*" _integerMultiplyPrimitive "==" _integerEqualsPrimitive "<" _integerPlusPetitPrimitive ">" _integerPlusGrandPrimitive]
+Object
 !(Class new)
 !ref int
 
@@ -32,6 +35,7 @@
 #dï¿½finition incomplï¿½te de la classe bool.
 ("value")
 ["!" _booleanNotPrimitive "&&" _booleanAndPrimitive "||" _booleanOrPrimitive]
+Object
 !(Class new)
 !ref bool
 
