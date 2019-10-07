@@ -20,7 +20,17 @@ public abstract class Statement {
 	abstract protected String printFooter();
 
 
-	abstract protected String printRentalLines();
+	protected String printRentalLines()
+	{
+		String result = "";
+		for (Rental each : customer.getRentals()) {
+					
+					// show figures for this rental
+					result += "\t" + each.getMovie().getTitle() + "\t" + each.calculateAmount() + "\n";
+				}
+		return result;		
+	}
+	
 
 	abstract protected String printHeader();
 
