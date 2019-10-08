@@ -2,7 +2,7 @@ package videoStore;
 
 public abstract class Statement {
 	
-	Customer customer;
+	protected Customer customer;
 	
 	Statement(Customer customer)
 	{
