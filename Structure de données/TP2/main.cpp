@@ -8,8 +8,8 @@
 #include "deque.h"
 
 int main(){
-
-  vector<TYPE*> vect;
-  vect.push_back();
+	int tg(5);
+  vector<int*> vect(5);
+  vect.push_back(&tg);
 
 }
