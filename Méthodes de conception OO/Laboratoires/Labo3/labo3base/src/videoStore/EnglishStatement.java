@@ -23,16 +23,7 @@ public class EnglishStatement  extends Statement{
 		return result;
 	}
 	
-	@Override
-	protected String printRentalLines() {
-		String result = "";
-		for (Rental each : customer.getRentals()) {
-			
-			// show figures for this rental
-			result += "\t" + each.getMovie().getTitle() + "\t" + each.calculateAmount() + "\n";
-		}
-		return result;
-	}
+	
 	@Override
 	protected String printHeader() {
 		String result = "Rental Record for " + customer.getName() + "\n";

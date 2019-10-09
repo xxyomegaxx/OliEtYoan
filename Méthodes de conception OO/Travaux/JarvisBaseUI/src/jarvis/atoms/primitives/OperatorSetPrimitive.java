@@ -9,9 +9,7 @@ public class OperatorSetPrimitive extends PrimitiveOperationAtom {
 
 	@Override
 	protected AbstractAtom execute(JarvisInterpreter ji, ObjectAtom self) {
-		// Ici, on peut assumer que l'objet qui a reçu le message (self) est un bool et
-		// possède donc
-		// le champ "value".
+
 
 		ListAtom members = (ListAtom) self.getJarvisClass().getValues().get(ObjectAtom.ATTRIBUTE_FIELD);
 

@@ -16,17 +16,6 @@ public class FrenchStatement extends Statement{
 
 	}
 
-	@Override
-	protected String printRentalLines() {
-    String result = "";
-for (Rental each : customer.getRentals()) {
-			
-			// show figures for this rental
-			result += "\t" + each.getMovie().getTitle() + "\t" + each.calculateAmount() + "\n";
-		}
-return result;
-
-	}
 
 	@Override
 	protected String printHeader() {
