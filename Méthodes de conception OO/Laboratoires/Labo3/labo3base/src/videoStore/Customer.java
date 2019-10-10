@@ -30,15 +30,13 @@ public class Customer {
 	}
 
 	public String englishStatement() {
-		statement = new EnglishStatement(this);
-		return statement.print();
+		return new EnglishStatement(this).print();
 	}
 
 	
 	public String frenchStatement() {
 
-		statement = new FrenchStatement(this);
-		return statement.print();
+		return new FrenchStatement(this).print();
 		
 	}
 
