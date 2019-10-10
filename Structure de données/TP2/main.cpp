@@ -8,8 +8,24 @@
 #include "deque.h"
 
 int main(){
-	int tg(5);
-  vector<int*> vect(5);
-  vect.push_back(&tg);
+	int intTab[10]{ 199,299,399,499,599,699,799,899,999,1099 };
+		vector<int> vect(3);
 
+
+		vect.afficher();
+		cout << "vect front " << vect.front() << endl;
+		cout << "vect back " << vect.back() << endl;
+		cout << "--------------------------------------------" << endl << endl;
+
+		for (int i = 0; i < 10; i++)
+		{
+			vect.push_back(intTab[i]);
+			vect.afficher();
+			cout << "vect front " << vect.front() << endl;
+			cout << "vect back " << vect.back() << endl;
+			cout << "--------------------------------------------" << endl << endl;
+		}
+
+		
+		system("PAUSE");
 }

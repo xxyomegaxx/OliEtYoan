@@ -125,7 +125,9 @@ void vector<TYPE>::push_back(const TYPE& x)
   size_t DIM = size();
   size_t CAP = FIN_CAP - DEBUT;
   if (DIM == CAP)
-    reserve((DIM+1)*2);
+  {
+	  reserve((DIM + 1) * 2);
+  }   
   resize(DIM + 1);
   DEBUT[DIM] = x;
 }

@@ -11,7 +11,7 @@ template <typename TYPE>
 vector<TYPE>::vector(size_t D)
 {
   /*... a completer ...*/
-	TYPE tab[D];
+	TYPE *tab = new TYPE[D];
 	DEBUT= &tab[0];
 	FIN_CAP = &tab[D];
 	FIN_DIM = DEBUT;
@@ -23,16 +23,19 @@ template <typename TYPE>
 void vector<TYPE>::reserve(size_t nCAP)
 {
   /*... a completer ...*/
-	TYPE ntab[nCAP];
-	int size = FIN_DIM - DEBUT;
-	for (int i = 0; i < size)
+	if (nCAP > FIN_CAP - DEBUT)
 	{
-		ntab[i] = *DEBUT;
-		DEBUT++;
+		TYPE *ntab = new TYPE[nCAP];
+		int size = FIN_DIM - DEBUT;
+		for (int i = 0; i < size; i++)
+		{
+			ntab[i] = DEBUT[i];
+		}
+		DEBUT = &ntab[0];
+		FIN_DIM = (DEBUT + size-1);
+		FIN_CAP = &ntab[nCAP-1];
 	}
-	DEBUT = &nTab[0];
-	FIN_DIM = DEBUT + size;
-	FIN_CAP = &ntab[nCAP - 1];
+	
 
 
 }
@@ -41,8 +44,8 @@ template <typename TYPE>
 TYPE& vector<TYPE>::back()
 {
   /*... a effacer et completer ...*/
-  TYPE* x = new TYPE();
-  return *x;
+	return *(FIN_DIM-1);
+
 }
 
 template <typename TYPE>
@@ -51,7 +54,7 @@ const TYPE& vector<TYPE>::back()const
   /*... a effacer et completer ...*/
   /*TYPE* x = new TYPE();
   return *x;*/
-	return FIN_DIM;
+	return *(FIN_DIM-1);
 }
 
 template <typename TYPE>
@@ -60,15 +63,16 @@ TYPE& vector<TYPE>::front()
   /*... a effacer et completer ...*/
   /*TYPE* x = new TYPE();
   return *x;*/
-	
+	return *DEBUT;
 
 }
 
 template <typename TYPE>
 const TYPE& vector<TYPE>::front()const
 {
-  /*... a effacer et completer ...*/
-  //TYPE* x = new TYPE();
+  /* a effacer et completer ...*/
+  TYPE* x = new TYPE();
+  x = DEBUT;
   return DEBUT;
 }
 
@@ -76,18 +80,18 @@ template <typename TYPE>
 TYPE& vector<TYPE>::operator[](size_t i)
 {
   /*... a effacer et completer ...*/
-  TYPE* x = new TYPE();
-  x = DEBUT + i;
 
-  return *x;
+
+  return *(DEBUT+i);
 }
 
 template <typename TYPE>
 const TYPE& vector<TYPE>::operator[](size_t i)const
 {
   /*... a effacer et completer ...*/
-  TYPE* x = new TYPE();
-  return *x;
+	TYPE* x = new TYPE();
+	x = DEBUT + i;
+	return x;
 }
 
 
