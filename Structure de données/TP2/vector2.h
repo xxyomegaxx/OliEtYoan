@@ -44,7 +44,7 @@ template <typename TYPE>
 TYPE& vector<TYPE>::back()
 {
   /*... a effacer et completer ...*/
-	return *(FIN_DIM-1);
+	return *(FIN_DIM);
 
 }
 
@@ -54,7 +54,7 @@ const TYPE& vector<TYPE>::back()const
   /*... a effacer et completer ...*/
   /*TYPE* x = new TYPE();
   return *x;*/
-	return *(FIN_DIM-1);
+	return *(FIN_DIM);
 }
 
 template <typename TYPE>
@@ -71,7 +71,7 @@ template <typename TYPE>
 const TYPE& vector<TYPE>::front()const
 {
   /* a effacer et completer ...*/
-	return *DEBUT
+	return *DEBUT;
 
 }
 
@@ -81,7 +81,7 @@ TYPE& vector<TYPE>::operator[](size_t i)
   /*... a effacer et completer ...*/
 
 
-  return *(DEBUT+i);
+	return at(i);
 }
 
 template <typename TYPE>
@@ -91,7 +91,7 @@ const TYPE& vector<TYPE>::operator[](size_t i)const
 	/*TYPE* x = new TYPE();
 	x = DEBUT + i;
 	return x;*/
-	return *(DEBUT+i);
+	return at(i);
 
 
 }

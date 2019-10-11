@@ -90,14 +90,13 @@ template <typename TYPE>
 void deque<TYPE>::resize(size_t nDIM)
 {
   reserve(nDIM);
- 
   size_t CAP = FIN_CAP-DEBUT_CAP;
   if(nDIM == 0)
     FRONT = BACK = nullptr;
   else{
     if(FRONT == nullptr)
       FRONT = DEBUT_CAP;
-    BACK = DEBUT_CAP + (((FRONT-DEBUT_CAP)+nDIM-1)%CAP);
+    BACK = DEBUT_CAP + (((FRONT-DEBUT_CAP)+nDIM)%(CAP+1));
   }
 }
 
