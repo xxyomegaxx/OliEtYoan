@@ -1,14 +1,11 @@
 ## A.##
 library(readxl)
 achats <- read_excel("Documents/Oli_et_Yoan/Statistique Appliquée/achats.xlsx")
-View(achats)
 
 #Extraction des données de la colonne Type
-Type = achats['Type']
-
+Type = achats$Type
 #Array to list
 Type <- c(Type)
-
 #Creating a table with a type list
 w = table(Type)
 
@@ -17,26 +14,40 @@ t = as.data.frame(w)
 #Showing t
 t
 
-slices <- t['Freq']
-
 ## B ##
+slices <- t$Freq
+lbls <- t$Type
 
+pct <- round(slices/sum(slices)*100, 1)
+lbls <- paste(lbls," (",pct,"%) ", sep="")
 
-# Define some colors 
-colors <- c("yellow2","olivedrab3","orangered3","red")
+pie(pct,lbls, main = "Fréquence relative de chaque Type d'achat en ligne")
 
-# Calculate the percentage for each day, rounded to one decimal place
-slices_labels <- round(slices/sum(slices) * 100, 1)
+## C ## 
+nbTransaction <- achats$Transactions
+moyenne <- mean(nbTransaction)
+moyenne
+ecart <- sd(nbTransaction)
+ecart
 
-# Concatenate a '%' char after each value
-slices_labels <- paste(slices_labels, "%", sep="")
+## D ##
+hist(achats$Montant,  ylim=c(0,120), xlim =c(0,5000),ylab="Fréquence", xlab="Montant", main = "La fréquence du montant total dépensé")
 
-# Create a pie chart with defined heading and custom colors and labels
-pie(slices, main="Sum", col=colors, labels=slices_labels, cex=0.8)
+## E ##
+montant = achats$Montant
+transaction = achats$Transactions
 
-# Create a legend at the right   
-#legend(.1, c("Vetement","Billets","Autres","Electro"), cex = 0.7, fill = colors)
+donnees<-data.frame(transaction,montant)
 
+plot(transaction,montant, xlab="Nombre de transaction", ylab="montant", main="Variation du nombre de transaction par rapport au montant")
 
+reg<-lm(montant~transaction) #Cr�ation du mod�le lin�aire
+summary(reg) #Quelques donn�es sur le mod�le de r�gression lin�aire
+abline(reg, col='red') #Ajout de la droite de r�gression au mod�le
 
+## F ##
+paste('y =', coef(reg)[[2]], '* x', '+', coef(reg)[[1]])
+
+## G ## 
+summary(reg)$r.squared
 
