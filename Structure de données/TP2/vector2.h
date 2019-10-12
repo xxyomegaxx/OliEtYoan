@@ -1,6 +1,6 @@
 /**
 * \ file vector.h
-* \ author Jean Goulet (Sept. 2016), modified by Aida Ouangraoua (Sept. 2019)
+* \author Olivier Cote et Yoan David
 * \ brief Ce fichier contient les fonctions du type vector à coder
 */
 
@@ -10,30 +10,36 @@
 template <typename TYPE>
 vector<TYPE>::vector(size_t D)
 {
-  /*... a completer ...*/
-	DEBUT = new TYPE[D];
-	FIN_CAP = &DEBUT[D];
-	FIN_DIM = DEBUT;
+	if (D == 0)
+	{
+		DEBUT = FIN_DIM = FIN_CAP = nullptr; // si vector vide, on pointe vers null 
+	}
+	else
+	{
+		DEBUT = new TYPE[D];
+		FIN_CAP = &DEBUT[D];
+		FIN_DIM = DEBUT;
 
+	}
+	
 
 }
 
 template <typename TYPE>
 void vector<TYPE>::reserve(size_t nCAP)
 {
-  /*... a completer ...*/
-	if (nCAP > FIN_CAP - DEBUT)
+	if (nCAP > FIN_CAP - DEBUT) // si nouvelle capacite > capacite
 	{
-		TYPE *ntab = new TYPE[nCAP];
+		TYPE *ntab = new TYPE[nCAP]; //on cree nouveau tableau
 		size_t size = FIN_DIM - DEBUT;
 		for (size_t i = 0; i < size; i++)
 		{
-			ntab[i] = DEBUT[i];
+			ntab[i] = DEBUT[i];  // ajout de l'ancien tableau dans le nouveau 
 		}
-		clear();
-		DEBUT = &ntab[0];
-		FIN_DIM = (DEBUT + size);
-		FIN_CAP = &ntab[nCAP];
+		clear(); // supression de l'ancien tableau
+		DEBUT = &ntab[0]; //debut pointe vers premier element
+		FIN_DIM = (DEBUT + size); // pointe vers le dernier element
+		FIN_CAP = &ntab[nCAP]; //pointe vers la fin de la capacité
 	}
 
 
@@ -43,55 +49,47 @@ void vector<TYPE>::reserve(size_t nCAP)
 template <typename TYPE>
 TYPE& vector<TYPE>::back()
 {
-  /*... a effacer et completer ...*/
-	return *(FIN_DIM);
+
+	return *(FIN_DIM/*-1*/); // retour du dernier element(pour avoir la valeur du dernier element ajouter -1)
 
 }
 
 template <typename TYPE>
 const TYPE& vector<TYPE>::back()const
 {
-  /*... a effacer et completer ...*/
-  /*TYPE* x = new TYPE();
-  return *x;*/
-	return *(FIN_DIM);
+
+	return *(FIN_DIM/*-1*/);// retour du dernier element(pour avoir la valeur du dernier element ajouter -1)
 }
 
 template <typename TYPE>
 TYPE& vector<TYPE>::front()
 {
-  /*... a effacer et completer ...*/
-  /*TYPE* x = new TYPE();
-  return *x;*/
-	return *DEBUT;
+
+	return *DEBUT; // retour premier element
 
 }
 
 template <typename TYPE>
 const TYPE& vector<TYPE>::front()const
 {
-  /* a effacer et completer ...*/
-	return *DEBUT;
+
+	return *DEBUT; //retour premier element
 
 }
 
 template <typename TYPE>
 TYPE& vector<TYPE>::operator[](size_t i)
 {
-  /*... a effacer et completer ...*/
 
 
-	return at(i);
+	return at(i); //renvoie la valeur au ieme element
 }
 
 template <typename TYPE>
 const TYPE& vector<TYPE>::operator[](size_t i)const
 {
-  /*... a effacer et completer ...*/
-	/*TYPE* x = new TYPE();
-	x = DEBUT + i;
-	return x;*/
-	return at(i);
+
+	return at(i); //renvoie la valeur au ieme element
 
 
 }
