@@ -1,9 +1,10 @@
 package jarvis.atoms;
 
-import jarvis.interpreter.JarvisInterpreter;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.NoSuchElementException;
+
+import jarvis.interpreter.JarvisInterpreter;
 
 public class ListAtom extends AbstractAtom{
 	
@@ -22,6 +23,11 @@ public class ListAtom extends AbstractAtom{
 	{
 		data=new ArrayList<AbstractAtom>();
 		data.addAll(values);
+	}
+	public ListAtom(ListAtom source)
+	{
+		data=new ArrayList<AbstractAtom>();
+		data.addAll(source.data);
 	}
 	
 	public static ListAtom read(JarvisInterpreter ji)
@@ -103,6 +109,19 @@ public class ListAtom extends AbstractAtom{
 	{
 		data.add(atom);
 	}
+	public void addAllVals(ListAtom source)
+	{
+		for(int i =0;i<source.data.size();i++)
+		{
+			
+			if((boolean)((String)((StringAtom)source.data.get(i)).getValue()).isEmpty() == false)
+			{
+				data.add(source.data.get(i));
+			}
+			
+		}
+	}
+
 	
 	
 

@@ -33,9 +33,8 @@ public class OperatorNewPrimitive extends PrimitiveOperationAtom{
 		
 		
 		//Seule une classe peut faire new. Ramasser de la classe combien d'attributs ça prend.
-		
-		ListAtom attributes = (ListAtom)self.message("attributes");
-		
+		//ListAtom attributes =(ListAtom)self.message("attributes");
+		ListAtom attributes = self.getAllAttributes();
 		ArrayList<AbstractAtom> data = new ArrayList<AbstractAtom>();
 		for(int i=0;i<attributes.size();i++)
 		{
@@ -51,6 +50,7 @@ public class OperatorNewPrimitive extends PrimitiveOperationAtom{
 		return res;		
 		
 	}
+
 
 	@Override
 	public String makeKey() {

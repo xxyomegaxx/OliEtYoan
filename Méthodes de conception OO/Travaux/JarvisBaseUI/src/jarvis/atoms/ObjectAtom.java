@@ -79,7 +79,7 @@ public class ObjectAtom extends AbstractAtom {
 		
 		
 		//Va chercher les attributs
-		ListAtom members = (ListAtom) classReference.getValues().get(ATTRIBUTE_FIELD);
+		ListAtom members = classReference.getAllAttributes();
 
 		//Vérifie si c'est un attribut 
 		int pos = members.find(selector);
@@ -112,6 +112,22 @@ public class ObjectAtom extends AbstractAtom {
 			//C'est une méthode.
 			return res;
 		}
+		
+	}
+	public ListAtom getAllAttributes()
+	{
+		ListAtom attributes = new ListAtom();
+		
+		try
+		{
+			ObjectAtom parent = (ObjectAtom) this.getValues().get(SUPERCLASS_FIELD); 
+			attributes.addAllVals(parent.getAllAttributes());
+		}
+		catch(ClassCastException e)
+		{
+		}
+		 attributes.addAllVals((ListAtom)getValues().get(ATTRIBUTE_FIELD));
+		return attributes;
 		
 	}
 

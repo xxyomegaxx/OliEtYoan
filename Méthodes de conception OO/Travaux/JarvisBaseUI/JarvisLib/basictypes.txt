@@ -5,7 +5,7 @@
 # Vous devriez la définir ici.
 ("")
 ["set" _operatorSetPrimitive]
-null
+0
 !(Class new)
 !ref Object
 #MUTATEUR: c'est une fonctionnalité 
