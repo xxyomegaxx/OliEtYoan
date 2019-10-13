@@ -147,7 +147,7 @@ public class ObjectAtom extends AbstractAtom {
 		
 		for (AbstractAtom atom : getValues()) {
 			
-			s+=" "+((ListAtom)classReference.getValues().get(0)).get(i).makeKey()+":";
+			s+=" "+((ListAtom)classReference.getAllAttributes()).get(i).makeKey()+":";
 			if(atom instanceof ClosureAtom)
 			{
 				s+=atom;
