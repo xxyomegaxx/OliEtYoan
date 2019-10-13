@@ -11,9 +11,8 @@ public class OperatorSetPrimitive extends PrimitiveOperationAtom {
 	protected AbstractAtom execute(JarvisInterpreter ji, ObjectAtom self) {
 
 
-		ListAtom members = (ListAtom) self.getJarvisClass().getValues().get(ObjectAtom.ATTRIBUTE_FIELD);
+		ListAtom members = self.getJarvisClass().getAllAttributes();
 
-		// Vérifie si c'est un attribut
 		int pos = members.find(ji.getArg());
 		self.setAttribute(pos, ji.getArg());
 
