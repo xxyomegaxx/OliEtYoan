@@ -10,8 +10,15 @@
 
 template <typename TYPE>
 typename list<TYPE>::cellule* list<TYPE>::insert(cellule* C,const TYPE& X){
+	cellule *nouveau = new cellule(X);
+	nouveau->PREC = C->PREC;
+	nouveau->SUIV = C;
+	C->PREC->SUIV = nouveau;
+	C->PREC = nouveau;
+	SIZE++;
+
   /*... a effacer et completer ...*/
-  return C;
+  return nouveau;
 }
 
 template <typename TYPE>
