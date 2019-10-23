@@ -16,15 +16,18 @@ typename list<TYPE>::cellule* list<TYPE>::insert(cellule* C,const TYPE& X){
 	C->PREC->SUIV = nouveau;
 	C->PREC = nouveau;
 	SIZE++;
-
-  /*... a effacer et completer ...*/
-  return nouveau;
+    return nouveau;
 }
 
 template <typename TYPE>
 typename list<TYPE>::cellule* list<TYPE>::erase(cellule* C){
   /*... a effacer et completer ...*/
-  return C;
+	cellule *retour = C->SUIV;
+	C->PREC->SUIV = C->SUIV;
+	C->SUIV->PREC = C->PREC;
+	delete C;
+	SIZE--;
+  return retour;
 }
 
 
