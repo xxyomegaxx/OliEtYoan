@@ -45,7 +45,8 @@ int main()
 	test.splice(it2, test2);
 	test.afficher();
 	test2.afficher();
-
+	test.reverse();
+	test.afficher();
 
 
 	system("PAUSE");

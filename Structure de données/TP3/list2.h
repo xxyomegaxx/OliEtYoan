@@ -117,6 +117,26 @@ void list<TYPE>::splice(iterator i,list& L){
 template <typename TYPE>
 void list<TYPE>::reverse(){
   /*... a completer ...*/
+	cellule *cell;
+	cellule *temp;
+
+	DEBUT->PREC->SUIV = DEBUT->PREC->PREC;
+	DEBUT->PREC->PREC = DEBUT;
+	cell = DEBUT->PREC->SUIV;
+	while (DEBUT != cell)
+	{
+		temp = cell->PREC;
+		cell->PREC = cell->SUIV;
+		cell->SUIV = temp;
+		cell = cell->SUIV;
+
+	}
+	temp = DEBUT->SUIV;
+	DEBUT->SUIV = nullptr;
+	DEBUT = DEBUT->PREC;
+	DEBUT->PREC->PREC = temp;
+
+
 }
 
   template <typename TYPE>
