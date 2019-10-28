@@ -2,21 +2,15 @@ package videoStore;
 
 public class RegularPrice extends Price{
 
-	@Override
-	public double Amount(Rental rental) {
-		double thisAmount = 0;
-		
-		thisAmount += 2;
-		if (rental.getDaysRented() > 2)
-			thisAmount += (rental.getDaysRented() - 2) * 1.5;
-		
-		return thisAmount;
+	public RegularPrice() {
+		super();
 	}
 
-	@Override
-	public int Points() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getCharge(int daysRented) {
+		double result = 2;
+		if (daysRented > 2)
+			result += (daysRented - 2) * 1.5;
+		return result;
 	}
 
 }

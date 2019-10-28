@@ -14,28 +14,32 @@ package videoStore;
  */
 
 public class Movie {
-//	public static final int REGULAR = 0;
-//	public static final int NEW_RELEASE = 1;
-//	public static final int CHILDRENS = 2;
-	
-	public static ChildrensPrice childrens;
-	public static NewReleasePrice new_release;
-	public static RegularPrice regular;
 
 	private java.lang.String title_;
 	private Price priceCode_;
 
-	public Movie(String title, Price priceCode) {
+	private Movie(String title, Price priceCode) {
 		title_ = title;
 		priceCode_ = priceCode;
 	}
+
+	static public Movie createRegular(String title) {
+		return new Movie(title, new RegularPrice());
+	}
+
+	static public Movie createChildren(String title) {
+		return new Movie(title, new ChildrensPrice());
+	}
+
+	static public Movie createNewRelease(String title) {
+		return new Movie(title, new NewReleasePrice());
 	
-	public void createChildrensMovie(String title, ChildrensPrice child) {
-		title_ = title;
-		childrens = child;
 	}
 	
-
+	
+	
+	
+	
 	public java.lang.String getTitle() {
 		return title_;
 	}
@@ -44,7 +48,16 @@ public class Movie {
 		return priceCode_;
 	}
 
-	public void setPriceCode(Price newCode) {
-		priceCode_ = newCode;
+	/*public void setPriceCode(int newCode) {
+		priceCode_.setPrice(newCode);
+	}*/
+	public double amount(int daysRented)
+	{			
+		return priceCode_.getCharge(daysRented);
+	}
+	public int points()
+	{
+		return priceCode_.getPoints();
+
 	}
 }

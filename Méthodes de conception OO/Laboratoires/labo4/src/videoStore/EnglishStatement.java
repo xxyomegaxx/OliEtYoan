@@ -15,7 +15,7 @@ public class EnglishStatement extends Statement{
 	@Override
 	protected String rentalLine(Rental rent) {
 		
-		return "\t" + rent.getDate()+ "\t"+ rent.getMovie().getTitle() + "\t" + rent.getMovie().getPriceCode().Amount(rent) + "$\n";
+		return "\t" + rent.getDate()+ "\t"+ rent.getMovie().getTitle() + "\t" + rent.amount() + "$\n";
 	}
 
 	@Override

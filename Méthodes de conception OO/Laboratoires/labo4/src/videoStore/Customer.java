@@ -40,7 +40,7 @@ public class Customer {
 
 		for (Rental each : rentals) {
 
-			totalAmount += each.getMovie().getPriceCode().Amount(each);
+			totalAmount += each.amount();
 		}
 		
 		return totalAmount;
@@ -52,7 +52,7 @@ public class Customer {
 
 		for (Rental each : rentals) {
 
-			frequentRenterPoints += each.getMovie().getPriceCode().Points();
+			frequentRenterPoints += each.points();
 		}
 		
 		return frequentRenterPoints;

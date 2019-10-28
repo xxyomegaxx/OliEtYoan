@@ -1,20 +1,15 @@
 package videoStore;
 
-public class ChildrensPrice extends Price {
-
-	@Override
-	public double Amount(Rental rental) {
-		double thisAmount = 0;
-		thisAmount += 1.5;
-		if (rental.getDaysRented() > 3)
-			thisAmount += (rental.getDaysRented() - 3) * 1.5;
-		return thisAmount;
+public class ChildrensPrice extends Price{
+	
+	public ChildrensPrice() {
+		super();
 	}
 
-	@Override
-	public int Points() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getCharge(int daysRented) {
+		double result = 1.5;
+		if (daysRented > 3)
+			result += (daysRented - 3) * 1.5;
+		return result;
 	}
-
 }

@@ -1,17 +1,19 @@
 package videoStore;
 
 public class NewReleasePrice extends Price {
+	
+    public NewReleasePrice() {
+        super();
+    }
 
-	@Override
-	public double Amount(Rental rental) {
-		double thisAmount = 0;
-		thisAmount += rental.getDaysRented() * 3;
-		return thisAmount;
-	}
+    public double getCharge(int daysRented) {
+        return daysRented * 3;
+    }
 
-	@Override
-	public int Points() {
-		return 2;
-	}
 
+    public int getPoints() {
+        return 2;
+    }
 }
+
+

@@ -2,15 +2,16 @@ package videoStore;
 
 public abstract class Price {
 	
-	protected Rental rental;
+    public Price() {
+        super();
+    }
+
+    public abstract double getCharge(int daysRented);
+
+
+    public int getPoints() {
+        return 1;
+    }
 	
-	public Price() {
-		
-	}
-	
-	public abstract double Amount(Rental rental);
-	
-	public int Points() {
-		return 1;
-	};
+
 }

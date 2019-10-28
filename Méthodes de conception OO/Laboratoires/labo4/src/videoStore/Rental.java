@@ -27,8 +27,6 @@ public class Rental {
 	public int getDaysRented() {
 		return daysRented;
 	}
-	
-	
 
 	public Movie getMovie() {
 		return movie;
@@ -36,5 +34,16 @@ public class Rental {
 
 	public LocalDate getDate() {
 		return date;
+	}
+	
+	public double amount() {
+				
+		return movie.amount(getDaysRented());
+	}
+
+	public int points() {
+
+		
+		return movie.points();
 	}
 }
