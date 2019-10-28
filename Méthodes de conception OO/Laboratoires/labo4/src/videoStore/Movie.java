@@ -14,27 +14,37 @@ package videoStore;
  */
 
 public class Movie {
-	public static final int REGULAR = 0;
-	public static final int NEW_RELEASE = 1;
-	public static final int CHILDRENS = 2;
+//	public static final int REGULAR = 0;
+//	public static final int NEW_RELEASE = 1;
+//	public static final int CHILDRENS = 2;
+	
+	public static ChildrensPrice childrens;
+	public static NewReleasePrice new_release;
+	public static RegularPrice regular;
 
 	private java.lang.String title_;
-	private int priceCode_;
+	private Price priceCode_;
 
-	public Movie(String title, int priceCode) {
+	public Movie(String title, Price priceCode) {
 		title_ = title;
 		priceCode_ = priceCode;
 	}
+	
+	public void createChildrensMovie(String title, ChildrensPrice child) {
+		title_ = title;
+		childrens = child;
+	}
+	
 
 	public java.lang.String getTitle() {
 		return title_;
 	}
 
-	public int getPriceCode() {
+	public Price getPriceCode() {
 		return priceCode_;
 	}
 
-	public void setPriceCode(int newCode) {
+	public void setPriceCode(Price newCode) {
 		priceCode_ = newCode;
 	}
 }
