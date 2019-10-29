@@ -7,7 +7,7 @@ public class StoreTest {
 	 */
 	public static void main(String[] args) {
 		
-		Movie movies[] = new Movie[5];
+		Movie movies[] = new Movie[6];
 		
 		
 		movies[0] = Movie.createChildren("Caillou a le cancer");
@@ -15,6 +15,7 @@ public class StoreTest {
 		movies[2] = Movie.createNewRelease("31 Jump Street: Ninja Academy");
 		movies[3] = Movie.createRegular("Les oiseaux se cachent pour mourir");
 		movies[4] = Movie.createRegular("Les gars chauds se cachent pour vomir");
+		movies[5] = Movie.createUnpopularPrice("Yoan David joue au volley");
 		
 		
 		Customer grandmaman = new Customer("Grand-moman");
@@ -24,6 +25,7 @@ public class StoreTest {
 		grandmaman.addRentals(new Rental(movies[2],2));
 		grandmaman.addRentals(new Rental(movies[3],7));
 		grandmaman.addRentals(new Rental(movies[4],1));
+		grandmaman.addRentals(new Rental(movies[5],100000));
 		
 		System.out.println(grandmaman.englishStatement());
 		System.out.println(grandmaman.frenchStatement());

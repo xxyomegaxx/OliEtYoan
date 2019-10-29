@@ -36,9 +36,9 @@ public class Movie {
 	
 	}
 	
-	
-	
-	
+	static public Movie createUnpopularPrice(String title) {
+		return new Movie(title, new UnpopularPrice());
+	}
 	
 	public java.lang.String getTitle() {
 		return title_;
