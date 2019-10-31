@@ -40,26 +40,26 @@ public:
 	reverse_iterator(cellule*C = nullptr) :POINTEUR(C) {}
 	TYPE& operator*()const { return POINTEUR->CONTENU; } //*i
 	TYPE* operator->()const { return &(POINTEUR->CONTENU); } //i->
-	iterator& operator++() { POINTEUR = POINTEUR->PREC; return *this; } //++i
-	iterator operator++(int) { iterator it(*this); POINTEUR = POINTEUR->PREC; return it; } //i++
-	iterator& operator--() { POINTEUR = POINTEUR->SUIV; return *this; } //--i
-	iterator operator--(int) { iterator ret(*this); POINTEUR = POINTEUR->SUIV; return ret; } //i--  
-	bool operator==(const iterator& IT)const {
+	reverse_iterator& operator++() { POINTEUR = POINTEUR->PREC; return *this; } //++i
+	reverse_iterator operator++(int) { iterator it(*this); POINTEUR = POINTEUR->PREC; return it; } //i++
+	reverse_iterator& operator--() { POINTEUR = POINTEUR->SUIV; return *this; } //--i
+	reverse_iterator operator--(int) { iterator ret(*this); POINTEUR = POINTEUR->SUIV; return ret; } //i--  
+	bool operator==(const reverse_iterator& IT)const {
 		return POINTEUR == IT.POINTEUR;
 	}
-	bool operator!=(const iterator& IT)const {
+	bool operator!=(const reverse_iterator& IT)const {
 		return POINTEUR != IT.POINTEUR;
 	}
 };
 
 template <typename TYPE>
 typename list<TYPE>::reverse_iterator list<TYPE>::rbegin(){
-  return reverse_iterator(DEBUT->PREC->PREC);
+  return reverse_iterator(DEBUT->PREC);
 }
 
 template <typename TYPE>
 typename list<TYPE>::reverse_iterator list<TYPE>::rend(){
-  return reverse_iterator(DEBUT);
+  return reverse_iterator(DEBUT->SUIV);
 }
 
 template <typename TYPE>
