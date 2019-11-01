@@ -41,9 +41,9 @@ public:
 	TYPE& operator*()const { return POINTEUR->CONTENU; } //*i
 	TYPE* operator->()const { return &(POINTEUR->CONTENU); } //i->
 	reverse_iterator& operator++() { POINTEUR = POINTEUR->PREC; return *this; } //++i
-	reverse_iterator operator++(int) { iterator it(*this); POINTEUR = POINTEUR->PREC; return it; } //i++
+	reverse_iterator operator++(int) { reverse_iterator it(*this); POINTEUR = POINTEUR->PREC; return it; } //i++
 	reverse_iterator& operator--() { POINTEUR = POINTEUR->SUIV; return *this; } //--i
-	reverse_iterator operator--(int) { iterator ret(*this); POINTEUR = POINTEUR->SUIV; return ret; } //i--  
+	reverse_iterator operator--(int) { reverse_iterator ret(*this); POINTEUR = POINTEUR->SUIV; return ret; } //i--  
 	bool operator==(const reverse_iterator& IT)const {
 		return POINTEUR == IT.POINTEUR;
 	}
@@ -142,6 +142,7 @@ void list<TYPE>::reverse(){
   template <typename TYPE>
 void list<TYPE>::sort(iterator DEB,iterator FIN){
   /*... a completer ...*/
+  
 }
 
 #endif

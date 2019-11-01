@@ -12,12 +12,11 @@ int main()
 	test.push_front(2);
 	test.push_front(0);
 
-	list<int>::iterator it(test.begin());
-	it++;
+	list<int>::iterator it(test.end());
 	test.insert(it, 1);
 
-	it = test.begin();
-	test.erase(it);
+	it = test.end();
+	// test.erase(it);
 	test.afficher();
 
 
