@@ -48,6 +48,19 @@ int main()
 	test.afficher();
 
 
+	list<int> test3;
+	test3.push_back(3);
+	test3.push_back(888);
+	test3.push_back(556);
+	test3.push_back(23);
+	test3.push_back(2);
+
+	list<int>::iterator itD(test3.begin());
+	list<int>::iterator itF(test3.begin());
+	itF++;
+	itF++;
+	test3.sort(itD, itF);
+	test3.afficher();
 	system("PAUSE");
 
 

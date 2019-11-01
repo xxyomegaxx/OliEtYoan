@@ -142,7 +142,29 @@ void list<TYPE>::reverse(){
   template <typename TYPE>
 void list<TYPE>::sort(iterator DEB,iterator FIN){
   /*... a completer ...*/
+<<<<<<< HEAD
   
+=======
+	iterator it(DEB);
+	iterator it2(DEB);
+	list<TYPE> *nouv = new list<TYPE>();
+	TYPE temp;
+	while (it2 != FIN)
+	{
+		while (it != FIN)
+		{
+			if (it.POINTEUR->CONTENU > it.POINTEUR->SUIV->CONTENU)
+			{
+				temp = it.POINTEUR->CONTENU;
+				it.POINTEUR->CONTENU = it.POINTEUR->SUIV->CONTENU;
+				it.POINTEUR->SUIV->CONTENU = temp;
+			}
+			it++;
+		}
+		it = DEB;
+		it2++;
+	}
+>>>>>>> 65e86d2fde3290d2ae19de2ed698c3806829a747
 }
 
 #endif
