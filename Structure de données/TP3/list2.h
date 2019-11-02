@@ -179,15 +179,19 @@ supprimer les cellules qu’elle contenait
 */
 template <typename TYPE>
 void list<TYPE>::splice(iterator i,list& L){
-	//Pour chaque iteration, le suivant du precedent de l'iterateur sera affecte l'element de la liste
+	// Fait pointer le suivant de l'element avant i vers le debut de la liste à ajouter
 	i.POINTEUR->PREC->SUIV = L.DEBUT->SUIV;
+	// Fait pointer le prec du debut de la liste à ajouter vers l'element avant i
 	L.DEBUT->SUIV->PREC = i.POINTEUR->PREC;
-	//Pour chaque iteration, le precedent du suivant de l'iterateur sera affecte l'element de la liste
+	//fait pointer le prec de l'element i vers la fin de la liste l
 	i.POINTEUR->PREC = L.DEBUT->PREC->PREC;
+	//fait pointer le suiv du dernier element de l vers i
 	L.DEBUT->PREC->PREC->SUIV = i.POINTEUR;
-
+	
+	//Transforme le tableau L en tableau null en faisant pointer le suivant du debut vers la fin et le prec de la fin vers le debut
 	L.DEBUT->SUIV = L.DEBUT->PREC;
 	L.DEBUT->SUIV->PREC = L.DEBUT;
+	//ajustement des tailles
 	SIZE += L.SIZE;
 	L.SIZE = 0;
   
@@ -203,9 +207,10 @@ void list<TYPE>::reverse(){
 	cellule *cell; //Pointeur vers la contenu de la cellule cell
 	cellule *temp; //Pointeur vers la contenu de la cellule temp
 
-	//
+	// Transforme la fin en Debut
 	DEBUT->PREC->SUIV = DEBUT->PREC->PREC;
 	DEBUT->PREC->PREC = DEBUT;
+	// pour chaque element du tableau, inverse le suiv et le precedant
 	cell = DEBUT->PREC->SUIV;
 	while (DEBUT != cell)
 	{
@@ -215,6 +220,7 @@ void list<TYPE>::reverse(){
 		cell = cell->SUIV;
 
 	}
+	//Transforme le debut en fin
 	temp = DEBUT->SUIV;
 	DEBUT->SUIV = nullptr;
 	DEBUT = DEBUT->PREC;
