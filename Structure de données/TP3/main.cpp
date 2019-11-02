@@ -5,6 +5,7 @@ using namespace std;
 int main()
 {
 
+	cout << "Test 1";
 	list<int> test;
 	test.push_back(3);
 	test.push_back(4);
@@ -14,12 +15,10 @@ int main()
 
 	list<int>::iterator it(test.end());
 	test.insert(it, 1);
-
 	it = test.end();
-	// test.erase(it);
 	test.afficher();
-
-
+	
+	cout << "Test 2";
 	list<int> test2;
 	test2.push_back(33);
 	test2.push_back(44);
@@ -31,12 +30,10 @@ int main()
 	test = test2;
 	test.afficher();
 
-
-
-	test.resize(3,4);
+	test.resize(8,4);
 	test.afficher();
-	test.resize(5,4);
-	test.afficher();
+	// test.resize(5,4);
+	// test.afficher();
 
 	list<int>::iterator it2(test.begin());
 	it2++;

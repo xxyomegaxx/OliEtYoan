@@ -1,9 +1,9 @@
 /**
 * \ file list.h
 * \ author Jean Goulet (Sept. 2016), modified by Aida Ouangraoua (Oct. 2019)
+* \ modified by Olivier Cote(18116913) et Yoan David(19089763)
 * \ brief Ce fichier contient les specifications du type list
 */
-
 
 #ifndef list_h
 #define list_h
