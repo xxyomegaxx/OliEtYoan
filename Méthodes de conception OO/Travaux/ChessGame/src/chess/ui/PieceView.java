@@ -9,7 +9,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
-public class ChessView {
+public class PieceView {
 	// Utilisé pour générer les noms de fichiers contenant les images des pièces.
 	private static final String names[] = { "pawn", "knight", "bishop", "rook", "queen", "king" };
 	private static final String prefixes[] = { "w", "b" };
@@ -22,9 +22,14 @@ public class ChessView {
 	// Panneau d'interface contenant l'image de la pièce
 	private Pane piecePane;
 	
-	public ChessView() {
+	public PieceView() {
 		
 	}
+	
+	public Pane getPane() {
+		return piecePane;
+	}
+
 	
 
 	// Gestionnaire d'événements pour le déplacement des pièces

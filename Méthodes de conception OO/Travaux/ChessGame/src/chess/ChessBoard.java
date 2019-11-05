@@ -47,8 +47,8 @@ public class ChessBoard {
 	public void putPiece(ChessPiece piece) {
 
 		Point2D pos = view.gridToPane(this, piece, piece.getGridX(), piece.getGridY());
-		piece.getPane().relocate(pos.getX(), pos.getY());
-		getUI().getChildren().add(piece.getPane());
+		piece.getUI().relocate(pos.getX(), pos.getY());
+		getUI().getChildren().add(piece.getUI());
 		grid[piece.getGridX()][piece.getGridY()] = piece;
 	}
 
@@ -97,7 +97,7 @@ public class ChessBoard {
 
 		//Si elle est occuppé par une pièce de couleur différente, alors c'est une capture
 		else if (!isSameColor(gridPos, newGridPos)) {			
-			getUI().getChildren().remove(grid[newGridPos.x][newGridPos.y].getPane());
+			getUI().getChildren().remove(grid[newGridPos.x][newGridPos.y].getUI());
 			grid[newGridPos.x][newGridPos.y] = grid[gridPos.x][gridPos.y];
 			grid[gridPos.x][gridPos.y] = new ChessPiece(gridPos.x, gridPos.y, this);
 

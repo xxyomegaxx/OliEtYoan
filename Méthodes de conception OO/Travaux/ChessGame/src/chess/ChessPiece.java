@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import chess.ui.PieceView;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Point2D;
@@ -24,7 +25,7 @@ public class ChessPiece {
 	private int type;
 	private int color;
 	
-	private ChessPiece piece;
+	private PieceView piece;
 
 	// Pour créer des pièces à mettre sur les cases vides
 	public ChessPiece(int x, int y, ChessBoard b) {
@@ -116,8 +117,8 @@ public class ChessPiece {
 	}
 
 	//Accesseurs divers
-	public Pane getPane() {
-		return piecePane;
+	public Pane getUI() {
+		return piece.getPane();
 	}
 
 	public int getType() {
