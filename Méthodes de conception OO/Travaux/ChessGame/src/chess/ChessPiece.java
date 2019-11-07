@@ -33,7 +33,7 @@ public class ChessPiece {
 		this.color = ChessUtils.COLORLESS;
 		gridPosX = x;
 		gridPosY = y;
-		board = b;
+		piece = new PieceView(b);
 	}
 
 	// Création d'une pièce normale. La position algébrique en notation d'échecs
@@ -42,26 +42,8 @@ public class ChessPiece {
 
 		color = ChessUtils.getColor(name);
 		type = ChessUtils.getType(name);
-
-		board = b;
 		
-		Image pieceImage;
-		try {
-			pieceImage = new Image(new FileInputStream("images/" + prefixes[color] + names[type] + ".png"));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return;
-		}
-		ImageView pieceView = new ImageView(pieceImage);
-
-		pieceView.setX(0);
-		pieceView.setY(0);
-		pieceView.setFitHeight(pieceSize);
-		pieceView.setFitWidth(pieceSize);
-
-		pieceView.setPreserveRatio(true);
-		piecePane = new Pane(pieceView);
-		enableDragging(piecePane);
+		piece = new PieceView(name,b,this,color,type);
 		
 		setAlgebraicPos(pos);
 

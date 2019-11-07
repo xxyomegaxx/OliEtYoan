@@ -1,12 +1,17 @@
 package chess.ui;
 
 import java.awt.Point;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import chess.ChessBoard;
+import chess.ChessPiece;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class PieceView {
@@ -22,8 +27,30 @@ public class PieceView {
 	// Panneau d'interface contenant l'image de la pièce
 	private Pane piecePane;
 	
-	public PieceView() {
+	public PieceView(ChessBoard b) {
+		board = b;
+	}
+	
+	public PieceView(String name, ChessBoard b,ChessPiece p ,int color, int type) {
+		board = b;
 		
+		Image pieceImage;
+		try {
+			pieceImage = new Image(new FileInputStream("images/" + prefixes[color] + names[type] + ".png"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return;
+		}
+		ImageView pieceView = new ImageView(pieceImage);
+
+		pieceView.setX(0);
+		pieceView.setY(0);
+		pieceView.setFitHeight(pieceSize);
+		pieceView.setFitWidth(pieceSize);
+
+		pieceView.setPreserveRatio(true);
+		piecePane = new Pane(pieceView);
+		enableDragging(piecePane,p);
 	}
 	
 	public Pane getPane() {
@@ -33,7 +60,7 @@ public class PieceView {
 	
 
 	// Gestionnaire d'événements pour le déplacement des pièces
-	private void enableDragging(Node node) {
+	private void enableDragging(Node node, ChessPiece piece) {
 		final ObjectProperty<Point2D> mouseAnchor = new SimpleObjectProperty<>();
 
 		// Lorsque la pièce est saisie, on préserve la position de départ
@@ -60,13 +87,13 @@ public class PieceView {
 		node.setOnMouseReleased(event -> {
 
 			Point newGridPos = board.view.paneToGrid(board, event.getSceneX(), event.getSceneY());
-			if (board.move(getGridPos(), newGridPos)) {
+			if (board.move(piece.getGridPos(), newGridPos)) {
 
-				Point2D newPos = board.view.gridToPane(board, this, newGridPos.x, newGridPos.y);
+				Point2D newPos = board.view.gridToPane(board, piece, newGridPos.x, newGridPos.y);
 				node.relocate(newPos.getX(), newPos.getY());
-				this.setGridPos(newGridPos);
+				piece.setGridPos(newGridPos);
 			} else {
-				Point2D oldPos = board.view.gridToPane(board, this, getGridX(), getGridY());
+				Point2D oldPos = board.view.gridToPane(board, piece, piece.getGridX(), piece.getGridY());
 				node.relocate(oldPos.getX(), oldPos.getY());
 			}
 
