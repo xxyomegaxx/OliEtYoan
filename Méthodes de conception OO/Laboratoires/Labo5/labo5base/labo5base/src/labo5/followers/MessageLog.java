@@ -5,8 +5,9 @@ package labo5.followers;
  * Utilisez-le pour voir si les messages sont produits comme pr�vu
  * par les vedettes.
  */
-public class MessageLog {
+public class MessageLog  implements Follower {
 	
+	@Override
 	public void update(String message){
 		
 		System.out.println(message);

@@ -1,10 +1,11 @@
 package labo5.celebrities;
 
-public abstract class SocialMediaCelebrity {
+public abstract class SocialMediaCelebrity extends Sujet{
 
 	private int waitTime;
 	protected String name;
 	protected String status = "I'm new to Facetwit, lol.";
+	
 
 	public SocialMediaCelebrity(String n, int wait) {
 		name = n;
@@ -17,6 +18,7 @@ public abstract class SocialMediaCelebrity {
 	protected void setStatus(String ns) {
 		waitBeforePost();
 		status = ns;
+		notifyFollowers(ns);
 
 	}
 

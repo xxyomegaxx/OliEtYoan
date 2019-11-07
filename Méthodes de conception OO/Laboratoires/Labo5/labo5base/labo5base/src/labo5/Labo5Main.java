@@ -43,29 +43,37 @@ public class Labo5Main extends JFrame {
 		fans.add(new Reposter(this, "SpiritualFan"));
 		fans.add(new Reposter(this, "JohnCenaFan"));
 
+		for (int i = 0; i < celebs.size(); i++) {
+			celebs.get(i).attach(fans.get(i));
+			celebs.get(i).attach(log);
+		}
+
 	}
-	
+
 	/*
-	 * Boucle qui change les statuts des vedettes � tour de r�le. 
-	 * Drama knows no bounds! Ne terminera jamais (fermez la fen�tre pour
-	 * arr�ter le programme).
+	 * Boucle qui change les statuts des vedettes � tour de r�le. Drama knows no
+	 * bounds! Ne terminera jamais (fermez la fen�tre pour arr�ter le
+	 * programme).
 	 */
 
 	public void startTheDrama() {
 
 		while (true) {
 
-			for (int i = 0; i < celebs.size(); i++) {
-				SocialMediaCelebrity celeb = celebs.get(i);
-				celeb.changeStatus();
-				fans.get(i).update(celeb.getStatus());
-				log.update(celeb.getStatus());
+			/*
+			 * for (int i = 0; i < celebs.size(); i++) { SocialMediaCelebrity celeb =
+			 * celebs.get(i); celeb.changeStatus(); fans.get(i).update(celeb.getStatus());
+			 * log.update(celeb.getStatus());
+			 */
 
+			for (SocialMediaCelebrity celeb : celebs) {
+				celeb.changeStatus();
 			}
 
 		}
 
 	}
+
 
 	/*
 	 * Initialisation de la fen�tre.

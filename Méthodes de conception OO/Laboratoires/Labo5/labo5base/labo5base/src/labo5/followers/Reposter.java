@@ -3,7 +3,7 @@ package labo5.followers;
 import labo5.Labo5Main;
 import labo5.ui.MessageView;
 
-public class Reposter {
+public class Reposter implements Follower{
 
 	protected MessageView viewport;
 	private String name;
@@ -23,6 +23,7 @@ public class Reposter {
 	 * Un reposter est un fan qui ne fait que r�afficher ce que la vedette
 	 * a dit dans son propre fil de nouvelles
 	 */
+	@Override
 	public void update(String message){
 		
 		//Ajoute tout simplement le message dans la bo�te de texte.
