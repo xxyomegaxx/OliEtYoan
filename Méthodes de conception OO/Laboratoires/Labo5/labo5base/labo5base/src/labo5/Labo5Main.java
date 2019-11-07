@@ -13,6 +13,7 @@ import labo5.celebrities.PositiveCelebrity;
 import labo5.celebrities.SocialMediaCelebrity;
 import labo5.followers.MessageLog;
 import labo5.followers.Reposter;
+import labo5.followers.SerialReposter;
 import labo5.ui.MessageView;
 
 public class Labo5Main extends JFrame {
@@ -42,10 +43,12 @@ public class Labo5Main extends JFrame {
 		fans.add(new Reposter(this, "BritneyFan"));
 		fans.add(new Reposter(this, "SpiritualFan"));
 		fans.add(new Reposter(this, "JohnCenaFan"));
+		SerialReposter nolife = new SerialReposter(this, "NoLife");
 
 		for (int i = 0; i < celebs.size(); i++) {
 			celebs.get(i).attach(fans.get(i));
 			celebs.get(i).attach(log);
+			celebs.get(i).attach(nolife);
 		}
 
 	}

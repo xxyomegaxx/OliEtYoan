@@ -3,7 +3,6 @@ package labo5.celebrities;
 public abstract class SocialMediaCelebrity extends Sujet{
 
 	private int waitTime;
-	protected String name;
 	protected String status = "I'm new to Facetwit, lol.";
 	
 

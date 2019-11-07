@@ -24,7 +24,7 @@ public class Reposter implements Follower{
 	 * a dit dans son propre fil de nouvelles
 	 */
 	@Override
-	public void update(String message){
+	public void update(String name,String message){
 		
 		//Ajoute tout simplement le message dans la bo�te de texte.
 		viewport.appendMessage(message);

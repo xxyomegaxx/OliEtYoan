@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import labo5.followers.Follower;
 
 public abstract class Sujet {
+	protected String name;
 	ArrayList<Follower>  followerList = new ArrayList<Follower>();
 	public void attach(Follower follower)
 	{
@@ -15,7 +16,7 @@ public abstract class Sujet {
 	{
 		for(Follower each : followerList)
 		{
-			each.update(message);
+			each.update(name,message);
 		}
 	}
 

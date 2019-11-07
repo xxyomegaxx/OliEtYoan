@@ -8,7 +8,7 @@ package labo5.followers;
 public class MessageLog  implements Follower {
 	
 	@Override
-	public void update(String message){
+	public void update(String name,String message){
 		
 		System.out.println(message);
 		
