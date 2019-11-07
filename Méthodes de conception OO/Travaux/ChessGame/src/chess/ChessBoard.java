@@ -81,6 +81,21 @@ public class ChessBoard {
 		move(ChessUtils.convertAlgebraicPosition(start),ChessUtils.convertAlgebraicPosition(end));
 	}
 	
+	public Point2D move(Point2D pos, Point2D newPos) {
+		
+		Point newGridPos = view.paneToGrid(newPos.getX(), newPos.getY());
+		Point gridPos = view.paneToGrid(pos.getX(), pos.getY());
+		
+		if(move(gridPos,newGridPos)) {
+			Point2D newPos2 = view.gridToPane(newGridPos.x,newGridPos.y);
+			return newPos2;
+		} else {
+			Point2D oldPos = view.gridToPane(gridPos.x, newGridPos.y);
+			return oldPos;
+		}
+	
+	}
+	
 	//Effectue un mouvement sur l'échiqier. Quelques règles de base sont implantées ici.
 	public boolean move(Point gridPos, Point newGridPos) {
 
@@ -92,6 +107,7 @@ public class ChessBoard {
 		else if (isEmpty(newGridPos)) {
 			grid[newGridPos.x][newGridPos.y] = grid[gridPos.x][gridPos.y];
 			grid[gridPos.x][gridPos.y] = new ChessPiece(gridPos.x, gridPos.y, this);
+			grid[gridPos.x][gridPos.y].setGridPos(newGridPos);
 			return true;
 		}
 
@@ -100,6 +116,7 @@ public class ChessBoard {
 			getUI().getChildren().remove(grid[newGridPos.x][newGridPos.y].getUI());
 			grid[newGridPos.x][newGridPos.y] = grid[gridPos.x][gridPos.y];
 			grid[gridPos.x][gridPos.y] = new ChessPiece(gridPos.x, gridPos.y, this);
+			grid[gridPos.x][gridPos.y].setGridPos(newGridPos);
 
 			return true;
 		}

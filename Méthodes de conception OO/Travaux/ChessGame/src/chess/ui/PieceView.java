@@ -26,14 +26,14 @@ public class PieceView {
 	private ChessBoard board;
 	// Panneau d'interface contenant l'image de la pièce
 	private Pane piecePane;
-	
+
 	public PieceView(ChessBoard b) {
 		board = b;
 	}
-	
-	public PieceView(String name, ChessBoard b,ChessPiece p ,int color, int type) {
+
+	public PieceView(String name, ChessBoard b, ChessPiece p, int color, int type) {
 		board = b;
-		
+
 		Image pieceImage;
 		try {
 			pieceImage = new Image(new FileInputStream("images/" + prefixes[color] + names[type] + ".png"));
@@ -50,14 +50,12 @@ public class PieceView {
 
 		pieceView.setPreserveRatio(true);
 		piecePane = new Pane(pieceView);
-		enableDragging(piecePane,p);
+		enableDragging(piecePane, p);
 	}
-	
+
 	public Pane getPane() {
 		return piecePane;
 	}
-
-	
 
 	// Gestionnaire d'événements pour le déplacement des pièces
 	private void enableDragging(Node node, ChessPiece piece) {
@@ -85,17 +83,14 @@ public class PieceView {
 		// au jeu d'échecs si possible.
 		// L'image de la pièce est également centrée sur la case la plus proche.
 		node.setOnMouseReleased(event -> {
-
-			Point newGridPos = board.view.paneToGrid(board, event.getSceneX(), event.getSceneY());
-			if (board.move(piece.getGridPos(), newGridPos)) {
-
-				Point2D newPos = board.view.gridToPane(newGridPos.x, newGridPos.y);
-				node.relocate(newPos.getX(), newPos.getY());
-				piece.setGridPos(newGridPos);
-			} else {
-				Point2D oldPos = board.view.gridToPane(piece.getGridX(), piece.getGridY());
-				node.relocate(oldPos.getX(), oldPos.getY());
-			}
+			
+			Point2D newPos = new Point2D(event.getSceneX(), event.getSceneY());
+			Point2D Pos = new Point2D(node.getLayoutX(), node.getLayoutY());
+			
+			Point2D x = board.move(Pos,newPos);
+			
+			node.relocate(x.getX(), x.getY());
+			
 
 		});
 	}
