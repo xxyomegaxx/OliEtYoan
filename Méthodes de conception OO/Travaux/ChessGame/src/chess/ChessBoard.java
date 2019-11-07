@@ -46,7 +46,7 @@ public class ChessBoard {
 	// Place une pièce sur le planche de jeu.
 	public void putPiece(ChessPiece piece) {
 
-		Point2D pos = view.gridToPane(this, piece, piece.getGridX(), piece.getGridY());
+		Point2D pos = view.gridToPane(piece.getGridX(), piece.getGridY());
 		piece.getUI().relocate(pos.getX(), pos.getY());
 		getUI().getChildren().add(piece.getUI());
 		grid[piece.getGridX()][piece.getGridY()] = piece;

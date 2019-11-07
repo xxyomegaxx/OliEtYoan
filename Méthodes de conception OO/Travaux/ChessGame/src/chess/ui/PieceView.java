@@ -89,11 +89,11 @@ public class PieceView {
 			Point newGridPos = board.view.paneToGrid(board, event.getSceneX(), event.getSceneY());
 			if (board.move(piece.getGridPos(), newGridPos)) {
 
-				Point2D newPos = board.view.gridToPane(board, piece, newGridPos.x, newGridPos.y);
+				Point2D newPos = board.view.gridToPane(newGridPos.x, newGridPos.y);
 				node.relocate(newPos.getX(), newPos.getY());
 				piece.setGridPos(newGridPos);
 			} else {
-				Point2D oldPos = board.view.gridToPane(board, piece, piece.getGridX(), piece.getGridY());
+				Point2D oldPos = board.view.gridToPane(piece.getGridX(), piece.getGridY());
 				node.relocate(oldPos.getX(), oldPos.getY());
 			}
 
