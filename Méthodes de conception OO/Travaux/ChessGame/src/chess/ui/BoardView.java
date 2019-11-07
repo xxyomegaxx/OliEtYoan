@@ -65,7 +65,7 @@ public class BoardView {
 		return boardPane;
 	}
 
-	public Point paneToGrid(ChessBoard chessBoard, double xPos, double yPos) {
+	public Point paneToGrid(double xPos, double yPos) {
 		
 		if (xPos < (borderSize + startX))
 			xPos = borderSize + startX;
