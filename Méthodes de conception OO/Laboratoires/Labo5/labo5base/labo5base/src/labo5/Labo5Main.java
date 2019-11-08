@@ -16,6 +16,7 @@ import labo5.followers.Hater;
 import labo5.followers.MessageLog;
 import labo5.followers.Reposter;
 import labo5.followers.SerialReposter;
+import labo5.followers.Troll;
 import labo5.ui.MessageView;
 
 public class Labo5Main extends JFrame {
@@ -45,6 +46,8 @@ public class Labo5Main extends JFrame {
 		fans.add(new Reposter(this, "BritneyFan"));
 		fans.add(new Reposter(this, "SpiritualFan"));
 		fans.add(new Reposter(this, "JohnCenaFan"));
+		Troll troll1 = new Troll (this,"The troll1",1);
+		Troll troll2 = new Troll (this,"The troll2",2);
 		SerialReposter nolife = new SerialReposter(this, "NoLife");
 		Fanboy fanboy = new Fanboy(this,"The Fanboy");
 		Hater hater = new Hater(this,"The Hater");
@@ -53,14 +56,21 @@ public class Labo5Main extends JFrame {
 			celebs.get(i).attach(fans.get(i));
 			celebs.get(i).attach(log);
 			celebs.get(i).attach(nolife);
-		}
+			celebs.get(i).attach(troll1);
+			celebs.get(i).attach(troll2);
+}
 		celebs.get(2).attach(fanboy);
 		Reposter fanboyFan = new Reposter(this, "Fanboy Fan");
 		fanboy.attach(fanboyFan);
+		fanboy.attach(troll1);
+		fanboy.attach(troll2);
+
 		
 		celebs.get(0).attach(hater);
 		Reposter haterFan = new Reposter(this, "Hater Fan");
 		hater.attach(haterFan);
+		hater.attach(troll1);
+		hater.attach(troll2);
 
 	}
 
