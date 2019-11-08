@@ -81,18 +81,13 @@ public class ChessBoard {
 		move(ChessUtils.convertAlgebraicPosition(start),ChessUtils.convertAlgebraicPosition(end));
 	}
 	
-	public Point2D move(Point2D pos, Point2D newPos) {
+	public boolean move(Point2D pos, Point2D newPos) {
 		
 		Point newGridPos = view.paneToGrid(newPos.getX(), newPos.getY());
 		Point gridPos = view.paneToGrid(pos.getX(), pos.getY());
 		
-		if(move(gridPos,newGridPos)) {
-			Point2D newPos2 = view.gridToPane(newGridPos.x,newGridPos.y);
-			return newPos2;
-		} else {
-			Point2D oldPos = view.gridToPane(gridPos.x, newGridPos.y);
-			return oldPos;
-		}
+		return move(gridPos,newGridPos);
+		
 	
 	}
 	

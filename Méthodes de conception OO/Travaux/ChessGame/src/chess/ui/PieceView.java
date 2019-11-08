@@ -87,11 +87,11 @@ public class PieceView {
 			Point2D newPos = new Point2D(event.getSceneX(), event.getSceneY());
 			Point2D Pos = new Point2D(node.getLayoutX(), node.getLayoutY());
 			
-			Point2D x = board.move(Pos,newPos);
-			
-			node.relocate(x.getX(), x.getY());
-			
-
+			if(board.move(Pos, newPos)) {
+				node.relocate(newPos.getX(), newPos.getY());
+			} else {
+				node.relocate(Pos.getX(), Pos.getY());
+			}
 		});
 	}
 }
