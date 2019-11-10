@@ -175,18 +175,9 @@ public class ChessGame extends Application {
 
 	//Redémarre le jeu avec la planche de jeu par défaut.
 	private void resetGame() {
+		File file = new File("boards/normalStart");
+		resetGame(file);
 
-		clearGame();
-		board = new ChessBoard(boardPosX, boardPosY);
-		ArrayList<ChessPiece> pieces = new ArrayList<ChessPiece>();
-		pieces=ChessPiece.createInitialPieces(board);
-		for(ChessPiece piece: pieces){
-			board.putPiece(piece);
-		}
-		gamePane.getChildren().add(board.getUI());
-		// Attention! Le board peut masquer les autres contrôles s'il n'est pas
-		// placé complètement derrière eux.
-		board.getUI().toBack();
 	}
 	
 	//Redémarre le jeu avec une planche de jeu chargée d'un fichier

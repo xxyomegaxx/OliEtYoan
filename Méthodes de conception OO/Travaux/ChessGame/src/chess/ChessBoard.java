@@ -2,13 +2,11 @@ package chess;
 
 import java.awt.Point;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.util.Scanner;
 
 import chess.ui.BoardView;
 import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 //Représente la planche de jeu avec les pièces.
@@ -102,7 +100,6 @@ public class ChessBoard {
 		else if (isEmpty(newGridPos)) {
 			grid[newGridPos.x][newGridPos.y] = grid[gridPos.x][gridPos.y];
 			grid[gridPos.x][gridPos.y] = new ChessPiece(gridPos.x, gridPos.y, this);
-			grid[gridPos.x][gridPos.y].setGridPos(newGridPos);
 			grid[newGridPos.x][newGridPos.y].setGridPos(newGridPos);
 			return true;
 		}
@@ -128,15 +125,33 @@ public class ChessBoard {
 	}
 
 	public static ChessBoard readFromFile(File file, int x, int y) throws Exception {
-		
-
-		throw new Exception("Pas implanté");
+		ChessBoard board = new ChessBoard(x,y);
+		Scanner sc = new Scanner(file);
+		String desc;
+		while(sc.hasNext())
+		{
+			desc = sc.nextLine();
+			board.putPiece(ChessPiece.readFromStream(desc, board));
+		}
+		//throw new Exception("Pas implanté");
+		return board;
 	}
 	
 	
 	public void saveToFile(File file) throws Exception {
 
-		throw new Exception("Pas implanté");
+		FileWriter writer = new FileWriter(file);
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if(!isEmpty(grid[i][j].getGridPos()))
+				{
+					writer.write(grid[i][j].saveToStream()+"\n");
+				}					
+				
+			}
+		}
+		writer.close();
+		
 	}
 	
 	public Point paneToGrid(Point2D p) {

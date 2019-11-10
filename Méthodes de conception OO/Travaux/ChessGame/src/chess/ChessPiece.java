@@ -49,6 +49,7 @@ public class ChessPiece {
 
 	}
 	
+	
 	//Change la position avec la notation algébrique
 	public void setAlgebraicPos(String pos) {
 
@@ -58,7 +59,7 @@ public class ChessPiece {
 		gridPosY = pos2d.y;
 	}
 
-	// Crée la liste de pièces avec leur position de départ pour un jeu d'échecs standard
+	/*// Crée la liste de pièces avec leur position de départ pour un jeu d'échecs standard
 	public static ArrayList<ChessPiece> createInitialPieces(ChessBoard board) {
 
 		ArrayList<ChessPiece> pieces = new ArrayList<ChessPiece>();
@@ -90,13 +91,14 @@ public class ChessPiece {
 		}
 
 		return pieces;
-	}
+	}*/
 	
 	//Pour savoir si c'est une pièce vide (pour les cases vides de l'échiquier).
 	public boolean isNone() {
 
 		return type == ChessUtils.TYPE_NONE;
 	}
+	
 
 	//Accesseurs divers
 	public Pane getUI() {
@@ -132,5 +134,24 @@ public class ChessPiece {
 		}
 
 	}
+
+	public static ChessPiece readFromStream(String s,ChessBoard b) {
+		String pos = s.substring(0,2);
+		String name = s.substring(3,5);
+		return new ChessPiece(name,pos,b);
+
+		
+	}
+	
+	public String saveToStream()
+	{
+		String retour = "";
+		retour += ChessUtils.makeAlgebraicPosition(gridPosX, gridPosY);
+		retour += "-";
+		retour += ChessUtils.makePieceName(color, type);
+		return retour;
+	}
+	
+
 
 }
