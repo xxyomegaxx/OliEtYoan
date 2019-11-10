@@ -14,6 +14,7 @@ import labo5.celebrities.SocialMediaCelebrity;
 import labo5.followers.Fanboy;
 import labo5.followers.Hater;
 import labo5.followers.MessageLog;
+import labo5.followers.PressAgent;
 import labo5.followers.Reposter;
 import labo5.followers.SerialReposter;
 import labo5.followers.Troll;
@@ -51,6 +52,9 @@ public class Labo5Main extends JFrame {
 		SerialReposter nolife = new SerialReposter(this, "NoLife");
 		Fanboy fanboy = new Fanboy(this,"The Fanboy");
 		Hater hater = new Hater(this,"The Hater");
+		PressAgent agent1 = new PressAgent("agent1",1);
+		PressAgent agent2 = new PressAgent("agent2",2);
+		
 
 		for (int i = 0; i < celebs.size(); i++) {
 			celebs.get(i).attach(fans.get(i));
@@ -58,6 +62,8 @@ public class Labo5Main extends JFrame {
 			celebs.get(i).attach(nolife);
 			celebs.get(i).attach(troll1);
 			celebs.get(i).attach(troll2);
+			celebs.get(i).attachVeto(agent1);
+			celebs.get(i).attachVeto(agent2);
 }
 		celebs.get(2).attach(fanboy);
 		Reposter fanboyFan = new Reposter(this, "Fanboy Fan");

@@ -2,6 +2,6 @@ package labo5.followers;
 
 public interface Follower {
 	
-	public void update(String message, String message2);
+	public void update(String name, String message);
 
 }

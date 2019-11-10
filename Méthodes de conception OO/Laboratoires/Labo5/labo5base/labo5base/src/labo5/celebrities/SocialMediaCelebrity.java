@@ -16,8 +16,10 @@ public abstract class SocialMediaCelebrity extends Sujet{
 
 	protected void setStatus(String ns) {
 		waitBeforePost();
-		status = ns;
-		notifyFollowers(ns);
+		if(notifyFollowers(ns))
+		{
+			status = ns;
+		}
 
 	}
 
