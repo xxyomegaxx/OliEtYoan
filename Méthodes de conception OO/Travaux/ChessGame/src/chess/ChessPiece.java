@@ -43,7 +43,7 @@ public class ChessPiece {
 		color = ChessUtils.getColor(name);
 		type = ChessUtils.getType(name);
 		
-		piece = new PieceView(name,b,this,color,type);
+		piece = new PieceView(name,b,color,type);
 		
 		setAlgebraicPos(pos);
 
@@ -126,6 +126,11 @@ public class ChessPiece {
 	public void setGridPos(Point pos) {
 		gridPosX = pos.x;
 		gridPosY = pos.y;
+		if(piece.getPane()!=null)
+		{
+			piece.relocateNode(pos);
+		}
+
 	}
 
 }

@@ -31,7 +31,7 @@ public class PieceView {
 		board = b;
 	}
 
-	public PieceView(String name, ChessBoard b, ChessPiece p, int color, int type) {
+	public PieceView(String name, ChessBoard b, int color, int type) {
 		board = b;
 
 		Image pieceImage;
@@ -50,7 +50,14 @@ public class PieceView {
 
 		pieceView.setPreserveRatio(true);
 		piecePane = new Pane(pieceView);
-		enableDragging(piecePane, p);
+		enableDragging(piecePane);
+		
+	}
+	public void relocateNode(Point p)
+	{
+		Point2D paneP = new Point2D(0,0);
+		paneP = board.gridToPane(p);
+		piecePane.relocate(paneP.getX(), paneP.getY());
 	}
 
 	public Pane getPane() {
@@ -58,14 +65,16 @@ public class PieceView {
 	}
 
 	// Gestionnaire d'événements pour le déplacement des pièces
-	private void enableDragging(Node node, ChessPiece piece) {
+	private void enableDragging(Node node) {
 		final ObjectProperty<Point2D> mouseAnchor = new SimpleObjectProperty<>();
+		final ObjectProperty<Point2D> firstPos = new SimpleObjectProperty<>();
 
 		// Lorsque la pièce est saisie, on préserve la position de départ
 		node.setOnMousePressed(event -> {
-
-			mouseAnchor.set(new Point2D(event.getSceneX(), event.getSceneY()));
-
+			Point2D start = new Point2D(event.getSceneX(), event.getSceneY());
+			mouseAnchor.set(start);
+			firstPos.set(start);
+			
 		});
 
 		// À chaque événement de déplacement, on déplace la pièce et on met à
@@ -83,15 +92,16 @@ public class PieceView {
 		// au jeu d'échecs si possible.
 		// L'image de la pièce est également centrée sur la case la plus proche.
 		node.setOnMouseReleased(event -> {
-			
+			firstPos.set(board.gridToPane(board.paneToGrid(firstPos.get())));
 			Point2D newPos = new Point2D(event.getSceneX(), event.getSceneY());
-			Point2D Pos = new Point2D(node.getLayoutX(), node.getLayoutY());
 			
-			if(board.move(Pos, newPos)) {
-				node.relocate(newPos.getX(), newPos.getY());
-			} else {
-				node.relocate(Pos.getX(), Pos.getY());
+			if((board.move(firstPos.get(), newPos))==false)
+			{
+				relocateNode(board.paneToGrid(firstPos.get()));
 			}
+						
 		});
 	}
 }
+
+

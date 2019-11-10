@@ -103,6 +103,7 @@ public class ChessBoard {
 			grid[newGridPos.x][newGridPos.y] = grid[gridPos.x][gridPos.y];
 			grid[gridPos.x][gridPos.y] = new ChessPiece(gridPos.x, gridPos.y, this);
 			grid[gridPos.x][gridPos.y].setGridPos(newGridPos);
+			grid[newGridPos.x][newGridPos.y].setGridPos(newGridPos);
 			return true;
 		}
 
@@ -111,7 +112,7 @@ public class ChessBoard {
 			getUI().getChildren().remove(grid[newGridPos.x][newGridPos.y].getUI());
 			grid[newGridPos.x][newGridPos.y] = grid[gridPos.x][gridPos.y];
 			grid[gridPos.x][gridPos.y] = new ChessPiece(gridPos.x, gridPos.y, this);
-			grid[gridPos.x][gridPos.y].setGridPos(newGridPos);
+			grid[newGridPos.x][newGridPos.y].setGridPos(newGridPos);
 
 			return true;
 		}
@@ -136,6 +137,16 @@ public class ChessBoard {
 	public void saveToFile(File file) throws Exception {
 
 		throw new Exception("Pas implanté");
+	}
+	
+	public Point paneToGrid(Point2D p) {
+		return view.paneToGrid(p.getX(), p.getY());
+
+	}
+
+	public Point2D gridToPane(Point p) {
+		return view.gridToPane(p.x, p.y);
+	
 	}
 
 }
