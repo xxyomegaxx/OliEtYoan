@@ -18,21 +18,25 @@ typename set<TYPE>::cellule* set<TYPE>::insert(typename set<TYPE>::cellule* ap, 
   /*... a effacer et completer ...*/
 size_t hauteurAvant = DEBUT->HAUTEUR;
 size_t hauteur = tirer_hauteur_au_hasard();
-cellule** nouveau = new cellule(X,hauteur);
+cellule *nouveau = new cellule(X,hauteur);
 
 if(hauteur > hauteurAvant){
   cellule** nouveauDebut = new cellule*[hauteur];
   cellule** nouveauFin = new cellule*[hauteur]; 
   for(size_t i = 0; i < hauteurAvant; i++){
-    swap(DEBUT->SUIV[i],nouveauDebut[i]);
-    swap(DEBUT->PREC->PREC[i],nouveauFin[i]);
+    //swap(DEBUT->SUIV[i],nouveauDebut->SUIV[i]);
+	  nouveauDebut[i] = DEBUT->SUIV[i];
+    //swap(DEBUT->PREC->PREC[i],nouveauFin[i]);
+	nouveauFin[i] = DEBUT->PREC[0]->PREC[i];
   }
-  swap(DEBUT->SUIV,nouveauDebut);
-  swap(DEBUT->PREC->PREC,nouveauFin);
-  ~set(nouveauDebut);
-  ~set(nouveauFin);
+  delete [] *DEBUT;
+  delete[] *DEBUT->PREC[0]->PREC;
+  DEBUT->SUIV=nouveauDebut;
+  DEBUT->PREC[0]->PREC=nouveauFin;
+  
 
-  for(size_t i = hauteurAvant;i <= hauteur; i++){
+
+  for(size_t i = hauteurAvant;i < hauteur; i++){
     DEBUT->SUIV[i] = nouveau;
     nouveau->PREC[i] = DEBUT;
 
@@ -40,20 +44,23 @@ if(hauteur > hauteurAvant){
     nouveau->SUIV[i] = DEBUT->PREC[0];
   }
 
-  cellule* p = ap->PREC[0];
-  cellule* ap;
-  for(int i = 0; i <= hauteurAvant-1; i++){
-    while(p->HAUTEUR <= i){
-      p = p->PREC[p->HAUTEUR-1];
-      nouveau->PREC[i] = p->SUIV[i];
-    }
-    while(ap->HAUTEUR <= i){
-      ap = ap->SUIV[ap->HAUTEUR-1];
-      nouveau->SUIV[i] = ap->PREC[i];
-    }
+  
   }
-  return nouveau;
-  }
+	cellule* p = ap->PREC[0];
+	//cellule* ap;
+	for (int i = 0; i < hauteurAvant; i++) {
+		while (p->HAUTEUR <= i) {
+			p = p->PREC[p->HAUTEUR - 1];
+		}
+		nouveau->PREC[i] = p;
+		p->SUIV[i] = nouveau;
+		while (ap->HAUTEUR <= i) {
+			ap = ap->SUIV[ap->HAUTEUR - 1];
+		}
+		nouveau->SUIV[i] = ap;
+		ap->PREC[i] = nouveau;
+}
+return nouveau;
 }
 
 
