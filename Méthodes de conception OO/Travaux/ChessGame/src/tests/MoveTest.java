@@ -135,17 +135,17 @@ class MoveTest {
 		
 		initial.loadBoard(initialPos);
 		initial.movePiece("e4-a4");
-		result= ChessBoard.readFromFile(new File("boards/tests/queenBasic2"));
+		result= ChessBoard.readFromFile(new File("boards/tests/queenbasic2"));
 		assert(initial.compareBoard(result));	
 		
 		initial.loadBoard(initialPos);
 		initial.movePiece("e4-e3");
-		result= ChessBoard.readFromFile(new File("boards/tests/queenBasic3"));
+		result= ChessBoard.readFromFile(new File("boards/tests/queenbasic3"));
 		assert(initial.compareBoard(result));
 		
 		initial.loadBoard(initialPos);
 		initial.movePiece("e4-f3");
-		result= ChessBoard.readFromFile(new File("boards/tests/queenBasic4"));
+		result= ChessBoard.readFromFile(new File("boards/tests/queenbasic4"));
 		assert(initial.compareBoard(result));
 		
 	}
@@ -177,5 +177,155 @@ class MoveTest {
 		assert(initial.compareBoard(result));
 		
 	}
+	
+	@Test
+	public void testPawnIllegalMoves() throws Exception
+	{
+		ChessGame initial = new ChessGame(100,200);
+	
+		initial.loadBoard(new File("boards/tests/bpawnBasic"));
+		ChessBoard result= ChessBoard.readFromFile(new File("boards/tests/bpawnBasic"));
+		
+		initial.movePiece("f5-f3");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("f5-e5");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("f5-f6");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("f5-g4");
+		assert(initial.compareBoard(result));
+		
+		initial.loadBoard(new File("boards/tests/wpawnBasic"));
+		result= ChessBoard.readFromFile(new File("boards/tests/wpawnBasic1"));
+		
+		initial.movePiece("f5-f7");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("f5-g5");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("f5-f4");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("f5-e6");
+		assert(initial.compareBoard(result));
+	}
+	
+	@Test
+	public void testRookIllegalMoves() throws Exception
+	{
+		ChessGame initial = new ChessGame(100,200);
+		initial.loadBoard(new File("boards/tests/rookBasic"));
+		ChessBoard result= ChessBoard.readFromFile(new File("boards/tests/rookBasic"));
+	
+		initial.movePiece("e4-d5");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("e4-g2");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("e4-d6");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("e4-a3");
+		assert(initial.compareBoard(result));
+		
+
+	}
+	
+	@Test
+	public void testKnightIllegalMoves() throws Exception
+	{
+		ChessGame initial = new ChessGame(100,200);
+		initial.loadBoard(new File("boards/tests/knightBasic"));
+		ChessBoard result= ChessBoard.readFromFile(new File("boards/tests/knightBasic"));
+	
+		initial.movePiece("f5-f6");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("f5-d7");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("f5-h5");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("f5-g4");
+		assert(initial.compareBoard(result));
+		
+
+	}
+	
+	@Test
+	public void testBishopIllegalMoves() throws Exception
+	{
+		ChessGame initial = new ChessGame(100,200);
+		initial.loadBoard(new File("boards/tests/bishopBasic"));
+		ChessBoard result= ChessBoard.readFromFile(new File("boards/tests/bishopBasic"));
+	
+		initial.movePiece("e4-d4");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("e4-e6");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("e4-d2");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("e4-h2");
+		assert(initial.compareBoard(result));
+		
+
+	}
+	
+	@Test
+	public void testQueenIllegalMoves() throws Exception
+	{
+		ChessGame initial = new ChessGame(100,200);
+		initial.loadBoard(new File("boards/tests/queenbasic"));
+		ChessBoard result= ChessBoard.readFromFile(new File("boards/tests/queenbasic"));
+	
+		initial.movePiece("e4-d6");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("e4-a5");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("e4-d2");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("e4-h5");
+		assert(initial.compareBoard(result));
+		
+
+	}
+	
+	@Test
+	public void testKingIllegalMoves() throws Exception
+	{
+		ChessGame initial = new ChessGame(100,200);
+		initial.loadBoard(new File("boards/tests/kingBasic"));
+		ChessBoard result= ChessBoard.readFromFile(new File("boards/tests/kingBasic"));
+	
+		initial.movePiece("e4-d6");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("e4-e6");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("e4-g4");
+		assert(initial.compareBoard(result));
+		
+		initial.movePiece("e4-b1");
+		assert(initial.compareBoard(result));
+		
+
+	}
+	
+	
+	
+
 
 }
