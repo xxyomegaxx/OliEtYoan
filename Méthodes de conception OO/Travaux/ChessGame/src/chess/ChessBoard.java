@@ -98,23 +98,41 @@ public class ChessBoard {
 
 		//Si la case destination est vide, on peut faire le mouvement
 		else if (isEmpty(newGridPos)) {
-			grid[newGridPos.x][newGridPos.y] = grid[gridPos.x][gridPos.y];
-			grid[gridPos.x][gridPos.y] = new ChessPiece(gridPos.x, gridPos.y, this);
-			grid[newGridPos.x][newGridPos.y].setGridPos(newGridPos);
+			assignSquare(newGridPos,getPiece(gridPos));
+			clearSquare(gridPos);			
 			return true;
 		}
 
 		//Si elle est occuppé par une pièce de couleur différente, alors c'est une capture
 		else if (!isSameColor(gridPos, newGridPos)) {			
-			getUI().getChildren().remove(grid[newGridPos.x][newGridPos.y].getUI());
-			grid[newGridPos.x][newGridPos.y] = grid[gridPos.x][gridPos.y];
-			grid[gridPos.x][gridPos.y] = new ChessPiece(gridPos.x, gridPos.y, this);
-			grid[newGridPos.x][newGridPos.y].setGridPos(newGridPos);
-
+			removePiece(newGridPos);
+			assignSquare(newGridPos,getPiece(gridPos));
+			clearSquare(gridPos);
 			return true;
 		}
 
 		return false;
+	}
+	
+	private void assignSquare(Point point ,ChessPiece piece)
+	{
+		grid[point.x][point.y]= piece;
+		grid[point.x][point.y].setGridPos(point);
+	}
+	
+	private void clearSquare(Point point)
+	{
+		grid[point.x][point.y] = new ChessPiece(point.x, point.y, this);
+	}
+	
+	private void removePiece(Point point)
+	{
+		getUI().getChildren().remove(grid[point.x][point.y].getUI());
+	}
+	
+	ChessPiece getPiece(Point point)
+	{
+		return grid[point.x][point.y];
 	}
 	
 
