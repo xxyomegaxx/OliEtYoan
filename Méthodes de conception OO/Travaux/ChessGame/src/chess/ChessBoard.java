@@ -120,8 +120,8 @@ public class ChessBoard {
 
 	//Fonctions de lecture et de sauvegarde d'échiquier dans des fichiers. À implanter.
 	
-	public static ChessBoard readFromFile(String fileName) throws Exception {
-		return readFromFile(new File(fileName), 0, 0);
+	public static ChessBoard readFromFile(File file) throws Exception {
+		return readFromFile(file, 200, 100);
 	}
 
 	public static ChessBoard readFromFile(File file, int x, int y) throws Exception {
@@ -162,6 +162,25 @@ public class ChessBoard {
 	public Point2D gridToPane(Point p) {
 		return view.gridToPane(p.x, p.y);
 	
+	}
+	
+	@Override
+	public boolean equals(Object o)
+	{
+		for(int i = 0;i<8;i++)
+		{
+			for(int j =0;j<8;j++)
+			{
+				if(grid[i][j].equals(((ChessBoard) o).grid[i][j]))
+				{
+					
+				}
+				else return false;
+			}
+				
+		}
+		return true;
+		
 	}
 
 }

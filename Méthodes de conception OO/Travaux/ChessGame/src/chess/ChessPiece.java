@@ -152,6 +152,18 @@ public class ChessPiece {
 		return retour;
 	}
 	
+	@Override
+	public boolean equals(Object o)
+	{
+		if(type == ((ChessPiece)o).type && color == ((ChessPiece)o).color && gridPosX == ((ChessPiece)o).gridPosX && gridPosY == ((ChessPiece)o).gridPosY)
+		{
+			return true;
+		}
+		else return false;
+
+		
+	}
+	
 
 
 }
