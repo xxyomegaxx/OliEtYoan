@@ -163,6 +163,43 @@ public class ChessPiece {
 
 		
 	}
+
+	public boolean verifyMove(Point gridPos, Point newGridPos) {
+		int deltaX = newGridPos.x-gridPos.x;
+		int deltaY = newGridPos.y-gridPos.y;
+		int deltaXabs = Math.abs(newGridPos.x-gridPos.x);
+		int deltaYabs = Math.abs(newGridPos.y-gridPos.y);
+		switch(type)
+		{
+		case ChessUtils.TYPE_PAWN :
+			if(color == ChessUtils.BLACK && deltaX==0 && deltaY==1) return true;
+			else if(color == ChessUtils.WHITE && deltaX==0 && deltaY==-1) return true;
+			else return false;
+		case ChessUtils.TYPE_ROOK :
+			if(deltaX==0 || deltaY==0) return true;
+			else return false;
+
+		case ChessUtils.TYPE_KNIGHT :
+			if(deltaXabs==2 && deltaYabs==1) return true;
+			else if(deltaXabs==1 && deltaYabs==2) return true;
+			else return false;
+			
+		case ChessUtils.TYPE_BISHOP :
+			if(deltaXabs==deltaYabs)return true;
+			else return false;
+			
+		case ChessUtils.TYPE_QUEEN :
+			if(deltaX==0 || deltaY==0) return true;
+			else if(deltaXabs==deltaYabs)return true;
+			else return false;
+
+		case ChessUtils.TYPE_KING :
+			if (deltaXabs <=1 && deltaYabs<=1) return true;
+			else return false;	
+		default : return false;	
+
+		}
+	}
 	
 
 

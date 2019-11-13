@@ -199,7 +199,7 @@ class MoveTest {
 		assert(initial.compareBoard(result));
 		
 		initial.loadBoard(new File("boards/tests/wpawnBasic"));
-		result= ChessBoard.readFromFile(new File("boards/tests/wpawnBasic1"));
+		result= ChessBoard.readFromFile(new File("boards/tests/wpawnBasic"));
 		
 		initial.movePiece("f5-f7");
 		assert(initial.compareBoard(result));

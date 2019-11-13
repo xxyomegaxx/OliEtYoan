@@ -91,14 +91,17 @@ public class ChessBoard {
 	
 	//Effectue un mouvement sur l'échiqier. Quelques règles de base sont implantées ici.
 	public boolean move(Point gridPos, Point newGridPos) {
-
+		ChessPiece toMove = getPiece(gridPos);
+		if (!toMove.verifyMove(gridPos, newGridPos)) {
+			return false;
+			}
 		//Vérifie si les coordonnées sont valides
-		if (!isValid(newGridPos))
+	    else if (!isValid(newGridPos))
 			return false;
 
 		//Si la case destination est vide, on peut faire le mouvement
 		else if (isEmpty(newGridPos)) {
-			assignSquare(newGridPos,getPiece(gridPos));
+			assignSquare(newGridPos,toMove);
 			clearSquare(gridPos);			
 			return true;
 		}
@@ -106,7 +109,7 @@ public class ChessBoard {
 		//Si elle est occuppé par une pièce de couleur différente, alors c'est une capture
 		else if (!isSameColor(gridPos, newGridPos)) {			
 			removePiece(newGridPos);
-			assignSquare(newGridPos,getPiece(gridPos));
+			assignSquare(newGridPos,toMove);
 			clearSquare(gridPos);
 			return true;
 		}
