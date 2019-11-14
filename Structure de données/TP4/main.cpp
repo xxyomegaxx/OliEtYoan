@@ -13,10 +13,17 @@ int main(){
 	test1.insert(11);
 	test1.insert(9);
 	test1.insert(3);
-    
+    set<int>::iterator ito = test1.insert(3).first;
+
+
+
     test1.afficher();
 
-    
+	system("PAUSE");
+
+	test1.erase(ito);
+	test1.afficher();
+	system("PAUSE");
 //    set<int>::iterator it1=test1.begin();
 //    while(it1 != test1.end()){
 //        cout << *it1 << endl;

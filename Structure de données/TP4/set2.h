@@ -18,8 +18,8 @@ typename set<TYPE>::cellule* set<TYPE>::insert(typename set<TYPE>::cellule* ap, 
   /*... a effacer et completer ...*/
 size_t hauteurAvant = DEBUT->HAUTEUR;
 size_t hauteur = tirer_hauteur_au_hasard();
-TYPE y = X;
-cellule* nouveau = new cellule(y,hauteur);
+TYPE *y = new TYPE(X);
+cellule* nouveau = new cellule(*y,hauteur);
 
 if(hauteur > hauteurAvant){
   cellule** nouveauDebut = new cellule*[hauteur];
@@ -74,13 +74,20 @@ typename set<TYPE>::cellule* set<TYPE>::erase(typename set<TYPE>::cellule* C){
   cellule* ap = C->SUIV[0];
 
   for(int i = 0; i < C->HAUTEUR; i++){
-    p->SUIV[i] = ap->PREC[i];
-    ap->PREC[i] = p->SUIV[i];
+
+	  while (p->HAUTEUR <= i) {
+		  p = p->PREC[p->HAUTEUR - 1];
+	  }
+	  while (ap->HAUTEUR <= i) {
+		  ap = ap->SUIV[ap->HAUTEUR - 1];
+	  }
+	   p->SUIV[i] = ap->PREC[i];
+       ap->PREC[i] = p->SUIV[i];
   }
-  delete [] C;
+  delete C;
 
   SIZE--;
-  return C;
+  return p;
 }
 
 /////////////////////////////////////////////////
@@ -119,10 +126,9 @@ void set<TYPE>::clear()
 template <typename TYPE>
 typename set<TYPE>::iterator set<TYPE>::find(const TYPE& X)
 {
-  /*... a effacer et completer ...*/
   iterator *it;
 
-  int h = DEBUT->SUIV->HAUTEUR;
+  int h = DEBUT->SUIV[0]->HAUTEUR;
   cellule* c = DEBUT;
   while(h <= 0 && c->CONTENU != X){
     if(c->SUIV[h] <= X){
@@ -174,9 +180,9 @@ typename set<TYPE>::iterator set<TYPE>::upper_bound(const TYPE& X)
 			}
 			else reachEnd = true;
 		}
-		return iterator(c->SUIV[0]);;
 	}
-	return iterator();
+	if(c->CONTENU == X)
+	return iterator(c->SUIV[0]);
   }
 
 template <typename TYPE>
@@ -196,14 +202,22 @@ template <typename TYPE>
 typename set<TYPE>::iterator set<TYPE>::erase(const TYPE& VAL)
 {
   /*... a effacer et completer ...*/
-  return iterator();
+	iterator it = find(VAL);
+	if (it == nullptr)
+	{
+		return lower_bound(VAL);
+	}
+	else
+	{
+		return iterator(erase(it.POINTEUR));
+
+	}  
 }
 
 template <typename TYPE>
 typename set<TYPE>::iterator set<TYPE>::erase(iterator it)
 {
-  /*... a effacer et completer ...*/
-  return iterator();
+	return iterator(erase(it.POINTEUR));
 }
 
 #endif
