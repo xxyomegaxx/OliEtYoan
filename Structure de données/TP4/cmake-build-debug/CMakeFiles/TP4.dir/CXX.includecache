@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/oli/Documents/Oli_et_Yoan/Structure de données/TP4/main.cpp
+iostream
+-
+set.h
+/Users/oli/Documents/Oli_et_Yoan/Structure de données/TP4/set.h
+
+/Users/oli/Documents/Oli_et_Yoan/Structure de données/TP4/set.h
+iostream
+-
+sstream
+-
+cstdlib
+-
+vector
+-
+string
+-
+random
+-
+chrono
+-
+set2.h
+/Users/oli/Documents/Oli_et_Yoan/Structure de données/TP4/set2.h
+
+/Users/oli/Documents/Oli_et_Yoan/Structure de données/TP4/set2.h
+

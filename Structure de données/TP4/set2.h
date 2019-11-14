@@ -45,7 +45,7 @@ if(hauteur > hauteurAvant){
   }
 
   
-  }
+}
 	cellule* p = ap->PREC[0];
 	//cellule* ap;
 	for (int i = 0; i < hauteurAvant; i++) {
@@ -146,15 +146,13 @@ typename set<TYPE>::iterator set<TYPE>::lower_bound(const TYPE& X)
   cellule* c = DEBUT; 
   size_t h = c->SUIV[0]->HAUTEUR;
 
-  for(size_t i = h-1; i > 0; i--){
+  for(size_t i = h-1; i >= 0; i--){
+
     while(c->SUIV[i]->CONTENU <= X){
       c = c->SUIV[i];
     }
     return iterator(c->SUIV[0]);;
   }
-
-
-  
   return iterator();
 }
 
