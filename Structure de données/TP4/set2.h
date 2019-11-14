@@ -33,7 +33,8 @@ if(hauteur > hauteurAvant){
 
   DEBUT->SUIV=nouveauDebut;
   DEBUT->PREC[0]->PREC=nouveauFin;
-  
+  DEBUT->HAUTEUR = hauteur;
+  DEBUT->PREC[0]->HAUTEUR = hauteur;
 
 
   for(size_t i = hauteurAvant;i < hauteur; i++){
@@ -145,16 +146,18 @@ typename set<TYPE>::iterator set<TYPE>::lower_bound(const TYPE& X)
   /*... a effacer et completer ...*/
   cellule* c = DEBUT; 
   size_t h = c->SUIV[0]->HAUTEUR;
-
-  for(size_t i = h-1; i > 0; i--){
-    while(c->SUIV[i]->CONTENU <= X){
-      c = c->SUIV[i];
+  bool reachEnd = false;
+  for(size_t i = h-1; i >= 0; i--){
+	  
+		  while (c->SUIV[i]->CONTENU <= X && !reachEnd) {
+			  if (c->SUIV[i] != DEBUT->PREC[0])
+			  {
+				  c = c->SUIV[i];
+			  }
+			  else reachEnd = true;
     }
     return iterator(c->SUIV[0]);;
   }
-
-
-  
   return iterator();
 }
 
