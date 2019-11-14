@@ -3,11 +3,11 @@
 using namespace std;
 
 int main(){
-    cout << "_____ TEST 1 _____";
+    cout << "_____ TEST 1 ______";
 
     set<int> test1;
     set<int>::iterator it = test1.begin();
-    
+  
     test1.insert(10);
 	test1.insert(19);
 	test1.insert(11);
