@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(){
-    cout << "_____ TEST 1 ______";
+    cout << "_____ TEST 1 ______test";
 
     set<int> test1;
     set<int>::iterator it = test1.begin();
