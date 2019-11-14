@@ -18,19 +18,19 @@ typename set<TYPE>::cellule* set<TYPE>::insert(typename set<TYPE>::cellule* ap, 
   /*... a effacer et completer ...*/
 size_t hauteurAvant = DEBUT->HAUTEUR;
 size_t hauteur = tirer_hauteur_au_hasard();
-cellule *nouveau = new cellule(X,hauteur);
+TYPE y = X;
+cellule* nouveau = new cellule(y,hauteur);
 
 if(hauteur > hauteurAvant){
   cellule** nouveauDebut = new cellule*[hauteur];
   cellule** nouveauFin = new cellule*[hauteur]; 
   for(size_t i = 0; i < hauteurAvant; i++){
-    //swap(DEBUT->SUIV[i],nouveauDebut->SUIV[i]);
 	  nouveauDebut[i] = DEBUT->SUIV[i];
-    //swap(DEBUT->PREC->PREC[i],nouveauFin[i]);
-	nouveauFin[i] = DEBUT->PREC[0]->PREC[i];
+	  nouveauFin[i] = DEBUT->PREC[0]->PREC[i];
   }
-  delete [] *DEBUT;
-  delete[] *DEBUT->PREC[0]->PREC;
+  delete [] DEBUT->PREC[0]->PREC;
+  delete [] DEBUT->SUIV;
+
   DEBUT->SUIV=nouveauDebut;
   DEBUT->PREC[0]->PREC=nouveauFin;
   
@@ -59,14 +59,26 @@ if(hauteur > hauteurAvant){
 		}
 		nouveau->SUIV[i] = ap;
 		ap->PREC[i] = nouveau;
-}
-return nouveau;
+    }
+    SIZE++;
+    return nouveau;
 }
 
 
 template <typename TYPE>
 typename set<TYPE>::cellule* set<TYPE>::erase(typename set<TYPE>::cellule* C){
   /*... a effacer et completer ...*/
+
+  cellule* p = C->PREC[0];
+  cellule* ap = C->SUIV[0];
+
+  for(int i = 0; i < C->HAUTEUR; i++){
+    p->SUIV[i] = ap->PREC[i];
+    ap->PREC[i] = p->SUIV[i];
+  }
+  delete [] C;
+
+  SIZE--;
   return C;
 }
 
@@ -79,18 +91,28 @@ template <typename TYPE>
 set<TYPE>::set(const set<TYPE>& source) : set()
 {
   /*... a completer ...*/
+//    for(const TYPE & x:source) insert(x);
+    
 }
 
 template <typename TYPE>
 set<TYPE>::~set()
 {
   /*... a completer ...*/
+//    clear();
+//    delete [] DEBUT;
+//    delete [] DEBUT->PREC[0]->PREC;
 }
 
 template <typename TYPE>
 void set<TYPE>::clear()
 {
   /*... a completer ...*/
+//    set<TYPE>::iterator it = begin();
+//    while(it != end()){
+//        it=erase(it);
+//    }
+    
 }
 
 template <typename TYPE>
@@ -122,13 +144,13 @@ typename set<TYPE>::iterator set<TYPE>::lower_bound(const TYPE& X)
 {
   /*... a effacer et completer ...*/
   cellule* c = DEBUT; 
-  int h = c->SUIV->HAUTEUR;
+  size_t h = c->SUIV[0]->HAUTEUR;
 
-  for(int i = h-1; i > 0; i--){
-    while(c->SUIV[i].CONTENU <= X){
+  for(size_t i = h-1; i > 0; i--){
+    while(c->SUIV[i]->CONTENU <= X){
       c = c->SUIV[i];
     }
-    return new iterator(c->SUIV[0]);
+    return iterator(c->SUIV[0]);;
   }
 
 
@@ -161,8 +183,13 @@ template <typename TYPE>
 typename set<TYPE>::iterator set<TYPE>::insert(iterator it, const TYPE& X)
 {
   /*... a effacer et completer ...*/
-  
-  return iterator();
+    cellule* p = it.POINTEUR;
+    
+  if(*it > X && p->PREC[0]->CONTENU < X){
+    return iterator(insert(it.POINTEUR,X));
+  } else {
+    return insert(X).first;
+  }
 }
 
 template <typename TYPE>

@@ -70,13 +70,13 @@ private:
   //selecteur : est vide ?
   bool empty()const;
 
-  // nombre d'occurrences d'un ÈlÈment (0 ou 1)
+  // nombre d'occurrences d'un √àl√àment (0 ou 1)
   size_t count(const TYPE&)const;
-  // premiËre occurence d'un ÈlÈment
+  // premi√ãre occurence d'un √àl√àment
   iterator find(const TYPE&);
-  // premier ÈlÈment >=
+  // premier √àl√àment >=
   iterator lower_bound(const TYPE&);
-  // premier ÈlÈment >
+  // premier √àl√àment >
   iterator upper_bound(const TYPE&);
 
   //insertion avec iterateur a verifier
@@ -146,7 +146,7 @@ size_t set<TYPE>::tirer_hauteur_au_hasard()
     //prob 1/4 d'avoir 2
     //prob 1/8 d'avoir 3 etc.
     //
-    // Si vous voulez gÈnÈrer la mÍme sÈquence pour vos tests, vous pouvez modifier la valeur de seed pour qu'elle soit Ègale ‡ 0
+    // Si vous voulez g√àn√àrer la m√çme s√àquence pour vos tests, vous pouvez modifier la valeur de seed pour qu'elle soit √àgale ‚Ä° 0
     // static auto seed = 0;
     static auto seed = chrono::system_clock::now().time_since_epoch().count();
     static minstd_rand0 generator(static_cast<unsigned int>(seed));

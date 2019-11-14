@@ -47,7 +47,7 @@ typename list<TYPE>::cellule* list<TYPE>::erase(cellule* C){
 	//Associe le precedent de la cellule au precedent de son suivant.
 	C->SUIV->PREC = C->PREC;
 	//Effectue la suppression de la cellule C.
-	delete C;
+	r C;
 	//Decremente la dimension de la liste
 	SIZE--;
 	//Retourne la position du suivant de la cellule precedemment supprime
