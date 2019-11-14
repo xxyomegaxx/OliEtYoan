@@ -143,44 +143,41 @@ typename set<TYPE>::iterator set<TYPE>::find(const TYPE& X)
 template <typename TYPE>
 typename set<TYPE>::iterator set<TYPE>::lower_bound(const TYPE& X)
 {
-  /*... a effacer et completer ...*/
   cellule* c = DEBUT; 
   size_t h = c->SUIV[0]->HAUTEUR;
   bool reachEnd = false;
-  for(size_t i = h-1; i >= 0; i--){
+  for(int i = h-1; i >= 0; i--){
 	  
-		  while (c->SUIV[i]->CONTENU <= X && !reachEnd) {
+		  while (c->SUIV[i]->CONTENU < X && !reachEnd) {
 			  if (c->SUIV[i] != DEBUT->PREC[0])
 			  {
 				  c = c->SUIV[i];
 			  }
 			  else reachEnd = true;
     }
-    return iterator(c->SUIV[0]);;
   }
-  return iterator();
+  return iterator(c->SUIV[0]);
 }
 
 template <typename TYPE>
 typename set<TYPE>::iterator set<TYPE>::upper_bound(const TYPE& X)
 {
-  /*... a effacer et completer ...*/
-  cellule* c = DEBUT; 
-  int h = c->SUIV->HAUTEUR;
+	cellule* c = DEBUT;
+	size_t h = c->SUIV[0]->HAUTEUR;
+	bool reachEnd = false;
+	for (size_t i = h - 1; i >= 0; i--) {
 
-  for(int i = h-1; i > 0; i--){
-    while(c->SUIV[i]->CONTENU < X){
-      c = c->suiv[i];
-    }
-    c=c->SUIV[0];
-    if(c->CONTENU==X)
-    {
-      c=c->SUIV[0];
-    }
-
-    return new iterator(c);
+		while (c->SUIV[i]->CONTENU < X && !reachEnd) {
+			if (c->SUIV[i] != DEBUT->PREC[0])
+			{
+				c = c->SUIV[i];
+			}
+			else reachEnd = true;
+		}
+		return iterator(c->SUIV[0]);;
+	}
+	return iterator();
   }
-}
 
 template <typename TYPE>
 typename set<TYPE>::iterator set<TYPE>::insert(iterator it, const TYPE& X)
