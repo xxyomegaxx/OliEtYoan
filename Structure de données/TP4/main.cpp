@@ -13,13 +13,14 @@ int main(){
 	test1.insert(11);
 	test1.insert(9);
 	test1.insert(3);
-    set<int>::iterator ito = test1.insert(3).first;
 
 
 
     test1.afficher();
 
 	system("PAUSE");
+
+	set<int>::iterator ito = test1.find(11);
 
 	test1.erase(ito);
 	test1.afficher();

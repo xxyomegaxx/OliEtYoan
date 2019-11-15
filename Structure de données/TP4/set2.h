@@ -45,18 +45,21 @@ if(hauteur > hauteurAvant){
     nouveau->SUIV[i] = DEBUT->PREC[0];
   }
 
+
   
   }
+else; //hauteurAvant = hauteur;
+
 	cellule* p = ap->PREC[0];
 	//cellule* ap;
 	for (int i = 0; i < hauteurAvant; i++) {
 		while (p->HAUTEUR <= i) {
-			p = p->PREC[p->HAUTEUR - 1];
+			p = p->PREC[p->HAUTEUR];
 		}
 		nouveau->PREC[i] = p;
 		p->SUIV[i] = nouveau;
 		while (ap->HAUTEUR <= i) {
-			ap = ap->SUIV[ap->HAUTEUR - 1];
+			ap = ap->SUIV[ap->HAUTEUR];
 		}
 		nouveau->SUIV[i] = ap;
 		ap->PREC[i] = nouveau;
@@ -99,7 +102,7 @@ template <typename TYPE>
 set<TYPE>::set(const set<TYPE>& source) : set()
 {
   /*... a completer ...*/
-//    for(const TYPE & x:source) insert(x);
+    for(const TYPE & x:source) insert(x);
     
 }
 
@@ -107,19 +110,19 @@ template <typename TYPE>
 set<TYPE>::~set()
 {
   /*... a completer ...*/
-//    clear();
-//    delete [] DEBUT;
-//    delete [] DEBUT->PREC[0]->PREC;
+    clear();
+	delete  DEBUT->PREC[0];
+    delete  DEBUT;
+
 }
 
 template <typename TYPE>
 void set<TYPE>::clear()
 {
-  /*... a completer ...*/
-//    set<TYPE>::iterator it = begin();
-//    while(it != end()){
-//        it=erase(it);
-//    }
+       set<TYPE>::iterator it = begin();
+        while(it != end()){
+        it=erase(it);
+	    }
     
 }
 
@@ -128,11 +131,12 @@ typename set<TYPE>::iterator set<TYPE>::find(const TYPE& X)
 {
   iterator *it;
 
-  int h = DEBUT->SUIV[0]->HAUTEUR;
+  int h = DEBUT->HAUTEUR;
   cellule* c = DEBUT;
-  while(h <= 0 && c->CONTENU != X){
-    if(c->SUIV[h] <= X){
-      c = c->SUIV[h];
+  while(h-1 >= 0 && c->CONTENU != X){
+    if(c->SUIV[h-1]->CONTENU < X){
+		if(c->SUIV[h]!= DEBUT->PREC[0]) c = c->SUIV[h];
+     
     } else {
       h--;
     }
