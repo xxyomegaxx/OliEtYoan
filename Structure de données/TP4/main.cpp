@@ -29,10 +29,37 @@ int main(){
 	test1.clear();
 
 	test1.afficher();
-//    set<int>::iterator it1=test1.begin();
-//    while(it1 != test1.end()){
-//        cout << *it1 << endl;
-//        it1++; 
-//    }
+
+	system("PAUSE");
+
+	test1.insert(10);
+	test1.insert(40);
+	test1.insert(50);
+	test1.insert(30);
+	test1.insert(20);
+
+	set<int>::iterator iti = test1.find(11);
+	set<int>::iterator ita= test1.find(40);
+
+	test1.insert(ita, 39);
+	test1.insert(ita, 55);
+
+	test1.afficher();
+	system("PAUSE");
+	set<int>::iterator Fethi = test1.lower_bound(3);
+	Fethi = test1.upper_bound(30);
+	Fethi = test1.upper_bound(10);
+	Fethi = test1.upper_bound(40);
+	Fethi = test1.upper_bound(39);
+	test1.afficher();
+
+
+
+
+
+
+
+
+
 
 }

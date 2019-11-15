@@ -156,7 +156,7 @@ template <typename TYPE>
 typename set<TYPE>::iterator set<TYPE>::lower_bound(const TYPE& X)
 {
   cellule* c = DEBUT; 
-  size_t h = c->SUIV[0]->HAUTEUR;
+  size_t h = c->HAUTEUR;
   bool reachEnd = false;
   for(int i = h-1; i >= 0; i--){
 	  
@@ -167,6 +167,7 @@ typename set<TYPE>::iterator set<TYPE>::lower_bound(const TYPE& X)
 			  }
 			  else reachEnd = true;
     }
+		  reachEnd = false;
   }
   return iterator(c->SUIV[0]);
 }
@@ -175,9 +176,9 @@ template <typename TYPE>
 typename set<TYPE>::iterator set<TYPE>::upper_bound(const TYPE& X)
 {
 	cellule* c = DEBUT;
-	size_t h = c->SUIV[0]->HAUTEUR;
+	size_t h = c->HAUTEUR;
 	bool reachEnd = false;
-	for (size_t i = h - 1; i >= 0; i--) {
+	for (int i = h - 1; i >= 0; i--) {
 
 		while (c->SUIV[i]->CONTENU < X && !reachEnd) {
 			if (c->SUIV[i] != DEBUT->PREC[0])
@@ -186,8 +187,9 @@ typename set<TYPE>::iterator set<TYPE>::upper_bound(const TYPE& X)
 			}
 			else reachEnd = true;
 		}
+		reachEnd = false;
 	}
-	if (c->CONTENU == X) c->SUIV[0];
+	if (c->SUIV[0]->CONTENU == X) c=c->SUIV[0];
 	return iterator(c->SUIV[0]);
   }
 
@@ -197,8 +199,9 @@ typename set<TYPE>::iterator set<TYPE>::insert(iterator it, const TYPE& X)
   /*... a effacer et completer ...*/
     cellule* p = it.POINTEUR;
     
-  if(*it > X && p->PREC[0]->CONTENU < X){
-    return iterator(insert(it.POINTEUR,X));
+  if(p->CONTENU > X && p->PREC[0]->CONTENU < X){
+
+	  return iterator(insert(it.POINTEUR,X));
   } else {
     return insert(X).first;
   }
