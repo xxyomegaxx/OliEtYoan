@@ -17,10 +17,10 @@ int main(){
 
 
     test1.afficher();
-	/*
-	system("PAUSE");
+	
+	//system("PAUSE");
 
-	set<int>::iterator ito = test1.find(11);
+	set<int>::iterator ito = test1.find(19);
 
 	test1.erase(ito);
 	test1.afficher();
@@ -28,7 +28,7 @@ int main(){
 //    set<int>::iterator it1=test1.begin();
 //    while(it1 != test1.end()){
 //        cout << *it1 << endl;
-//        it1++; */
+//        it1++; 
 //    }
 
 }

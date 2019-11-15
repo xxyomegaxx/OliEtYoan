@@ -133,9 +133,9 @@ typename set<TYPE>::iterator set<TYPE>::find(const TYPE& X)
 
   int h = DEBUT->HAUTEUR;
   cellule* c = DEBUT;
-  while(h-1 >= 0 && c->CONTENU != X){
-    if(c->SUIV[h-1]->CONTENU < X){
-		if(c->SUIV[h]!= DEBUT->PREC[0]) c = c->SUIV[h];
+  while(h > 0 && c->CONTENU != X){
+    if(c->SUIV[h-1]->CONTENU <= X && c->SUIV[h-1] != DEBUT->PREC[0]){
+		 c = c->SUIV[h-1];
      
     } else {
       h--;
