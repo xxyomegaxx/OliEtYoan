@@ -13,6 +13,13 @@
 // fonctions privees
 /////////////////////////////////////////////////
 
+
+/**
+* \ brief Fonction d'insertion d'une valeur avant un certaine cellule.
+* \ param [in] Une cellule de certain TYPE
+* \ 		   Une variable d'un certain TYPE
+* \ return return La nouvelle cellule d'un certain TYPE
+*/
 template <typename TYPE>
 typename set<TYPE>::cellule* set<TYPE>::insert(typename set<TYPE>::cellule* ap, const TYPE& X){
   /*... a effacer et completer ...*/
@@ -44,8 +51,6 @@ if(hauteur > hauteurAvant){
     DEBUT->PREC[0]->PREC[i] = nouveau;
     nouveau->SUIV[i] = DEBUT->PREC[0];
   }
-
-
   
   }
 
@@ -110,11 +115,8 @@ set<TYPE>::set(const set<TYPE>& source) : set()
 template <typename TYPE>
 set<TYPE>::~set()
 {
-  /*... a completer ...
-    clear();
-	delete  DEBUT->PREC[0];
-    delete  DEBUT;
-	*/
+  /*... a completer ... */
+
 }
 
 template <typename TYPE>
