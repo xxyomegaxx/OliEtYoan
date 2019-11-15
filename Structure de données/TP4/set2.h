@@ -22,7 +22,6 @@
 */
 template<typename TYPE>
 typename set<TYPE>::cellule *set<TYPE>::insert(typename set<TYPE>::cellule *ap, const TYPE &X) {
-    /*... a effacer et completer ...*/
     size_t hauteurAvant = DEBUT->HAUTEUR; //hauteur initiale
     size_t hauteur = tirer_hauteur_au_hasard(); //hauteur tirer haut hasard
     TYPE *y = new TYPE(X); //Copie de x
@@ -102,7 +101,6 @@ typename set<TYPE>::cellule *set<TYPE>::insert(typename set<TYPE>::cellule *ap, 
 */
 template<typename TYPE>
 typename set<TYPE>::cellule *set<TYPE>::erase(typename set<TYPE>::cellule *C) {
-    /*... a effacer et completer ...*/
 
     cellule *p = C->PREC[0]; //cellule avant celle qu'on veut supprimer
     cellule *ap = C->SUIV[0]; //cellule apres celle qu'on veut supprimer
@@ -238,23 +236,30 @@ typename set<TYPE>::iterator set<TYPE>::lower_bound(const TYPE &X) {
 
 template<typename TYPE>
 typename set<TYPE>::iterator set<TYPE>::upper_bound(const TYPE &X) {
-    cellule *c = DEBUT;
-    size_t h = c->HAUTEUR;
-    bool reachEnd = false;
-    for (int i = h - 1; i >= 0; i--) {
+	// c est la cellule de recherche, on l'initialise au debut
+	cellule* c = DEBUT;
+	// h est la hauteur de la liste
+	size_t h = c->HAUTEUR;
+	//valeur qui nous permet de dire si on a atteint la fin de letage
+	bool reachEnd = false;
+	// pour tous les etages partant du plus haut
+	for (int i = h - 1; i >= 0; i--) {
+		// si le contenu du suivant de c est plus petit que x a l'etage de la boucle et qu'il n'est pas egal a la fin, c = au suivant de ce etage
+		while (c->SUIV[i]->CONTENU < X && !reachEnd) {
+			if (c->SUIV[i] != DEBUT->PREC[0]) {
+				c = c->SUIV[i];
 
-        while (c->SUIV[i]->CONTENU < X && !reachEnd) {
-            if (c->SUIV[i] != DEBUT->PREC[0]) {
-                c = c->SUIV[i];
-            } else reachEnd = true;
-        }
-        reachEnd = false;
-    }
+			}
+			else reachEnd = true;// moment pour changer d'etage
+		}
+		reachEnd = false;
+	}
     //Si la contenu de x au niveau 0 est egal a X
     if (c->SUIV[0]->CONTENU == X) {
         //Assigner c a la cellule suivante
         c = c->SUIV[0];
     }
+	// Retourne le suivant de c qui va necesairement etre plus grand que x
     return iterator(c->SUIV[0]);
 }
 
