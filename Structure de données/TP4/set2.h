@@ -48,18 +48,18 @@ if(hauteur > hauteurAvant){
 
   
   }
-else; //hauteurAvant = hauteur;
+else {} //hauteurAvant = hauteur;
 
 	cellule* p = ap->PREC[0];
 	//cellule* ap;
-	for (int i = 0; i < hauteurAvant; i++) {
+	for (int i = 0; i < min(hauteurAvant,hauteur); i++) {
 		while (p->HAUTEUR <= i) {
-			p = p->PREC[p->HAUTEUR];
+			p = p->PREC[p->HAUTEUR-1];
 		}
 		nouveau->PREC[i] = p;
 		p->SUIV[i] = nouveau;
 		while (ap->HAUTEUR <= i) {
-			ap = ap->SUIV[ap->HAUTEUR];
+			ap = ap->SUIV[ap->HAUTEUR-1];
 		}
 		nouveau->SUIV[i] = ap;
 		ap->PREC[i] = nouveau;
@@ -109,11 +109,11 @@ set<TYPE>::set(const set<TYPE>& source) : set()
 template <typename TYPE>
 set<TYPE>::~set()
 {
-  /*... a completer ...*/
+  /*... a completer ...
     clear();
 	delete  DEBUT->PREC[0];
     delete  DEBUT;
-
+	*/
 }
 
 template <typename TYPE>
