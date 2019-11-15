@@ -48,7 +48,6 @@ if(hauteur > hauteurAvant){
 
   
   }
-else {} //hauteurAvant = hauteur;
 
 	cellule* p = ap->PREC[0];
 	//cellule* ap;
@@ -75,6 +74,8 @@ typename set<TYPE>::cellule* set<TYPE>::erase(typename set<TYPE>::cellule* C){
 
   cellule* p = C->PREC[0];
   cellule* ap = C->SUIV[0];
+  cellule* retour = C->SUIV[0];
+  
 
   for(int i = 0; i < C->HAUTEUR; i++){
 
@@ -84,13 +85,13 @@ typename set<TYPE>::cellule* set<TYPE>::erase(typename set<TYPE>::cellule* C){
 	  while (ap->HAUTEUR <= i) {
 		  ap = ap->SUIV[ap->HAUTEUR - 1];
 	  }
-	   p->SUIV[i] = ap->PREC[i];
-       ap->PREC[i] = p->SUIV[i];
+	   p->SUIV[i] = ap;
+       ap->PREC[i] = p;
   }
   delete C;
 
   SIZE--;
-  return p;
+  return retour;
 }
 
 /////////////////////////////////////////////////
@@ -119,7 +120,8 @@ set<TYPE>::~set()
 template <typename TYPE>
 void set<TYPE>::clear()
 {
-       set<TYPE>::iterator it = begin();
+        iterator it = begin();
+
         while(it != end()){
         it=erase(it);
 	    }
@@ -185,7 +187,7 @@ typename set<TYPE>::iterator set<TYPE>::upper_bound(const TYPE& X)
 			else reachEnd = true;
 		}
 	}
-	if(c->CONTENU == X)
+	if (c->CONTENU == X) c->SUIV[0];
 	return iterator(c->SUIV[0]);
   }
 

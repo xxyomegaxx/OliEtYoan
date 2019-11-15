@@ -18,13 +18,17 @@ int main(){
 
     test1.afficher();
 	
-	//system("PAUSE");
+	system("PAUSE");
 
-	set<int>::iterator ito = test1.find(19);
+	set<int>::iterator ito = test1.find(11);
 
 	test1.erase(ito);
 	test1.afficher();
 	system("PAUSE");
+
+	test1.clear();
+
+	test1.afficher();
 //    set<int>::iterator it1=test1.begin();
 //    while(it1 != test1.end()){
 //        cout << *it1 << endl;
