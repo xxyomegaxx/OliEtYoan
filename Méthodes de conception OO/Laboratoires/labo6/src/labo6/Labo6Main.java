@@ -15,6 +15,7 @@ import javax.swing.SwingUtilities;
 import labo6.Ressources.Country;
 import labo6.Ressources.Gender;
 import labo6.bots.ChatBot;
+import labo6.database.TextList;
 import labo6.session.Session;
 
 public class Labo6Main extends JFrame {
@@ -32,7 +33,11 @@ public class Labo6Main extends JFrame {
 	private Session session;
 	
 	private final String NORMAL_SESSION = "normal"; 
-	private String sessionType = NORMAL_SESSION;
+	private final String SEDUCTION_SESSION = "seduction";
+	private final String CASUAL_SESSION = "CasualSession,";
+
+	private String sessionType = CASUAL_SESSION;
+	
 
 	
 
@@ -56,13 +61,31 @@ public class Labo6Main extends JFrame {
 
 			humanUser = new User("Me", userCountry, userGender);
 			
-			if(sessionType.equals(NORMAL_SESSION)){
+			
+			switch(sessionType) {
+			case NORMAL_SESSION :
 				session = new Session(this,humanUser);
+				break;
+			case SEDUCTION_SESSION :
+				session = new SeductionSession(this,humanUser);
+				break;
+			case CASUAL_SESSION :
+				session = new CasualSession(this,humanUser);
+				break;
+			default :
+				throw new IllegalArgumentException ("Wrong session type: "+ sessionType);
 			}
-			else
-			{
-				throw new IllegalArgumentException ("Wrong session type: "+sessionType);
-			}
+			
+//			if(sessionType.equals(NORMAL_SESSION)){
+//				session = new Session(this,humanUser);
+//			}
+//			if(sessionType.equals(SEDUCTION_SESSION)) {
+//				session = new SeductionSession(this,humanUser);
+//			}
+//			else
+//			{
+//				throw new IllegalArgumentException ("Wrong session type: "+ sessionType);
+//			}
 			
 			session.start();			
 

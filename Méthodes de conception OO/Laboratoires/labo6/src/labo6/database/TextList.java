@@ -12,7 +12,7 @@ public class TextList {
 	private ArrayList<TextMessage> msgs = new ArrayList<TextMessage>();
 
 	public TextList() {
-
+		
 	}
 
 	public TextList(ArrayList<TextMessage> src) {

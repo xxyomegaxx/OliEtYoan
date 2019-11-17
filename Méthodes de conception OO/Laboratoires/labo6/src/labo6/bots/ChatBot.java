@@ -3,6 +3,9 @@ package labo6.bots;
 import labo6.Ressources.Gender;
 import labo6.User;
 import labo6.database.Picture;
+import labo6.database.TextDatabase;
+import labo6.database.TextList;
+import labo6.database.TextMessage.TextKey;
 
 public class ChatBot extends User {
 
@@ -29,6 +32,5 @@ public class ChatBot extends User {
 	public User getPeer(){
 		return peer;
 	}
-
 	
 }
