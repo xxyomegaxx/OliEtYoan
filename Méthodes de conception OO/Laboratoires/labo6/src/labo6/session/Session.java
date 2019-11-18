@@ -2,7 +2,9 @@ package labo6.session;
 
 import java.util.ArrayList;
 
+import labo6.CasualSession;
 import labo6.Labo6Main;
+import labo6.SeductionSession;
 import labo6.Ressources.Gender;
 import labo6.User;
 import labo6.bots.ChatBot;
@@ -22,11 +24,14 @@ import labo6.database.TextMessage.TextKey;
 public class Session {
 
 	protected User human;
-//	protected TextList list = new TextList();
 	private ChatBot robot;
 	private Labo6Main ui;
 	private boolean ended;
 	private Thread sleeper;
+
+	public final static String NORMAL_SESSION = "normal";
+	public final static String SEDUCTION_SESSION = "seduction";
+	public final static String CASUAL_SESSION = "CasualSession";
 
 	public Session(Labo6Main l, User u) {
 		ui = l;
@@ -89,6 +94,26 @@ public class Session {
 				oldText = human.getUI().getText();
 			}
 
+		}
+
+	}
+	
+	/*
+	 * Fonction qui permet au creator Labo6Main de creer une sessions sans savoir son type.
+	 */
+	public static Session createSession(String type, Labo6Main ui, User humanUser) {
+		while (true) {
+
+			switch (type) {
+			case NORMAL_SESSION:
+				return new Session(ui, humanUser);
+			case SEDUCTION_SESSION:
+				return new SeductionSession(ui, humanUser);
+			case CASUAL_SESSION:
+				return new CasualSession(ui, humanUser);
+			default:
+				throw new IllegalArgumentException("Wrong session type: " + type);
+			}
 		}
 
 	}

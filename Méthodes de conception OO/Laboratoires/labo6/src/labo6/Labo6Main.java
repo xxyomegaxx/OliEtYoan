@@ -29,72 +29,37 @@ public class Labo6Main extends JFrame {
 	JButton genderButton = new JButton("GENRE");
 	JButton countryButton = new JButton("PAYS");
 	private Country userCountry = Country.Canada;
-	private Gender userGender = Gender.male;	
+	private Gender userGender = Gender.male;
 	private Session session;
-	
-	private final String NORMAL_SESSION = "normal"; 
-	private final String SEDUCTION_SESSION = "seduction";
-	private final String CASUAL_SESSION = "CasualSession,";
 
-	private String sessionType = CASUAL_SESSION;
-	
-
-	
+	String sessionType = Session.CASUAL_SESSION;
 
 	public Labo6Main(String[] args) {
-		
-		if(args.length>0){
-			sessionType=args[0];
-		}		
-		
-	}
 
-	/*
-	 * Boucle principale. Ne termine pas. D�marre une session avec l'utilisateur humain.
-	 * La session se termine lorsqu'on appuie sur "GENRE" ou sur "PAYS": l'utilisateur humain
-	 * change de caract�ristiques, la session ne peut donc plus continuer.
-	 */
-	public void startTheRoulette() {
-
-		
-		while (true) {
-
-			humanUser = new User("Me", userCountry, userGender);
-			
-			
-			switch(sessionType) {
-			case NORMAL_SESSION :
-				session = new Session(this,humanUser);
-				break;
-			case SEDUCTION_SESSION :
-				session = new SeductionSession(this,humanUser);
-				break;
-			case CASUAL_SESSION :
-				session = new CasualSession(this,humanUser);
-				break;
-			default :
-				throw new IllegalArgumentException ("Wrong session type: "+ sessionType);
-			}
-			
-//			if(sessionType.equals(NORMAL_SESSION)){
-//				session = new Session(this,humanUser);
-//			}
-//			if(sessionType.equals(SEDUCTION_SESSION)) {
-//				session = new SeductionSession(this,humanUser);
-//			}
-//			else
-//			{
-//				throw new IllegalArgumentException ("Wrong session type: "+ sessionType);
-//			}
-			
-			session.start();			
-
+		if (args.length > 0) {
+			sessionType = args[0];
 		}
 
 	}
 
 	/*
-	 * Initialisation de la fen�tre. Long script d�sagr�able. Ne vous pr�ocuppez pas de ce code.
+	 * Boucle principale. Ne termine pas. D�marre une session avec l'utilisateur
+	 * humain. La session se termine lorsqu'on appuie sur "GENRE" ou sur "PAYS":
+	 * l'utilisateur humain change de caract�ristiques, la session ne peut donc plus
+	 * continuer.
+	 */
+	public void startTheRoulette() {
+		
+		humanUser = new User("Me", userCountry, userGender);
+		
+		session = Session.createSession(sessionType, this, humanUser);
+		
+		session.start();
+	}
+
+	/*
+	 * Initialisation de la fen�tre. Long script d�sagr�able. Ne vous pr�ocuppez pas
+	 * de ce code.
 	 */
 	private void initUI() {
 
@@ -107,13 +72,13 @@ public class Labo6Main extends JFrame {
 		nextPanel.add(countryButton);
 		nextPanel.add(nextButton);
 		nextPanel.add(Box.createHorizontalGlue());
-		
+
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
-						session.changeChatBot();						
+						session.changeChatBot();
 					}
 				});
 			}
@@ -131,6 +96,7 @@ public class Labo6Main extends JFrame {
 				});
 			}
 		});
+		
 		countryButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -176,6 +142,6 @@ public class Labo6Main extends JFrame {
 		});
 
 		ex.startTheRoulette();
-		
+
 	}
 }
