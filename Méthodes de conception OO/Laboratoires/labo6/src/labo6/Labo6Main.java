@@ -33,7 +33,7 @@ public class Labo6Main extends JFrame {
 	private Session session;
 	private ChatBot chatbot;
 
-	String sessionType = Session.CASUAL_SESSION;
+	String sessionType = Session.SEDUCTION_SESSION;
 	
 	public Labo6Main(String[] args) {
 

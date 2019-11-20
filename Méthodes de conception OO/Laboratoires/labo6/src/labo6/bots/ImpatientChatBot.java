@@ -26,15 +26,27 @@ public class ImpatientChatBot extends ChatBot {
 	@Override
 	public void sleep() {
 		
-		TextList question = new TextList();
-		question = TextDatabase.getAllMessages();
-		question.keep(TextKey.isQuestion, true);
+	
 		
 		try {
 			
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			appendMessage(question.random().getMessage());
+		}
+		
+	}
+
+	@Override
+	public void waitForUser() {
+		String text = peer.getUI().getText();
+		sleep();
+		
+		TextList questions = new TextList();
+		questions = TextDatabase.getAllMessages();
+		
+		if(peer.getUI().getText().equals(text)) {
+			String theQuestion = questions.random().getMessage();
+			appendMessage(theQuestion);
 		}
 		
 	}

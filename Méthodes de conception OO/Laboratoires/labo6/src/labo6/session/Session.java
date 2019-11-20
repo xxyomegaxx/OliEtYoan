@@ -58,7 +58,7 @@ public class Session {
 		
 		while (!hasEnded()) {
 
-			robot.sleep();
+			robot.waitForUser();
 
 			if (!human.getUI().getText().equals(oldText)) {
 				

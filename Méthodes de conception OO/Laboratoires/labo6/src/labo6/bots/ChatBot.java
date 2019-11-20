@@ -19,6 +19,7 @@ public abstract class ChatBot extends User {
 	}
 
 	public abstract void sleep();
+	public abstract void waitForUser();
 	
 	public void appendMessage(String msg){
 		getUI().appendMessage(msg);
@@ -27,6 +28,7 @@ public abstract class ChatBot extends User {
 	public User getPeer(){
 		return peer;
 	}
+	
 	
 	public abstract Boolean checkForWakeUp(String message);
 	

@@ -33,10 +33,16 @@ public class SlowmoChatBot extends ChatBot {
 	public void sleep() {
 		try {
 
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			
 		}
+		
+	}
+
+	@Override
+	public void waitForUser() {
+		sleep();
 		
 	}
 }
