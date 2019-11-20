@@ -31,9 +31,10 @@ public class Labo6Main extends JFrame {
 	private Country userCountry = Country.Canada;
 	private Gender userGender = Gender.male;
 	private Session session;
+	private ChatBot chatbot;
 
 	String sessionType = Session.CASUAL_SESSION;
-
+	
 	public Labo6Main(String[] args) {
 
 		if (args.length > 0) {
@@ -52,7 +53,7 @@ public class Labo6Main extends JFrame {
 		
 		humanUser = new User("Me", userCountry, userGender);
 		
-		session = Session.createSession(sessionType, this, humanUser);
+		session = Session.createSession(sessionType, this, humanUser, chatbot );
 		
 		session.start();
 	}
