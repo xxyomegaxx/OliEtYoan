@@ -48,6 +48,25 @@ public class User {
 				
 		return line;
 	}
+	public boolean CheckTwoLastLines()
+	{
+		String text = getUI().getText();
+		String[] lines = text.split("\n");
+		if(lines.length>=2)
+		{
+			String lastline = lines[lines.length-1];
+			String blastline = lines[lines.length-2];
+			if(lastline.equals(blastline))
+			{
+			return true;
+			}
+			else return false;
+					
+
+		} else return false;
+		
+	}
+	
 	
 	public Country getCountry(){
 		return country;

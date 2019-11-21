@@ -13,22 +13,7 @@ public class CheckSame extends CheckUserBehavior {
 
 	@Override
 	public Boolean checkForWakeUp(String message) {
-		
-		
-		oldText = peer.getUI().getText();
-		oldLine = peer.getLastLine();
-
-		if (message.equals(oldText)) {
-//			System.out.println(message + "   message");
-//			System.out.println(last + "   last");
-			oldText = message;
-			return true;
-		} else {
-//			System.out.println(message + "   mes");
-//			System.out.println(last + "   la");
-			oldText = message;
-			return false;
-		}
+		return peer.CheckTwoLastLines();
 
 	}
 

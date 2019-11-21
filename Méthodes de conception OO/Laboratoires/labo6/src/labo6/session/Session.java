@@ -61,7 +61,7 @@ public class Session {
 			
 			if (!human.getUI().getText().equals(oldText)) {
 
-				if (robot.checkForWakeUp(oldText)) {
+				if (robot.checkForWakeUp(human.getLastLine())) {
 					
 //					if(robot.getLastLine() == null) {
 //						robot.appendMessage(helloMsg);
