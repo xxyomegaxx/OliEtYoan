@@ -15,6 +15,7 @@ import javax.swing.SwingUtilities;
 import labo6.Ressources.Country;
 import labo6.Ressources.Gender;
 import labo6.bots.ChatBot;
+import labo6.database.TextList;
 import labo6.session.Session;
 
 public class Labo6Main extends JFrame {
@@ -28,50 +29,38 @@ public class Labo6Main extends JFrame {
 	JButton genderButton = new JButton("GENRE");
 	JButton countryButton = new JButton("PAYS");
 	private Country userCountry = Country.Canada;
-	private Gender userGender = Gender.male;	
+	private Gender userGender = Gender.male;
 	private Session session;
-	
-	private final String NORMAL_SESSION = "normal"; 
-	private String sessionType = NORMAL_SESSION;
+	private ChatBot chatbot;
 
+	String sessionType = Session.SEDUCTION_SESSION;
 	
-
 	public Labo6Main(String[] args) {
-		
-		if(args.length>0){
-			sessionType=args[0];
-		}		
-		
-	}
 
-	/*
-	 * Boucle principale. Ne termine pas. D�marre une session avec l'utilisateur humain.
-	 * La session se termine lorsqu'on appuie sur "GENRE" ou sur "PAYS": l'utilisateur humain
-	 * change de caract�ristiques, la session ne peut donc plus continuer.
-	 */
-	public void startTheRoulette() {
-
-		
-		while (true) {
-
-			humanUser = new User("Me", userCountry, userGender);
-			
-			if(sessionType.equals(NORMAL_SESSION)){
-				session = new Session(this,humanUser);
-			}
-			else
-			{
-				throw new IllegalArgumentException ("Wrong session type: "+sessionType);
-			}
-			
-			session.start();			
-
+		if (args.length > 0) {
+			sessionType = args[0];
 		}
 
 	}
 
 	/*
-	 * Initialisation de la fen�tre. Long script d�sagr�able. Ne vous pr�ocuppez pas de ce code.
+	 * Boucle principale. Ne termine pas. D�marre une session avec l'utilisateur
+	 * humain. La session se termine lorsqu'on appuie sur "GENRE" ou sur "PAYS":
+	 * l'utilisateur humain change de caract�ristiques, la session ne peut donc plus
+	 * continuer.
+	 */
+	public void startTheRoulette() {
+		
+		humanUser = new User("Me", userCountry, userGender);
+		
+		session = Session.createSession(sessionType, this, humanUser, chatbot );
+		
+		session.start();
+	}
+
+	/*
+	 * Initialisation de la fen�tre. Long script d�sagr�able. Ne vous pr�ocuppez pas
+	 * de ce code.
 	 */
 	private void initUI() {
 
@@ -84,13 +73,13 @@ public class Labo6Main extends JFrame {
 		nextPanel.add(countryButton);
 		nextPanel.add(nextButton);
 		nextPanel.add(Box.createHorizontalGlue());
-		
+
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
-						session.changeChatBot();						
+						session.changeChatBot();
 					}
 				});
 			}
@@ -108,6 +97,7 @@ public class Labo6Main extends JFrame {
 				});
 			}
 		});
+		
 		countryButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -153,6 +143,6 @@ public class Labo6Main extends JFrame {
 		});
 
 		ex.startTheRoulette();
-		
+
 	}
 }

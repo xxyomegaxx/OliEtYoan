@@ -6,9 +6,9 @@ import labo6.database.Picture;
 import labo6.ui.UserPanel;
 
 /*
- * Représente un utilisateur (humain ou robot).
- * L'utilisateur initialise un panneau d'interface, mais l'ajout de celui-ci à l'arrière-plan
- * est contrôlé ailleurs (Session).
+ * Reprï¿½sente un utilisateur (humain ou robot).
+ * L'utilisateur initialise un panneau d'interface, mais l'ajout de celui-ci ï¿½ l'arriï¿½re-plan
+ * est contrï¿½lï¿½ ailleurs (Session).
  */
 
 public class User {
@@ -18,7 +18,7 @@ public class User {
 	private Country country=Country.Canada;
 	
 	
-	public User(String n,Picture profilePic,Gender gender){	
+	public User(String n,Picture profilePic,Gender gender){
 			name=n;			
 			ui = new UserPanel(name,profilePic.getPath(),Ressources.genderIcons[gender.value]);		
 	}
@@ -39,7 +39,7 @@ public class User {
 	
 	public String getLastLine(){
 		String text = getUI().getText();
-		String[]lines = text.split("\n");
+		String[] lines = text.split("\n");
 		
 		String line = lines[lines.length-1];
 		if(line.length()==0 && lines.length>1){

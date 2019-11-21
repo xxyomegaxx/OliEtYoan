@@ -35,6 +35,7 @@ public class TextDatabase {
 				false, false, Gender.unknown);
 		TEXT.add("Will you cook my dinner for me? My parents aren't around and I'm not allowed to turn on the stove. ",
 				Language.english, true, false, false, false, false, Gender.unknown);
+		
 		TEXT.add("I'm not a photographer, but I can picture me and you together", Language.english, false, false, true,
 				false, false, Gender.unknown);
 		TEXT.add("Are you an interior decorator? Because when I saw you, the entire room became beautiful.",
@@ -50,12 +51,12 @@ public class TextDatabase {
 		TEXT.add("I was feeling a little off today, but you definitely turned me on.", Language.english, true, true,
 				true, false, false, Gender.unknown);
 
-		TEXT.add("Salut! Comment ça va?", Language.french, true, false, false, false, true, Gender.unknown);
-		TEXT.add("Où sont tes ailes? J'aurais pu jurer que t'étais tombée du ciel...", Language.french, true, false,
+		TEXT.add("Salut! Comment ï¿½a va?", Language.french, true, false, false, false, true, Gender.unknown);
+		TEXT.add("Oï¿½ sont tes ailes? J'aurais pu jurer que t'ï¿½tais tombï¿½e du ciel...", Language.french, true, false,
 				true, false, true, Gender.female);
-		TEXT.add("Eh bien, regarde qui s'amène...", Language.french, false, false, false, false, true, Gender.unknown);
-		TEXT.add("Kess tu veux? Chus occuppé là...", Language.french, true, true, false, false, true, Gender.unknown);
-		TEXT.add("Bon, encore une autre personne intéressante avec qui parler...", Language.french, false, false, false, true, true,
+		TEXT.add("Eh bien, regarde qui s'amï¿½ne...", Language.french, false, false, false, false, true, Gender.unknown);
+		TEXT.add("Kess tu veux? Chus occuppï¿½ lï¿½...", Language.french, true, true, false, false, true, Gender.unknown);
+		TEXT.add("Bon, encore une autre personne intï¿½ressante avec qui parler...", Language.french, false, false, false, true, true,
 				Gender.unknown);
 		TEXT.add("L'haleine de mon chat sent le Meow Mix.", Language.french, false, false, false, false, false,
 				Gender.unknown);
@@ -65,23 +66,23 @@ public class TextDatabase {
 		TEXT.add("Mon chat s'appelle Mistigri.", Language.french, false, false, false, false, false, Gender.unknown);
 		TEXT.add("Mes parent refusent que j'utilise les ciseaux.", Language.french, false, false, false, false, false,
 				Gender.unknown);
-		TEXT.add("Quand je vais être grand, je veux devenir beta-testeur de jeux vidéo.", Language.french, false, false, false, false,
+		TEXT.add("Quand je vais ï¿½tre grand, je veux devenir beta-testeur de jeux vidï¿½o.", Language.french, false, false, false, false,
 				false, Gender.unknown);
-		TEXT.add("J'ai collé ma langue sur la clôture pis je suis resté pris...", Language.french, false, false, false,
+		TEXT.add("J'ai collï¿½ ma langue sur la clï¿½ture pis je suis restï¿½ pris...", Language.french, false, false, false,
 				false, false, Gender.unknown);
-		TEXT.add("Peux-tu m'aider à faire le souper? La recette dit de faire bouillir de l'eau pis je sais pas comment...",
+		TEXT.add("Peux-tu m'aider ï¿½ faire le souper? La recette dit de faire bouillir de l'eau pis je sais pas comment...",
 				Language.french, true, false, false, false, false, Gender.unknown);
 		TEXT.add("Je ne suis pas photographe, mais je t'imagine dans toutes sortes de poses", Language.french, false, true, true,
 				false, false, Gender.unknown);
-		TEXT.add("Es-tu décoratrice d'intérieur? Parce que je sans que je le feng, shui séduit par toi",
+		TEXT.add("Es-tu dï¿½coratrice d'intï¿½rieur? Parce que je sans que je le feng, shui sï¿½duit par toi",
 				Language.french, true, false, true, false, false, Gender.female);
 		TEXT.add("T'as tu vu l'oeuvre d'art qu'est mon 6-pack?", Language.french, true, false, true, false,
 				false, Gender.female);
-		TEXT.add("J'ai perdu mon no de téléphone, tu peux me donner le tien?", Language.french, true, false, true, false,
+		TEXT.add("J'ai perdu mon no de tï¿½lï¿½phone, tu peux me donner le tien?", Language.french, true, false, true, false,
 				false, Gender.unknown);
 		TEXT.add("As-tu une carte? Je crois que je viens de me perdre dans tes yeux...", Language.french, true, false, true, false, false,
 				Gender.unknown);
-		TEXT.add("Mon feu intéreieur s'était éteint jusqu'à ce que tu m'allumes.", Language.french, true, true,
+		TEXT.add("Mon feu intï¿½reieur s'ï¿½tait ï¿½teint jusqu'ï¿½ ce que tu m'allumes.", Language.french, true, true,
 				true, false, false, Gender.unknown);
 
 	}
