@@ -3,10 +3,14 @@ package labo6.session;
 import javafx.collections.ListChangeListener;
 import labo6.Labo6Main;
 import labo6.User;
+import labo6.CheckUser.CheckBehaviorAsk;
+import labo6.CheckUser.CheckBehaviorNothing;
+import labo6.CheckUser.CheckUserBehavior;
 import labo6.Ressources.Gender;
+import labo6.WaitBehavior.WaitBehavior;
+import labo6.WaitBehavior.WaitBehaviorAsk;
+import labo6.WaitBehavior.WaitBehaviorNothing;
 import labo6.bots.ChatBot;
-import labo6.bots.ImpatientChatBot;
-import labo6.bots.PatientChatBot;
 import labo6.database.PictureDatabase;
 import labo6.database.PictureList;
 import labo6.database.TextDatabase;
@@ -22,7 +26,17 @@ public class SeductionSession extends Session {
 
 	@Override
 	public ChatBot createChatBot() {
-		return new ImpatientChatBot(human, "other", PictureDatabase.getAllPictures().random(),Gender.random());
+		CheckUserBehavior checking = createCheckBehavior();
+		WaitBehavior waiting = createWaitBehavior();
+		return new ChatBot(human, "other", PictureDatabase.getAllPictures().random(),Gender.random(), waiting,checking);
+	}
+	
+	public CheckUserBehavior createCheckBehavior() {
+		return new CheckBehaviorNothing(human);
+	}
+	
+	public WaitBehavior createWaitBehavior() {
+		return new WaitBehaviorNothing(human);
 	}
 
 	@Override

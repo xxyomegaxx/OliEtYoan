@@ -51,11 +51,13 @@ public class Labo6Main extends JFrame {
 	 */
 	public void startTheRoulette() {
 		
-		humanUser = new User("Me", userCountry, userGender);
-		
-		session = Session.createSession(sessionType, this, humanUser, chatbot );
-		
-		session.start();
+		while(true) {
+			humanUser = new User("Me", userCountry, userGender);
+			
+			session = Session.createSession(sessionType, this, humanUser, chatbot );
+			
+			session.start();
+		}
 	}
 
 	/*

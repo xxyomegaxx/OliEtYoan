@@ -3,10 +3,14 @@ package labo6.session;
 import labo6.database.Picture.PictureKey;
 import labo6.Labo6Main;
 import labo6.User;
+import labo6.CheckUser.CheckBehaviorAsk;
+import labo6.CheckUser.CheckBehaviorSaySomething;
+import labo6.CheckUser.CheckUserBehavior;
 import labo6.Ressources.Gender;
+import labo6.WaitBehavior.WaitBehavior;
+import labo6.WaitBehavior.WaitBehaviorAsk;
+import labo6.WaitBehavior.WaitBehaviorSaySomething;
 import labo6.bots.ChatBot;
-import labo6.bots.ImpatientChatBot;
-import labo6.bots.SlowmoChatBot;
 import labo6.database.PictureDatabase;
 import labo6.database.PictureList;
 import labo6.database.TextDatabase;
@@ -18,10 +22,22 @@ public class CasualSession extends Session {
 	public CasualSession(Labo6Main l, User u, ChatBot r) {
 		super(l, u, r);
 	}
-	
+
 	@Override
 	public ChatBot createChatBot() {
-		return new SlowmoChatBot(human, "other", PictureDatabase.getAllPictures().random(), Gender.random());
+		CheckUserBehavior checking = createCheckBehavior();
+		WaitBehavior waiting = createWaitBehavior();
+		return new ChatBot(human, "other", PictureDatabase.getAllPictures().random(), Gender.random(), waiting, checking);
+	}
+
+	@Override
+	public CheckUserBehavior createCheckBehavior() {
+		return new CheckBehaviorSaySomething(human);
+	}
+
+	@Override
+	public WaitBehavior createWaitBehavior() {
+		return new WaitBehaviorSaySomething(human);
 	}
 
 	@Override
