@@ -39,29 +39,16 @@ public class ChessPiece {
 		setAlgebraicPos(pos);
 
 	}
-
-	public static ChessPiece readFromStream(Scanner reader, ChessBoard b) {
-		// LaboX: vider
-
-		String pieceDescription = reader.next();
-
-		if (pieceDescription.length() != 5) {
-			throw new IllegalArgumentException("Badly formed Chess Piece description: " + pieceDescription);
-		}
-
-		return new ChessPiece(pieceDescription.substring(3, 5), pieceDescription.substring(0, 2), b);
-
+	
+	ChessPiece(PieceMemento mem)
+	{
+		color=mem.getColor();
+		type = mem.getType();
+		gridPosX = mem.getPos().x;
+		gridPosY = mem.getPos().y;
 	}
 
-	public void saveToStream(Writer writer) throws Exception {
 
-		
-		writer.append(ChessUtils.makeAlgebraicPosition(gridPosX, gridPosY));
-		writer.append('-');
-		writer.append(ChessUtils.makePieceName(color, type));
-		writer.append('\n');
-
-	}
 
 	// Règles de mouvements
 	public boolean verifyMove(Point gridPos, Point newGridPos) {
@@ -162,6 +149,16 @@ public class ChessPiece {
 		}
 		return false;
 
+	}
+	
+	public PieceMemento createMemento()
+	{
+		return new PieceMemento(this);
+	}
+	
+	public void restoreMemento()
+	{
+		
 	}
 
 }

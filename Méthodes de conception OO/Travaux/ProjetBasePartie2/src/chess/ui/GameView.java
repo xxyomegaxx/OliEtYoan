@@ -193,11 +193,15 @@ public class GameView extends Application {
 	}
 	private void saveScript(File file){
 		
+		try {
+			game.saveScript(file);
+		} catch(Exception e){
+			Alert alert = new Alert(AlertType.ERROR, "Error writing script", ButtonType.OK);
+			alert.showAndWait();
+			return;
+		}
 	}
-	
-	
 
-	// LaboX : Exercice 5
 	public void loadScript(String fileName) {
 
 		loadScript(new File(fileName));
@@ -205,7 +209,13 @@ public class GameView extends Application {
 
 	private void loadScript(File file) {
 
-		// Incomplet!
+		try {
+			game.loadScriptFromFile(file);
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR, "Error loading script", ButtonType.OK);
+			alert.showAndWait();
+			return;
+		}
 
 	}
 

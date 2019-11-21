@@ -2,14 +2,16 @@ package chess.game;
 
 import java.awt.Point;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import chess.ui.BoardView;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import chess.game.ChessPiece;
 
 public class ChessBoard {
 
@@ -20,6 +22,10 @@ public class ChessBoard {
 	private ChessPiece[][] grid;
 
 	private BoardView view;
+	
+	private ArrayList<ChessMove> ancientMoves = new ArrayList<ChessMove>();
+	
+	private static BoardMemento initialState;
 
 	public ChessBoard(int x, int y) {
 
@@ -33,6 +39,16 @@ public class ChessBoard {
 			}
 		}
 
+	}
+	
+	
+	public ChessBoard(BoardMemento mem)
+	{
+		this(200,100);
+		for(int i=0;i<mem.getSize();i++)
+		{
+			putPiece(new ChessPiece(mem.getPiece(i)));
+		}
 	}
 
 	// Place une pièce vide dans la case
@@ -72,8 +88,10 @@ public class ChessBoard {
 		Point gridPos = view.paneToGrid(pixelPos);
 
 		ChessPiece toMove = grid[gridPos.x][gridPos.y];
+		
+		ChessMove mov = new ChessMove(view.paneToGrid(pixelPos), view.paneToGrid(newPixelPos));
 
-		boolean result = move(view.paneToGrid(pixelPos), view.paneToGrid(newPixelPos));
+		boolean result = move(mov);
 
 		toMove.moveUI(view.gridToPane(toMove.getGridPos()));
 
@@ -81,33 +99,34 @@ public class ChessBoard {
 	}
 
 	// Déplace une pièce sur la grille. Vérifie les règles de déplacement.
-	public boolean move(Point startPos, Point endPos) {
+	public boolean move(ChessMove mov) {
 
-		ChessPiece toMove = getPiece(startPos);
+		ChessPiece toMove = getPiece(mov.getDep());
 
 		if (toMove.isNone()) {
 			return false;
 		}
 
-		if (!isValid(endPos)) {
+		if (!isValid(mov.getArr())) {
 			return false;
 		}
 
-		if (isSameColor(startPos, endPos)) {
+		if (isSameColor(mov.getDep(),mov.getArr())) {
 			return false;
 		}
 
-		if (!toMove.verifyMove(startPos, endPos)) {
+		if (!toMove.verifyMove(mov.getDep(),mov.getArr())) {
 			return false;
 		}
 
-		if (!isEmpty(endPos)) {
+		if (!isEmpty(mov.getArr())) {
 
 			// Capture!
-			removePiece(endPos);
+			removePiece(mov.getArr());
 		}
-		assignSquare(endPos, toMove);
-		clearSquare(startPos);
+		assignSquare(mov.getArr(), toMove);
+		clearSquare(mov.getDep());
+		ancientMoves.add(mov);
 
 		return true;
 	}
@@ -124,40 +143,22 @@ public class ChessBoard {
 	
 	// Lecture d'un ChessBoard à partir d'un fichier
 	public static ChessBoard readFromFile(File file, int x, int y) throws Exception {
-
-		ChessBoard board = new ChessBoard(x, y);
-
+		
 		Scanner reader = new Scanner(new FileReader(file));
-
-		while (true) {
-			ChessPiece piece;
-			try {
-				piece = ChessPiece.readFromStream(reader, board);
-			} catch (Exception e) {
-				break;
-			}
-			board.putPiece(piece);
-		}
-		reader.close();
-		return board;
+		ChessBoard retour = BoardMemento.readFromStream(reader, x, y);
+		initialState = new BoardMemento(retour);
+		return retour;
+		
 	}
 
 	//Sauvegarde dans un fichier.
 	public void saveToFile(File file) throws Exception {
 
 		FileWriter writer = new FileWriter(file);
+		BoardMemento mem = new BoardMemento(this);
+		mem.saveToStream(writer);
 
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[i].length; j++) {
-				ChessPiece toWrite = grid[i][j];
-				if (!toWrite.isNone()) {
-					toWrite.saveToStream(writer);
-				}
-			}
-		}
-		//Séparateur. Nécessaire pour la lecture de scripts.
-		writer.write("</BOARD>\n");
-		writer.close();
+
 	}
 
 	@Override
@@ -202,6 +203,47 @@ public class ChessBoard {
 	public Node getUI() {
 
 		return view.getPane();
+	}
+	
+	public int getLength()
+	{
+		return grid.length;
+	}
+	
+	public BoardMemento createMemento()
+	{
+		return new BoardMemento(this);
+	}
+	
+	public void saveScript(File file) throws Exception
+	{
+		FileWriter writer = new FileWriter(file);
+		BoardMemento mem = new BoardMemento(this);
+		mem.saveToStream(writer);
+		for(int i=0;i<ancientMoves.size();i++)
+		{
+			ancientMoves.get(i).saveToStream(writer);
+		}
+		
+	}
+	public void loadScript(File file) throws Exception
+	{
+		Scanner reader = new Scanner(new FileReader(file));
+		ChessBoard board = new ChessBoard(200, 100);
+
+		while (true) {
+			ChessPiece piece;
+			try {
+				piece = PieceMemento.readFromStream(reader, board);
+			} catch (Exception e) {
+				break;
+			}
+			board.putPiece(piece);
+		}
+		for(int i = 0;i<ancientMoves.size();i++)
+		{
+			move(ancientMoves.get(i));
+		}
 	}
 
 }

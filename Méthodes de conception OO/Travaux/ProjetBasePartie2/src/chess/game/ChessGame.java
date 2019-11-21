@@ -25,10 +25,9 @@ public class ChessGame {
 	public void movePiece(String move){
 		if(move.length()!=5){
 			throw new IllegalArgumentException("Badly formed move");
-		}
-		String start = move.substring(0,2);
-		String end = move.substring(3,5);
-		board.move(ChessUtils.convertAlgebraicPosition(start),ChessUtils.convertAlgebraicPosition(end));
+		}		
+		ChessMove chessMove = new ChessMove(move);
+		board.move(chessMove);
 	}
 	
 
@@ -71,6 +70,11 @@ public class ChessGame {
 	public boolean compareBoard(ChessBoard other) {
 		
 		return board.equals(other);
+	}
+
+	public void saveScript(File file) throws Exception {
+		board.saveScript(file);
+		
 	}
 
 }
