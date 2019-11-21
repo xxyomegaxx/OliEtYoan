@@ -33,14 +33,14 @@ public class CasualProfile extends Profiler {
 
 		if (Pic.match(PictureKey.gender, Gender.male)) {
 			genre = Gender.male;
-			return new ChatBot(peer, "other", Pic, genre, waiting, checking);
+			return new ChatBot(peer, "CasualSession", Pic, genre, waiting, checking);
 		}
 		if (Pic.match(PictureKey.gender, Gender.female)) {
 			genre = Gender.female;
-			return new ChatBot(peer, "other", Pic, genre, waiting, checking);
+			return new ChatBot(peer, "CasualSession", Pic, genre, waiting, checking);
 		} else {
 			genre = Gender.unknown;
-			return new ChatBot(peer, "other", Pic, genre, waiting, checking);
+			return new ChatBot(peer, "CasualSession", Pic, genre, waiting, checking);
 		}
 	}
 

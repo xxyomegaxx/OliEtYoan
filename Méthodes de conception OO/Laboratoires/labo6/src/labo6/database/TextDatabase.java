@@ -84,6 +84,8 @@ public class TextDatabase {
 				Gender.unknown);
 		TEXT.add("Mon feu int�reieur s'�tait �teint jusqu'� ce que tu m'allumes.", Language.french, true, true,
 				true, false, false, Gender.unknown);
+		TEXT.add("T qui toiéééééé??", Language.french, true, true,
+				false, false, true, Gender.unknown);
 
 	}
 

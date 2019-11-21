@@ -35,7 +35,7 @@ public class TrollProfiler extends Profiler {
 		
 		Picture Pic = getSuitablePictures().random();
 
-		return new ChatBot(peer, "other", Pic, genre, waiting, checking);
+		return new ChatBot(peer, "TrollSession", Pic, genre, waiting, checking);
 	}
 
 	public CheckUserBehavior createCheckBehavior() {
@@ -88,7 +88,7 @@ public class TrollProfiler extends Profiler {
 
 	public String generateGreeting(TextList li) {
 
-//		li.keep(TextKey.isGreeting, true);
+		li.keep(TextKey.isGreeting, true);
 		li.keep(TextKey.isOffensive, true);
 
 		return li.random().getMessage();

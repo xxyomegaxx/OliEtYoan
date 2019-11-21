@@ -34,17 +34,17 @@ public class SeductiveProfile extends Profiler {
 		if(ui.getUserGender().equals(Gender.male) ) {
 			Pic.keep(PictureKey.gender, Gender.female);
 			genre = Gender.female;
-			return new ChatBot(peer, "other", Pic.random(), genre, waiting, checking);
+			return new ChatBot(peer, "SeductiveSession", Pic.random(), genre, waiting, checking);
 		}
 		if(ui.getUserGender().equals(Gender.female)) {
 			Pic.keep(PictureKey.gender, Gender.male);
 			genre = Gender.male;
-			return new ChatBot(peer, "other", Pic.random(), genre, waiting, checking);
+			return new ChatBot(peer, "SeductiveSession", Pic.random(), genre, waiting, checking);
 		}
 		else {
 			Pic.keep(PictureKey.gender, Gender.unknown);
 			genre = Gender.unknown;
-			return new ChatBot(peer, "other", Pic.random(), genre, waiting, checking);
+			return new ChatBot(peer, "SeductiveSession", Pic.random(), genre, waiting, checking);
 		}
 	}
 
