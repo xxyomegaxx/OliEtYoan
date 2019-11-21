@@ -39,5 +39,14 @@ public class ChatBot extends User {
 	public CheckUserBehavior getCheckUserBehavior() {
 		return checking;
 	}
+	
+	public boolean checkForWakeUp(String oldText) {
+		
+		return checking.checkForWakeUp(oldText);
+	}
+
+	public void waitForUser(ChatBot robot) {
+		waiting.waitForUser(robot);
+	}
 
 }

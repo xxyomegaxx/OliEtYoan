@@ -3,8 +3,8 @@ package labo6.session;
 import javafx.collections.ListChangeListener;
 import labo6.Labo6Main;
 import labo6.User;
-import labo6.CheckUser.CheckBehaviorAsk;
-import labo6.CheckUser.CheckBehaviorNothing;
+import labo6.CheckUser.CheckQuestion;
+import labo6.CheckUser.CheckAnything;
 import labo6.CheckUser.CheckUserBehavior;
 import labo6.Ressources.Gender;
 import labo6.WaitBehavior.WaitBehavior;
@@ -32,7 +32,7 @@ public class SeductionSession extends Session {
 	}
 	
 	public CheckUserBehavior createCheckBehavior() {
-		return new CheckBehaviorNothing(human);
+		return new CheckAnything(human);
 	}
 	
 	public WaitBehavior createWaitBehavior() {

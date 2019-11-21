@@ -3,8 +3,8 @@ package labo6.session;
 import labo6.database.Picture.PictureKey;
 import labo6.Labo6Main;
 import labo6.User;
-import labo6.CheckUser.CheckBehaviorAsk;
-import labo6.CheckUser.CheckBehaviorSaySomething;
+import labo6.CheckUser.CheckQuestion;
+import labo6.CheckUser.CheckSame;
 import labo6.CheckUser.CheckUserBehavior;
 import labo6.Ressources.Gender;
 import labo6.WaitBehavior.WaitBehavior;
@@ -32,7 +32,7 @@ public class CasualSession extends Session {
 
 	@Override
 	public CheckUserBehavior createCheckBehavior() {
-		return new CheckBehaviorSaySomething(human);
+		return new CheckSame(human);
 	}
 
 	@Override

@@ -2,9 +2,9 @@ package labo6.CheckUser;
 
 import labo6.User;
 
-public class CheckBehaviorAsk extends CheckUserBehavior{
+public class CheckQuestion extends CheckUserBehavior{
 
-	public CheckBehaviorAsk(User u) {
+	public CheckQuestion(User u) {
 		super(u);
 	}
 

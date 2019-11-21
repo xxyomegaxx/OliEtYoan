@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import labo6.Labo6Main;
 import labo6.Ressources.Gender;
 import labo6.User;
-import labo6.CheckUser.CheckBehaviorAsk;
+import labo6.CheckUser.CheckQuestion;
 import labo6.CheckUser.CheckUserBehavior;
 import labo6.WaitBehavior.WaitBehavior;
 import labo6.WaitBehavior.WaitBehaviorAsk;
@@ -57,14 +57,14 @@ public class Session {
 		
 		while (!hasEnded()) {
 		
-			robot.getWaitBehavior().waitForUser(robot);
+			robot.waitForUser(robot);
 			
 			if (!human.getUI().getText().equals(oldText)) {
 
-				if (robot.getCheckUserBehavior().checkForWakeUp(oldText)) {
+				if (robot.checkForWakeUp(oldText)) {
 					
 //					if(robot.getLastLine() == null) {
-						robot.appendMessage(helloMsg);
+//						robot.appendMessage(helloMsg);
 //					}
 
 					String message = generateAnswer(suitableMsg.clone());
@@ -105,7 +105,7 @@ public class Session {
 	}
 
 	public CheckUserBehavior createCheckBehavior() {
-		return new CheckBehaviorAsk(human);
+		return new CheckQuestion(human);
 	}
 
 	public WaitBehavior createWaitBehavior() {
