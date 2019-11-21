@@ -1,5 +1,8 @@
 package labo6.session;
 
+import Profilers.NormalProfile;
+import Profilers.Profiler;
+import Profilers.SeductiveProfile;
 import javafx.collections.ListChangeListener;
 import labo6.Labo6Main;
 import labo6.User;
@@ -21,8 +24,12 @@ import labo6.database.TextMessage.TextKey;
 
 public class SeductionSession extends Session {
 
-	public SeductionSession(Labo6Main l, User u, ChatBot r) {
-		super(l, u, r);
+	public SeductionSession(Labo6Main l, User u) {
+		super(l, u);
+	}
+	
+	public Profiler createProfiler() {
+		return new SeductiveProfile(human,ui);
 	}
 
 }

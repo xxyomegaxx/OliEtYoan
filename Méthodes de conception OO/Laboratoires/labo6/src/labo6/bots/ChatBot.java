@@ -5,10 +5,6 @@ import labo6.User;
 import labo6.CheckUser.CheckUserBehavior;
 import labo6.WaitBehavior.WaitBehavior;
 import labo6.database.Picture;
-import labo6.database.PictureDatabase;
-import labo6.database.TextDatabase;
-import labo6.database.TextList;
-import labo6.database.TextMessage.TextKey;
 
 public class ChatBot extends User {
 	
@@ -41,7 +37,7 @@ public class ChatBot extends User {
 	}
 	
 	public boolean checkForWakeUp(String oldText) {
-		
+	
 		return checking.checkForWakeUp(oldText);
 	}
 

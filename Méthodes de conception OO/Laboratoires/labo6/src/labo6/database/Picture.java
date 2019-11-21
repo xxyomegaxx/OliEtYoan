@@ -20,6 +20,7 @@ public class Picture {
 	private String path;
 	
 	
+	
 	public Picture(String p, Gender g, boolean c, boolean s) {
 		
 		values = new Object[3];

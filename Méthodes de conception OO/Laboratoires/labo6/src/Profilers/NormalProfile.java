@@ -3,9 +3,14 @@ package Profilers;
 import labo6.CheckUser.CheckQuestion;
 import labo6.CheckUser.CheckUserBehavior;
 import labo6.Ressources.Gender;
+import labo6.Labo6Main;
+import labo6.Ressources;
+import labo6.User;
 import labo6.WaitBehavior.WaitBehavior;
 import labo6.WaitBehavior.WaitBehaviorAsk;
 import labo6.bots.ChatBot;
+import labo6.database.Picture;
+import labo6.database.Picture.PictureKey;
 import labo6.database.PictureDatabase;
 import labo6.database.PictureList;
 import labo6.database.TextDatabase;
@@ -13,35 +18,54 @@ import labo6.database.TextList;
 import labo6.database.TextMessage.TextKey;
 
 public class NormalProfile extends Profiler {
-	
+
+	public NormalProfile(User u, Labo6Main l) {
+		super(u,l);
+	}
+
 	public ChatBot createChatBot() {
 		CheckUserBehavior checking = createCheckBehavior();
 		WaitBehavior waiting = createWaitBehavior();
-		return new ChatBot(human, "other", PictureDatabase.getAllPictures().random(), Gender.random(), waiting,
-				checking);
-	}
-	
-	public CheckUserBehavior createCheckBehavior() {
-		return new CheckQuestion(human);
-	}
-	
-	public WaitBehavior createWaitBehavior() {
-		return new WaitBehaviorAsk(human);
+		Gender genre;
+		
+		System.out.println();
+		
+		Picture Pic = PictureDatabase.getAllPictures().random();
+
+		if (Pic.match(PictureKey.gender, Gender.male)) {
+			genre = Gender.male;
+			return new ChatBot(peer, "other", Pic, genre, waiting, checking);
+		}
+		if (Pic.match(PictureKey.gender, Gender.female)) {
+			genre = Gender.female;
+			return new ChatBot(peer, "other", Pic, genre, waiting, checking);
+		} else {
+			genre = Gender.unknown;
+			return new ChatBot(peer, "other", Pic, genre, waiting, checking);
+		}
 	}
 
-	protected String generateAnswer(TextList li) {
+	public CheckUserBehavior createCheckBehavior() {
+		return new CheckQuestion(peer);
+	}
+
+	public WaitBehavior createWaitBehavior() {
+		return new WaitBehaviorAsk(peer);
+	}
+
+	public String generateAnswer(TextList li) {
 
 		return li.random().getMessage();
 	}
 
-	protected String generateGreeting(TextList li) {
+	public String generateGreeting(TextList li) {
 
 		li.keep(TextKey.isGreeting, true);
 
 		return li.random().getMessage();
 	}
 
-	protected TextList getSuitableMessages() {
+	public TextList getSuitableMessages() {
 		TextList list = new TextList();
 		list = TextDatabase.getAllMessages();
 		return list;
@@ -52,5 +76,4 @@ public class NormalProfile extends Profiler {
 		picList = PictureDatabase.getAllPictures();
 		return picList;
 	}
-
 }

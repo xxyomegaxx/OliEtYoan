@@ -2,6 +2,8 @@ package labo6.session;
 
 import java.util.ArrayList;
 
+import Profilers.NormalProfile;
+import Profilers.Profiler;
 import labo6.Labo6Main;
 import labo6.Ressources.Gender;
 import labo6.User;
@@ -27,8 +29,9 @@ import labo6.database.TextMessage.TextKey;
 public class Session {
 
 	protected User human;
-	protected ChatBot robot;
-	private Labo6Main ui;
+	protected ChatBot chatbot;
+	protected Profiler profile;
+	protected Labo6Main ui;
 	private boolean ended;
 	private Thread sleeper;
 
@@ -36,39 +39,42 @@ public class Session {
 	public final static String SEDUCTION_SESSION = "seduction";
 	public final static String CASUAL_SESSION = "CasualSession";
 
-	public Session(Labo6Main l, User u, ChatBot r) {
+	public Session(Labo6Main l, User u) {
 		ui = l;
 		human = u;
 		ended = false;
 		sleeper = Thread.currentThread();
-		robot = createChatBot();
+		
 	}
 
 	public final void start() {
 
-		ui.initBackGround(robot);
+		profile = createProfiler();
+		
+		chatbot = profile.createChatBot();
+
+		ui.initBackGround(chatbot);
 
 		// Creer une liste approprie pour la session instanciee
-		TextList suitableMsg = getSuitableMessages();
+		TextList suitableMsg = profile.getSuitableMessages();
+
 		// Genere un message de bienvenue
-		String helloMsg = generateGreeting(suitableMsg.clone());
+		String helloMsg = profile.generateGreeting(suitableMsg.clone());
+
+		chatbot.appendMessage(helloMsg);
 
 		String oldText = human.getUI().getText();
 
 		while (!hasEnded()) {
 
-			robot.waitForUser(robot);
+			chatbot.waitForUser(chatbot);
 
 			if (!human.getUI().getText().equals(oldText)) {
 
-				if (robot.checkForWakeUp(oldText)) {
+				if (chatbot.checkForWakeUp(oldText)) {
 
-//					if(robot.getLastLine() == null) {
-//						robot.appendMessage(helloMsg);
-//					}
-
-					String message = generateAnswer(suitableMsg.clone());
-					robot.appendMessage(message);
+					String message = profile.generateAnswer(suitableMsg.clone());
+					chatbot.appendMessage(message);
 
 				}
 
@@ -83,18 +89,22 @@ public class Session {
 	 * Fonction qui permet au creator Labo6Main de creer une sessions sans savoir
 	 * son type.
 	 */
-	public static Session createSession(String type, Labo6Main ui, User humanUser, ChatBot rob) {
+	public static Session createSession(String type, Labo6Main ui, User humanUser) {
 
 		switch (type) {
 		case NORMAL_SESSION:
-			return new Session(ui, humanUser, rob);
+			return new Session(ui, humanUser);
 		case SEDUCTION_SESSION:
-			return new SeductionSession(ui, humanUser, rob);
+			return new SeductionSession(ui, humanUser);
 		case CASUAL_SESSION:
-			return new CasualSession(ui, humanUser, rob);
+			return new CasualSession(ui, humanUser);
 		default:
 			throw new IllegalArgumentException("Wrong session type: " + type);
 		}
+	}
+
+	public Profiler createProfiler() {
+		return new NormalProfile(human,ui);
 	}
 
 	/*
@@ -102,8 +112,8 @@ public class Session {
 	 */
 	public void changeChatBot() {
 		// CA MARCHERA PAS
-		robot = createChatBot();
-		ui.initBackGround(robot);
+		chatbot = profile.createChatBot();
+		ui.initBackGround(chatbot);
 	}
 
 	public synchronized void end() {
