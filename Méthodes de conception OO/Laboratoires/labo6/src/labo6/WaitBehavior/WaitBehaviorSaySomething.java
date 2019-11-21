@@ -31,7 +31,7 @@ public class WaitBehaviorSaySomething extends WaitBehavior {
 
 		sleep();
 		if (peer.getUI().getText().equals(text)) {
-			bot.appendMessage(question);;
+			bot.appendMessage(question);
 		}
 
 	}

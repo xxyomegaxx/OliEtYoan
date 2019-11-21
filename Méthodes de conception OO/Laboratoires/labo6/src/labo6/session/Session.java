@@ -45,7 +45,7 @@ public class Session {
 	}
 
 	public final void start() {
-		
+
 		ui.initBackGround(robot);
 
 		// Creer une liste approprie pour la session instanciee
@@ -54,15 +54,15 @@ public class Session {
 		String helloMsg = generateGreeting(suitableMsg.clone());
 
 		String oldText = human.getUI().getText();
-		
+
 		while (!hasEnded()) {
-		
+
 			robot.waitForUser(robot);
-			
+
 			if (!human.getUI().getText().equals(oldText)) {
 
 				if (robot.checkForWakeUp(oldText)) {
-					
+
 //					if(robot.getLastLine() == null) {
 //						robot.appendMessage(helloMsg);
 //					}
@@ -71,7 +71,7 @@ public class Session {
 					robot.appendMessage(message);
 
 				}
-			
+
 				oldText = human.getUI().getText();// Prend le vieux texte
 			}
 
@@ -85,55 +85,16 @@ public class Session {
 	 */
 	public static Session createSession(String type, Labo6Main ui, User humanUser, ChatBot rob) {
 
-			switch (type) {
-			case NORMAL_SESSION:
-				return new Session(ui, humanUser, rob);
-			case SEDUCTION_SESSION:
-				return new SeductionSession(ui, humanUser, rob);
-			case CASUAL_SESSION:
-				return new CasualSession(ui, humanUser, rob);
-			default:
-				throw new IllegalArgumentException("Wrong session type: " + type);
-			}
-	}
-
-	public ChatBot createChatBot() {
-		CheckUserBehavior checking = createCheckBehavior();
-		WaitBehavior waiting = createWaitBehavior();
-		return new ChatBot(human, "other", PictureDatabase.getAllPictures().random(), Gender.random(), waiting,
-				checking);
-	}
-
-	public CheckUserBehavior createCheckBehavior() {
-		return new CheckQuestion(human);
-	}
-
-	public WaitBehavior createWaitBehavior() {
-		return new WaitBehaviorAsk(human);
-	}
-
-	protected String generateAnswer(TextList li) {
-
-		return li.random().getMessage();
-	}
-
-	protected String generateGreeting(TextList li) {
-
-		li.keep(TextKey.isGreeting, true);
-
-		return li.random().getMessage();
-	}
-
-	protected TextList getSuitableMessages() {
-		TextList list = new TextList();
-		list = TextDatabase.getAllMessages();
-		return list;
-	}
-
-	protected PictureList getSuitablePictures() {
-		PictureList picList = new PictureList();
-		picList = PictureDatabase.getAllPictures();
-		return picList;
+		switch (type) {
+		case NORMAL_SESSION:
+			return new Session(ui, humanUser, rob);
+		case SEDUCTION_SESSION:
+			return new SeductionSession(ui, humanUser, rob);
+		case CASUAL_SESSION:
+			return new CasualSession(ui, humanUser, rob);
+		default:
+			throw new IllegalArgumentException("Wrong session type: " + type);
+		}
 	}
 
 	/*
