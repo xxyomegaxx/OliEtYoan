@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import Profilers.Profiler;
 import labo6.Ressources.Country;
 import labo6.Ressources.Gender;
 import labo6.bots.ChatBot;
@@ -31,9 +32,8 @@ public class Labo6Main extends JFrame {
 	private Country userCountry = Country.Canada;
 	private Gender userGender = Gender.male;
 	private Session session;
-	private ChatBot chatbot;
 
-	String sessionType = Session.SEDUCTION_SESSION;
+	String sessionType = Session.TROLL_SESSION;
 	
 	public Labo6Main(String[] args) {
 
@@ -51,11 +51,17 @@ public class Labo6Main extends JFrame {
 	 */
 	public void startTheRoulette() {
 		
-		humanUser = new User("Me", userCountry, userGender);
-		
-		session = Session.createSession(sessionType, this, humanUser, chatbot );
-		
-		session.start();
+		while(true) {
+			humanUser = new User("Me", userCountry, userGender);
+			
+			session = Session.createSession(sessionType, this, humanUser);
+			
+			session.start();
+		}
+	}
+	
+	public Gender getUserGender() {
+		return userGender;
 	}
 
 	/*
