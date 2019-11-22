@@ -62,7 +62,7 @@ public class ChessGame {
 	}
 
 	public void loadScriptFromFile(File file) throws Exception {
-		board = new ChessBoard(posX, posY);
+		board = ChessBoard.readFromFile(file,posX,posY);
 		board.loadMovesFromFile(file);
 
 	}

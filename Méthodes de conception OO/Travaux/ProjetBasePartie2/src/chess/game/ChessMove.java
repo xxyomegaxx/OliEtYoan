@@ -41,7 +41,7 @@ public class ChessMove {
 		writer.append('\n');	
 	}
 	
-	public static ChessMove readFromStream(Scanner reader, ChessBoard b) {
+	public static ChessMove readFromStream(Scanner reader) {
 		// LaboX: vider
 
 		String moveDescription = reader.next();

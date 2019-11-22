@@ -31,7 +31,7 @@ public class BoardMemento {
 			}
 			//Séparateur. Nécessaire pour la lecture de scripts.
 			writer.write("</BOARD>\n");
-			writer.close();
+			
 		}
 		
 		public static ChessBoard readFromStream(Scanner reader, int x, int y) throws Exception {

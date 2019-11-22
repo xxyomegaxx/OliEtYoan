@@ -133,7 +133,28 @@ public class ChessBoard {
 
 	// Lecture et exécution d'une suite de mouvements
 	public void loadMovesFromFile(File file) throws Exception {
-		// Non implanté!!
+		Scanner reader = new Scanner(new FileReader(file));
+
+/*		while (true) {
+			ChessPiece piece;
+			try {
+				piece = PieceMemento.readFromStream(reader, this);
+			} catch (Exception e) {
+				break;
+			}
+			putPiece(piece);
+		}*/
+		while(!reader.next().equals("</BOARD>"));
+		
+		while(true) {
+			try {
+				move(ChessMove.readFromStream(reader));
+			} catch (Exception e) {
+				break;
+			}
+		}
+
+		
 	}
 
 	// Lecture d'un ChessBoard à partir d'un fichier. Utilisé par les tests.
@@ -157,8 +178,7 @@ public class ChessBoard {
 		FileWriter writer = new FileWriter(file);
 		BoardMemento mem = new BoardMemento(this);
 		mem.saveToStream(writer);
-
-
+		writer.close();
 	}
 
 	@Override
@@ -224,26 +244,7 @@ public class ChessBoard {
 		{
 			ancientMoves.get(i).saveToStream(writer);
 		}
-		
-	}
-	public void loadScript(File file) throws Exception
-	{
-		Scanner reader = new Scanner(new FileReader(file));
-		ChessBoard board = new ChessBoard(200, 100);
-
-		while (true) {
-			ChessPiece piece;
-			try {
-				piece = PieceMemento.readFromStream(reader, board);
-			} catch (Exception e) {
-				break;
-			}
-			board.putPiece(piece);
-		}
-		for(int i = 0;i<ancientMoves.size();i++)
-		{
-			move(ancientMoves.get(i));
-		}
+		writer.close();
 	}
 
 }
