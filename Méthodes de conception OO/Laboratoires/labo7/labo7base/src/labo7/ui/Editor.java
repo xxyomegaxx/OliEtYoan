@@ -10,14 +10,14 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import commands.CopyCommand;
+import commands.CutCommand;
+import commands.MajCommand;
+import commands.MinCommand;
+import commands.PasteCommand;
+import commands.TwitCommand;
 import labo7.model.EditableDocument;
-import labo7.ui.buttons.CopyButton;
-import labo7.ui.buttons.CutButton;
 import labo7.ui.buttons.EditorButton;
-import labo7.ui.buttons.MajButton;
-import labo7.ui.buttons.MinButton;
-import labo7.ui.buttons.PasteButton;
-import labo7.ui.buttons.TwitButton;
 import labo7.ui.shortcuts.ShortcutManager;
 
 @SuppressWarnings("serial")
@@ -43,8 +43,17 @@ public class Editor extends JFrame{
 	
 	private EditorButton redo;
 	private EditorButton undo;
+	
+	private CutCommand cutCommand;
+	private CopyCommand copyCommand;
+	private PasteCommand pasteCommand;
+	private MajCommand majCommand;
+	private MinCommand minCommand;
+	private TwitCommand twitCommand;
 
 	public Editor(EditableDocument doc) {
+		
+		
 
 		setModel(doc);
 		setSize(800,600);
@@ -72,13 +81,14 @@ public class Editor extends JFrame{
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel,BoxLayout.Y_AXIS));
 		buttonsPanel.setMaximumSize(new Dimension(130,600));
+
 		
-		copyButton = new CopyButton("Copier",textBox,model);
-		cutButton = new CutButton("Couper",textBox,model);
-		pasteButton = new PasteButton("Coller",textBox,model);
-		majButton = new MajButton("MAJUSCULES",textBox,model);
-		minButton = new MinButton("minuscules",textBox,model);
-		twitButton = new TwitButton("Twitterize",textBox,model);		
+		copyButton = new EditorButton("Copier");	
+		cutButton = new EditorButton("Couper");		
+		pasteButton = new EditorButton("Coller");	
+		majButton = new EditorButton("MAJUSCULES");	
+		minButton = new EditorButton("minuscules");
+		twitButton = new EditorButton("Twitterize");
 		
 		buttonsPanel.add(Box.createVerticalGlue());
 		buttonsPanel.add(copyButton);
@@ -111,8 +121,8 @@ public class Editor extends JFrame{
 		JPanel controlPanel = new JPanel();
 		controlPanel.setLayout(new BoxLayout(controlPanel,BoxLayout.X_AXIS));		
 		
-		undo = new EditorButton("undo",textBox,model);
-		redo = new EditorButton("redo",textBox,model);
+		undo = new EditorButton("undo");
+		redo = new EditorButton("redo");
 		
 		insert = new EditorCheckBox("Insertion",model);
 		insert.setSelected(true);
@@ -136,5 +146,24 @@ public class Editor extends JFrame{
 	public void setModel(EditableDocument doc) {
 		model=doc;		
 	}	
+	
+	public void initCommands()
+	{
+		cutCommand = new CutCommand(model,textBox);
+		copyCommand = new CopyCommand(model,textBox);
+		pasteCommand = new PasteCommand(model,textBox);
+		majCommand = new MajCommand(model,textBox);
+		minCommand = new MinCommand(model,textBox);
+		twitCommand = new TwitCommand(model,textBox);
+		
+		copyButton.storeCommand(copyCommand);
+		cutButton.storeCommand(cutCommand);
+		pasteButton.storeCommand(pasteCommand);
+		majButton.storeCommand(majCommand);
+		minButton.storeCommand(minCommand);
+		twitButton.storeCommand(twitCommand);
+		
+		
+	}
 
 }

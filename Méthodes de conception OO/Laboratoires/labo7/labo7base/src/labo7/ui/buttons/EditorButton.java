@@ -8,27 +8,37 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
+import commands.Command;
+import commands.Invoker;
 import labo7.model.EditableDocument;
 
 
-public class EditorButton extends JButton implements ActionListener{
+public class EditorButton extends JButton implements ActionListener,Invoker{
 
 	private static final long serialVersionUID = 1L;
-	protected EditableDocument model;
-	protected JTextArea textBox;
+	private Command command = null;
 	
-	public EditorButton(String label,JTextArea area,EditableDocument doc)
+	public EditorButton(String label)
 	{
 		super(label);
 		setMaximumSize(new Dimension(120,20));
 		this.addActionListener(this);
-		textBox=area;
-		model=doc;
 	}	
 
 	@Override
 	public void actionPerformed(ActionEvent evt){
-		System.err.println("Erreur: Fonctionnalité non implantée");
+		if(command!=null)
+		{
+			command.execute();
+		}
+		
+		else System.err.println("Erreur: Fonctionnalité non implantée");
+	}
+
+	@Override
+	public void storeCommand(Command c) {
+		command = c;
+		
 	}
 
 	
