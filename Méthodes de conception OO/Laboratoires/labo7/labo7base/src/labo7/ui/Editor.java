@@ -4,6 +4,7 @@ package labo7.ui;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -18,6 +19,7 @@ import commands.PasteCommand;
 import commands.TwitCommand;
 import labo7.model.EditableDocument;
 import labo7.ui.buttons.EditorButton;
+import labo7.ui.shortcuts.KeyboardShortcut;
 import labo7.ui.shortcuts.ShortcutManager;
 
 @SuppressWarnings("serial")
@@ -162,6 +164,25 @@ public class Editor extends JFrame{
 		majButton.storeCommand(majCommand);
 		minButton.storeCommand(minCommand);
 		twitButton.storeCommand(twitCommand);
+		
+		KeyboardShortcut shorti = new KeyboardShortcut(KeyEvent.VK_C, true);
+		shorti.storeCommand(copyCommand);
+		shortcuts.addShortcut(shorti);
+		
+		
+		shorti = new KeyboardShortcut(KeyEvent.VK_V, true);
+		shorti.storeCommand(pasteCommand);
+		shortcuts.addShortcut(shorti);
+
+		shorti = new KeyboardShortcut(KeyEvent.VK_X, true);
+		shorti.storeCommand(cutCommand);
+		shortcuts.addShortcut(shorti);
+		
+		shortcuts.addShortcut(new KeyboardShortcut(KeyEvent.VK_Z, true));
+		
+		shortcuts.addShortcut(new KeyboardShortcut(KeyEvent.VK_Y, true));
+		
+		
 		
 		
 	}

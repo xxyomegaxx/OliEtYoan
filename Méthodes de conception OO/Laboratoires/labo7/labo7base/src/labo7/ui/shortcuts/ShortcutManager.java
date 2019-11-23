@@ -52,35 +52,7 @@ public class ShortcutManager implements KeyEventDispatcher {
 	 */
 	public void initManager(){
 		
-		shortcuts.add(new KeyboardShortcut(KeyEvent.VK_C, true){
-			public void activateShortcut(){
-				System.out.println("Copier!");
-			}
-		});
-		
-		shortcuts.add(new KeyboardShortcut(KeyEvent.VK_V, true){
-			public void activateShortcut(){
-				System.out.println("Coller!");
-			}
-		});
-		
-		shortcuts.add(new KeyboardShortcut(KeyEvent.VK_X, true){
-			public void activateShortcut(){
-				System.out.println("Couper!");
-			}
-		});
-		
-		shortcuts.add(new KeyboardShortcut(KeyEvent.VK_Z, true){
-			public void activateShortcut(){
-				System.out.println("Undo!");
-			}
-		});
-		
-		shortcuts.add(new KeyboardShortcut(KeyEvent.VK_Y, true){
-			public void activateShortcut(){
-				System.out.println("Redo!");
-			}
-		});		
+	
 	}
 	
 	
