@@ -6,11 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JTextArea;
 
 import commands.Command;
+import commands.EditDocumentCommand;
 import commands.Invoker;
-import labo7.model.EditableDocument;
 
 
 public class EditorButton extends JButton implements ActionListener,Invoker{

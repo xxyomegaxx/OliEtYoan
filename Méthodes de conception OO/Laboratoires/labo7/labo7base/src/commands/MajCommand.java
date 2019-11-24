@@ -3,7 +3,7 @@ package commands;
 import labo7.model.EditableDocument;
 import labo7.ui.EditorTextArea;
 
-public class MajCommand extends Command{
+public class MajCommand extends EditDocumentCommand{
 
 	public MajCommand(EditableDocument doc, EditorTextArea txt) {
 		super(doc, txt);

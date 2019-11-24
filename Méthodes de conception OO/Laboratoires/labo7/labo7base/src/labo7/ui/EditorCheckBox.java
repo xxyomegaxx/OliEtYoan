@@ -5,28 +5,30 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
 
+import commands.Command;
+import commands.Invoker;
 import labo7.model.EditableDocument;
 
-public class EditorCheckBox extends JCheckBox implements ActionListener{
+public class EditorCheckBox extends JCheckBox implements ActionListener,Invoker{
 
-	private EditableDocument model;
+	private Command command;
 
-	public EditorCheckBox(String label,EditableDocument doc) {
+	public EditorCheckBox(String label) {
 		super(label);
 		addActionListener(this);
-		model=doc;
 	}
 
 	private static final long serialVersionUID = 1L;	
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
+		command.execute();
 
-		if (isSelected()) {
-			model.enableInsert();
-		} else {
-			model.disableInsert();
-		}
+	}
+
+	@Override
+	public void storeCommand(Command c) {
+		command =c;
 	}
 
 }

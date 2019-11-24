@@ -3,7 +3,7 @@ package commands;
 import labo7.model.EditableDocument;
 import labo7.ui.EditorTextArea;
 
-public class TwitCommand extends Command{
+public class TwitCommand extends EditDocumentCommand{
 
 	public TwitCommand(EditableDocument doc, EditorTextArea txt) {
 		super(doc, txt);

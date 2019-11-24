@@ -3,6 +3,7 @@ package labo7.ui.shortcuts;
 import java.awt.event.KeyEvent;
 
 import commands.Command;
+import commands.EditDocumentCommand;
 import commands.Invoker;
 
 /*

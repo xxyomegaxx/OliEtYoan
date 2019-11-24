@@ -16,6 +16,7 @@ import commands.CutCommand;
 import commands.MajCommand;
 import commands.MinCommand;
 import commands.PasteCommand;
+import commands.ToggleInsertCommand;
 import commands.TwitCommand;
 import labo7.model.EditableDocument;
 import labo7.ui.buttons.EditorButton;
@@ -52,6 +53,7 @@ public class Editor extends JFrame{
 	private MajCommand majCommand;
 	private MinCommand minCommand;
 	private TwitCommand twitCommand;
+	private ToggleInsertCommand togInsCommand;
 
 	public Editor(EditableDocument doc) {
 		
@@ -126,7 +128,7 @@ public class Editor extends JFrame{
 		undo = new EditorButton("undo");
 		redo = new EditorButton("redo");
 		
-		insert = new EditorCheckBox("Insertion",model);
+		insert = new EditorCheckBox("Insertion");
 		insert.setSelected(true);
 		controlPanel.add(undo);
 		controlPanel.add(redo);
@@ -158,12 +160,16 @@ public class Editor extends JFrame{
 		minCommand = new MinCommand(model,textBox);
 		twitCommand = new TwitCommand(model,textBox);
 		
+		togInsCommand = new ToggleInsertCommand(insert,model);
+		
 		copyButton.storeCommand(copyCommand);
 		cutButton.storeCommand(cutCommand);
 		pasteButton.storeCommand(pasteCommand);
 		majButton.storeCommand(majCommand);
 		minButton.storeCommand(minCommand);
 		twitButton.storeCommand(twitCommand);
+		
+		insert.storeCommand(togInsCommand);
 		
 		KeyboardShortcut shorti = new KeyboardShortcut(KeyEvent.VK_C, true);
 		shorti.storeCommand(copyCommand);
@@ -181,6 +187,7 @@ public class Editor extends JFrame{
 		shortcuts.addShortcut(new KeyboardShortcut(KeyEvent.VK_Z, true));
 		
 		shortcuts.addShortcut(new KeyboardShortcut(KeyEvent.VK_Y, true));
+		
 		
 		
 		

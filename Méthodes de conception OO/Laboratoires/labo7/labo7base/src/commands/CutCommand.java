@@ -3,7 +3,7 @@ package commands;
 import labo7.model.EditableDocument;
 import labo7.ui.EditorTextArea;
 
-public class CutCommand extends Command{
+public class CutCommand extends EditDocumentCommand{
 
 	public CutCommand(EditableDocument doc, EditorTextArea txt) {
 		super(doc, txt);
