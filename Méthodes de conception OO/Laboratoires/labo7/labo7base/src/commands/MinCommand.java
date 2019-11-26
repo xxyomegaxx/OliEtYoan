@@ -5,12 +5,12 @@ import labo7.ui.EditorTextArea;
 
 public class MinCommand extends EditDocumentCommand{
 
-	public MinCommand(EditableDocument doc, EditorTextArea txt) {
-		super(doc, txt);
+	public MinCommand(EditableDocument doc, EditorTextArea txt,CommandLog com) {
+		super(doc, txt,com);
 	}
 
 	@Override
-	public void execute() {
+	public void implExecute() {
 		editDoc.minimize(editTextArea.getSelectionStart(),editTextArea.getSelectionEnd());
 		
 	}

@@ -5,12 +5,12 @@ import labo7.ui.EditorTextArea;
 
 public class CopyCommand extends EditDocumentCommand{
 
-	public CopyCommand(EditableDocument doc, EditorTextArea txt) {
-		super(doc, txt);
+	public CopyCommand(EditableDocument doc, EditorTextArea txt,CommandLog com) {
+		super(doc, txt,com);
 	}
 
 	@Override
-	public void execute() {
+	public void implExecute() {
 		editDoc.copy(editTextArea.getSelectionStart(),editTextArea.getSelectionEnd());
 		
 	}

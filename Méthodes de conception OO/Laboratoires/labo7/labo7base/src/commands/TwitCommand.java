@@ -5,12 +5,12 @@ import labo7.ui.EditorTextArea;
 
 public class TwitCommand extends EditDocumentCommand{
 
-	public TwitCommand(EditableDocument doc, EditorTextArea txt) {
-		super(doc, txt);
+	public TwitCommand(EditableDocument doc, EditorTextArea txt,CommandLog com) {
+		super(doc, txt,com);
 	}
 
 	@Override
-	public void execute() {
+	public void implExecute() {
 		if(editDoc.getText().length()>140){
 			editDoc.setText(editDoc.getText().substring(0, 140));
 		}

@@ -5,12 +5,12 @@ import labo7.ui.EditorTextArea;
 
 public class CutCommand extends EditDocumentCommand{
 
-	public CutCommand(EditableDocument doc, EditorTextArea txt) {
-		super(doc, txt);
+	public CutCommand(EditableDocument doc, EditorTextArea txt,CommandLog com) {
+		super(doc, txt,com);
 	}
 
 	@Override
-	public void execute() {
+	public void implExecute() {
 		editDoc.cut(editTextArea.getSelectionStart(),editTextArea.getSelectionEnd());
 		
 	}

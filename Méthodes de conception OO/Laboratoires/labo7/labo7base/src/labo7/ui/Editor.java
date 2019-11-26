@@ -11,6 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import commands.CommandLog;
 import commands.CopyCommand;
 import commands.CutCommand;
 import commands.MajCommand;
@@ -18,6 +19,7 @@ import commands.MinCommand;
 import commands.PasteCommand;
 import commands.ToggleInsertCommand;
 import commands.TwitCommand;
+import commands.UndoCommand;
 import labo7.model.EditableDocument;
 import labo7.ui.buttons.EditorButton;
 import labo7.ui.shortcuts.KeyboardShortcut;
@@ -54,6 +56,7 @@ public class Editor extends JFrame{
 	private MinCommand minCommand;
 	private TwitCommand twitCommand;
 	private ToggleInsertCommand togInsCommand;
+	private UndoCommand undoCommand;
 
 	public Editor(EditableDocument doc) {
 		
@@ -151,16 +154,18 @@ public class Editor extends JFrame{
 		model=doc;		
 	}	
 	
-	public void initCommands()
+	public void initCommands(CommandLog commandLog)
 	{
-		cutCommand = new CutCommand(model,textBox);
-		copyCommand = new CopyCommand(model,textBox);
-		pasteCommand = new PasteCommand(model,textBox);
-		majCommand = new MajCommand(model,textBox);
-		minCommand = new MinCommand(model,textBox);
-		twitCommand = new TwitCommand(model,textBox);
+		cutCommand = new CutCommand(model,textBox,commandLog);
+		copyCommand = new CopyCommand(model,textBox,commandLog);
+		pasteCommand = new PasteCommand(model,textBox,commandLog);
+		majCommand = new MajCommand(model,textBox,commandLog);
+		minCommand = new MinCommand(model,textBox,commandLog);
+		twitCommand = new TwitCommand(model,textBox,commandLog);
 		
 		togInsCommand = new ToggleInsertCommand(insert,model);
+		
+		undoCommand = new UndoCommand(commandLog);
 		
 		copyButton.storeCommand(copyCommand);
 		cutButton.storeCommand(cutCommand);
@@ -170,6 +175,8 @@ public class Editor extends JFrame{
 		twitButton.storeCommand(twitCommand);
 		
 		insert.storeCommand(togInsCommand);
+		
+		undo.storeCommand(undoCommand);
 		
 		KeyboardShortcut shorti = new KeyboardShortcut(KeyEvent.VK_C, true);
 		shorti.storeCommand(copyCommand);
