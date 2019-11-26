@@ -8,11 +8,13 @@ public class ChessMove {
 	
 	private Point dep;
 	private Point arr;
+	private BoardMemento boardMem;
 	
-	ChessMove(Point a,Point b)
+	ChessMove(Point a,Point b,ChessBoard board)
 	{
 		dep = a;
 		arr=b;
+		boardMem = new BoardMemento(board);
 		
 	}
 	
@@ -52,6 +54,11 @@ public class ChessMove {
 
 		return new ChessMove(moveDescription);
 
+	}
+	
+	public BoardMemento getBoardMemento()
+	{
+		return boardMem;
 	}
 
 }

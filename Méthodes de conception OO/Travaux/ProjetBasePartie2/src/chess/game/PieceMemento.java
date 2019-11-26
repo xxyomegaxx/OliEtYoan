@@ -8,7 +8,6 @@ public class PieceMemento {
 	private int type; 
 	private int color;
 	private Point pos;
-	
 	PieceMemento(ChessPiece p)
 	{
 		type = p.getType();

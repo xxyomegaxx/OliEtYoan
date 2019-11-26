@@ -40,12 +40,18 @@ public class ChessPiece {
 
 	}
 	
-	ChessPiece(PieceMemento mem)
+	ChessPiece(PieceMemento mem,ChessBoard b)
 	{
 		color=mem.getColor();
 		type = mem.getType();
 		gridPosX = mem.getPos().x;
 		gridPosY = mem.getPos().y;
+		view = new PieceView(type, color, b);
+	}
+	
+	public void clearView()
+	{
+		view = null;
 	}
 
 
@@ -151,10 +157,7 @@ public class ChessPiece {
 
 	}
 	
-	public PieceMemento createMemento()
-	{
-		return new PieceMemento(this);
-	}
+	
 	
 	public void restoreMemento()
 	{

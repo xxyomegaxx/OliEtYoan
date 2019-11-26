@@ -27,7 +27,7 @@ public class ChessGame {
 			throw new IllegalArgumentException("Badly formed move");
 		}		
 		ChessMove chessMove = new ChessMove(move);
-		board.move(chessMove);
+		board.doMove(chessMove);
 	}
 	
 
@@ -74,6 +74,17 @@ public class ChessGame {
 
 	public void saveScript(File file) throws Exception {
 		board.saveScript(file);
+		
+	}
+
+	public void redo() {
+		board.redoMove();
+
+		
+	}
+
+	public void undo() {
+		board.undoMove();
 		
 	}
 

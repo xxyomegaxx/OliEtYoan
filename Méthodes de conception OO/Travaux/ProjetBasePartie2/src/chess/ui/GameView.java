@@ -108,10 +108,19 @@ public class GameView extends Application {
 		undoButton.setLayoutX(825);
 		undoButton.setLayoutY(50);
 		gamePane.getChildren().add(undoButton);
+		
+		undoButton.setOnAction(event -> {
+			undo();
+		});
+		
 		Button redoButton = new Button("Redo");
 		redoButton.setLayoutX(900);
 		redoButton.setLayoutY(50);
 		gamePane.getChildren().add(redoButton);
+		
+		redoButton.setOnAction(event -> {
+			redo();
+		});
 
 		CheckBox editBox = new CheckBox("Edit board");
 		editBox.setLayoutX(200);
@@ -138,6 +147,16 @@ public class GameView extends Application {
 		stage.show();
 	}
 	
+	private void redo() {
+		game.redo();
+		
+	}
+
+	private void undo() {
+		game.undo();
+		
+	}
+
 	private void clearGame(){
 		if (game != null) {
 			gamePane.getChildren().remove(game.getUI());

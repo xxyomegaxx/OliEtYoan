@@ -22,10 +22,14 @@ public class ChessBoard {
 	private ChessPiece[][] grid;
 
 	private BoardView view;
-	
+
 	private ArrayList<ChessMove> ancientMoves = new ArrayList<ChessMove>();
-	
+
+	private ArrayList<ChessMove> redoMoves = new ArrayList<ChessMove>();
+
 	private static BoardMemento initialState;
+
+	// private Stack<BoardMemento>
 
 	public ChessBoard(int x, int y) {
 
@@ -36,19 +40,40 @@ public class ChessBoard {
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[i].length; j++) {
 				grid[i][j] = new ChessPiece(i, j, this);
+
 			}
 		}
 
 	}
-	
-	
-	public ChessBoard(BoardMemento mem)
-	{
-		this(200,100);
-		for(int i=0;i<mem.getSize();i++)
-		{
-			putPiece(new ChessPiece(mem.getPiece(i)));
+
+	public ChessBoard(BoardMemento mem) {
+		this(200, 100);
+		for (int i = 0; i < mem.getSize(); i++) {
+			putPiece(new ChessPiece(mem.getPiece(i), this));
 		}
+	}
+
+	public void clear() {
+
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[i].length; j++) {
+
+				Point pt = new Point(i, j);
+				if (!isEmpty(pt)) {
+					removePiece(pt);
+				}
+
+			}
+		}
+
+	}
+
+	public void loadMemento(BoardMemento mem) {
+		clear();
+		for (int i = 0; i < mem.getSize(); i++) {
+			putPiece(new ChessPiece(mem.getPiece(i), this));
+		}
+
 	}
 
 	// Place une pièce vide dans la case
@@ -88,10 +113,10 @@ public class ChessBoard {
 		Point gridPos = view.paneToGrid(pixelPos);
 
 		ChessPiece toMove = grid[gridPos.x][gridPos.y];
-		
-		ChessMove mov = new ChessMove(view.paneToGrid(pixelPos), view.paneToGrid(newPixelPos));
 
-		boolean result = move(mov);
+		ChessMove mov = new ChessMove(view.paneToGrid(pixelPos), view.paneToGrid(newPixelPos), this);
+
+		boolean result = doMove(mov);
 
 		toMove.moveUI(view.gridToPane(toMove.getGridPos()));
 
@@ -99,7 +124,7 @@ public class ChessBoard {
 	}
 
 	// Déplace une pièce sur la grille. Vérifie les règles de déplacement.
-	public boolean move(ChessMove mov) {
+	public boolean doMove(ChessMove mov) {
 
 		ChessPiece toMove = getPiece(mov.getDep());
 
@@ -111,11 +136,11 @@ public class ChessBoard {
 			return false;
 		}
 
-		if (isSameColor(mov.getDep(),mov.getArr())) {
+		if (isSameColor(mov.getDep(), mov.getArr())) {
 			return false;
 		}
 
-		if (!toMove.verifyMove(mov.getDep(),mov.getArr())) {
+		if (!toMove.verifyMove(mov.getDep(), mov.getArr())) {
 			return false;
 		}
 
@@ -124,6 +149,7 @@ public class ChessBoard {
 			// Capture!
 			removePiece(mov.getArr());
 		}
+		redoMoves.clear();
 		assignSquare(mov.getArr(), toMove);
 		clearSquare(mov.getDep());
 		ancientMoves.add(mov);
@@ -135,44 +161,35 @@ public class ChessBoard {
 	public void loadMovesFromFile(File file) throws Exception {
 		Scanner reader = new Scanner(new FileReader(file));
 
-/*		while (true) {
-			ChessPiece piece;
+		while (!reader.next().equals("</BOARD>"))
+			;
+
+		while (true) {
 			try {
-				piece = PieceMemento.readFromStream(reader, this);
-			} catch (Exception e) {
-				break;
-			}
-			putPiece(piece);
-		}*/
-		while(!reader.next().equals("</BOARD>"));
-		
-		while(true) {
-			try {
-				move(ChessMove.readFromStream(reader));
+				doMove(ChessMove.readFromStream(reader));
 			} catch (Exception e) {
 				break;
 			}
 		}
 
-		
 	}
 
 	// Lecture d'un ChessBoard à partir d'un fichier. Utilisé par les tests.
 	public static ChessBoard readFromFile(String fileName) throws Exception {
 		return readFromFile(new File(fileName), 0, 0);
 	}
-	
+
 	// Lecture d'un ChessBoard à partir d'un fichier
 	public static ChessBoard readFromFile(File file, int x, int y) throws Exception {
-		
+
 		Scanner reader = new Scanner(new FileReader(file));
 		ChessBoard retour = BoardMemento.readFromStream(reader, x, y);
 		initialState = new BoardMemento(retour);
 		return retour;
-		
+
 	}
 
-	//Sauvegarde dans un fichier.
+	// Sauvegarde dans un fichier.
 	public void saveToFile(File file) throws Exception {
 
 		FileWriter writer = new FileWriter(file);
@@ -224,27 +241,43 @@ public class ChessBoard {
 
 		return view.getPane();
 	}
-	
-	public int getLength()
-	{
+
+	public int getLength() {
 		return grid.length;
 	}
-	
-	public BoardMemento createMemento()
-	{
+
+	public BoardMemento createMemento() {
 		return new BoardMemento(this);
 	}
-	
-	public void saveScript(File file) throws Exception
-	{
+
+	public void saveScript(File file) throws Exception {
 		FileWriter writer = new FileWriter(file);
 		BoardMemento mem = new BoardMemento(this);
 		mem.saveToStream(writer);
-		for(int i=0;i<ancientMoves.size();i++)
-		{
+		for (int i = 0; i < ancientMoves.size(); i++) {
 			ancientMoves.get(i).saveToStream(writer);
 		}
 		writer.close();
+	}
+
+	public void redoMove() {
+		if (redoMoves.size() > 0) {
+
+			ChessMove temp = redoMoves.remove(redoMoves.size() - 1);
+			ancientMoves.add(new ChessMove(temp.getDep(),temp.getArr(),this));
+			loadMemento(temp.getBoardMemento());
+		}
+
+	}
+
+	public void undoMove() {
+		if (ancientMoves.size() > 0) {
+
+			ChessMove temp = ancientMoves.remove(ancientMoves.size() - 1);
+			redoMoves.add(new ChessMove(temp.getDep(),temp.getArr(),this));
+			loadMemento(temp.getBoardMemento());
+		}
+
 	}
 
 }
