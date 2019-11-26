@@ -191,7 +191,9 @@ public class Editor extends JFrame{
 		shorti.storeCommand(cutCommand);
 		shortcuts.addShortcut(shorti);
 		
-		shortcuts.addShortcut(new KeyboardShortcut(KeyEvent.VK_Z, true));
+		shorti = new KeyboardShortcut(KeyEvent.VK_Z, true);
+		shorti.storeCommand(undoCommand);
+		shortcuts.addShortcut(shorti);
 		
 		shortcuts.addShortcut(new KeyboardShortcut(KeyEvent.VK_Y, true));
 		
