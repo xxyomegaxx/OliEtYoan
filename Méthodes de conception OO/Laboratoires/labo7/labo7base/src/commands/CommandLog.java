@@ -1,14 +1,14 @@
 package commands;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class CommandLog {
 	
-	ArrayList<EditDocumentCommand> list;
+	Stack<EditDocumentCommand> list;
 	
 	public CommandLog()
 	{
-		list = new ArrayList<EditDocumentCommand>();
+		list = new Stack<EditDocumentCommand>();
 	}
 	
 	public void add(EditDocumentCommand c)
@@ -18,9 +18,8 @@ public class CommandLog {
 	
 	public EditDocumentCommand removeLast()
 	{
-		if(list.size()>0) return list.remove(list.size()-1);
+		if(list.size()>0) return list.pop();
 		else return null;
-		
 	}
 	
 
