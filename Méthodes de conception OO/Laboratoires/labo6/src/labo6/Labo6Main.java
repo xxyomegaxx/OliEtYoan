@@ -33,7 +33,7 @@ public class Labo6Main extends JFrame {
 	private Gender userGender = Gender.male;
 	private Session session;
 
-	String sessionType = Session.TROLL_SESSION;
+	String sessionType = Session.SEDUCTION_SESSION;
 	
 	public Labo6Main(String[] args) {
 
