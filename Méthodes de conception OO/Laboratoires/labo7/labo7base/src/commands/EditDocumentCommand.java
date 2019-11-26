@@ -27,7 +27,7 @@ public abstract class EditDocumentCommand extends Command implements Cloneable {
 		savedText = editDoc.getText();
 		implExecute();
 		String newText = editDoc.getText();
-		if(savedText!=newText)
+		if(!savedText.equals(newText))
 		{
 			commandLog.add(clone());
 		}
