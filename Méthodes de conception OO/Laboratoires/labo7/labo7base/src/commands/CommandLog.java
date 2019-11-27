@@ -13,12 +13,15 @@ public class CommandLog {
 	
 	public void add(EditDocumentCommand c)
 	{
-		list.add(c);
+		list.push(c);
 	}
 	
 	public EditDocumentCommand removeLast()
 	{
-		if(list.size()>0) return list.pop();
+		System.out.println(list);
+		if(list.size()>0) {
+			return list.pop();
+		}
 		else return null;
 	}
 	

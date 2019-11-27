@@ -1,6 +1,5 @@
 package labo7.ui;
 
-
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.KeyboardFocusManager;
@@ -11,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import commands.CommandFactory;
 import commands.CommandLog;
 import commands.CopyCommand;
 import commands.CutCommand;
@@ -26,15 +26,12 @@ import labo7.ui.shortcuts.KeyboardShortcut;
 import labo7.ui.shortcuts.ShortcutManager;
 
 @SuppressWarnings("serial")
-public class Editor extends JFrame{
+public class Editor extends JFrame {
 
-	
 	private EditableDocument model;
-	
-	
+
 	private ShortcutManager shortcuts;
 
-	
 	private EditorLabel charCount;
 	private EditorCheckBox insert;
 	private EditorTextArea textBox;
@@ -44,145 +41,139 @@ public class Editor extends JFrame{
 	private EditorButton minButton;
 	private EditorButton twitButton;
 	private EditorButton majButton;
-	
-	
+
 	private EditorButton redo;
 	private EditorButton undo;
-	
+
+	private CommandFactory commandFactory;
+
 	private CutCommand cutCommand;
 	private CopyCommand copyCommand;
 	private PasteCommand pasteCommand;
 	private MajCommand majCommand;
 	private MinCommand minCommand;
 	private TwitCommand twitCommand;
-	private ToggleInsertCommand togInsCommand;
+	private ToggleInsertCommand togInsertCommand;
 	private UndoCommand undoCommand;
 
 	public Editor(EditableDocument doc) {
-		
-		
 
 		setModel(doc);
-		setSize(800,600);
-		setTitle("TwitEdit");		
+		setSize(800, 600);
+		setTitle("TwitEdit");
 
-		
-		Font font =new Font("Arial",Font.BOLD,20);
+		Font font = new Font("Arial", Font.BOLD, 20);
 		JPanel background = new JPanel();
-		background.setLayout(new BoxLayout(background ,BoxLayout.X_AXIS));
-		
-		//Boîte de texte
-		textBox= new EditorTextArea(500, 400,model);
-		textBox.setFont(font);	
+		background.setLayout(new BoxLayout(background, BoxLayout.X_AXIS));
+
+		// Boï¿½te de texte
+		textBox = new EditorTextArea(500, 400, model);
+		textBox.setFont(font);
 		textBox.setLineWrap(true);
 		textBox.setWrapStyleWord(true);
-		
-		//Gestionnaire de clavier pour les raccourcis
-		shortcuts= new ShortcutManager(); 
+
+		// Gestionnaire de clavier pour les raccourcis
+		shortcuts = new ShortcutManager();
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(shortcuts);
-		
-		
+
 		/*
 		 * Initialisation du panneau contenant les boutons
-		 */		
+		 */
 		JPanel buttonsPanel = new JPanel();
-		buttonsPanel.setLayout(new BoxLayout(buttonsPanel,BoxLayout.Y_AXIS));
-		buttonsPanel.setMaximumSize(new Dimension(130,600));
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
+		buttonsPanel.setMaximumSize(new Dimension(130, 600));
 
-		
-		copyButton = new EditorButton("Copier");	
-		cutButton = new EditorButton("Couper");		
-		pasteButton = new EditorButton("Coller");	
-		majButton = new EditorButton("MAJUSCULES");	
+		copyButton = new EditorButton("Copier");
+		cutButton = new EditorButton("Couper");
+		pasteButton = new EditorButton("Coller");
+		majButton = new EditorButton("MAJUSCULES");
 		minButton = new EditorButton("minuscules");
 		twitButton = new EditorButton("Twitterize");
-		
+
 		buttonsPanel.add(Box.createVerticalGlue());
 		buttonsPanel.add(copyButton);
 		buttonsPanel.add(cutButton);
 		buttonsPanel.add(pasteButton);
 		buttonsPanel.add(majButton);
 		buttonsPanel.add(minButton);
-		buttonsPanel.add(twitButton);			
+		buttonsPanel.add(twitButton);
 		buttonsPanel.add(Box.createVerticalGlue());
-		
-		background.add(buttonsPanel);				
+
+		background.add(buttonsPanel);
 		background.add(Box.createHorizontalGlue());
-		
-		
+
 		/*
-		 * Initialisation du panneau contenant la boîte de texte et les autres contrôles
-		 */		
+		 * Initialisation du panneau contenant la boï¿½te de texte et les autres contrï¿½les
+		 */
 		JPanel textPanel = new JPanel();
-		textPanel.setLayout(new BoxLayout(textPanel,BoxLayout.Y_AXIS));			
-			
-	
-		//Compteur de caractères
-		charCount=new EditorLabel();
+		textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+
+		// Compteur de caractï¿½res
+		charCount = new EditorLabel();
 		charCount.setModel(model);
 		charCount.setFont(font);
 		textPanel.add(charCount);
 		textPanel.add(textBox);
-	
-		//Panneau avec undo, redo et insere
+
+		// Panneau avec undo, redo et insere
 		JPanel controlPanel = new JPanel();
-		controlPanel.setLayout(new BoxLayout(controlPanel,BoxLayout.X_AXIS));		
-		
+		controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
+
 		undo = new EditorButton("undo");
 		redo = new EditorButton("redo");
-		
+
 		insert = new EditorCheckBox("Insertion");
 		insert.setSelected(true);
 		controlPanel.add(undo);
 		controlPanel.add(redo);
 		controlPanel.add(insert);
-		
-		textPanel.add(controlPanel);		
-		background.add(textPanel);		
-		
-		
-		//Ajout du panneau principal dans le frame
-		add(background);		
-		
-		//Préparations finales
+
+		textPanel.add(controlPanel);
+		background.add(textPanel);
+
+		// Ajout du panneau principal dans le frame
+		add(background);
+
+		// Prï¿½parations finales
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
-	
+
 	public void setModel(EditableDocument doc) {
-		model=doc;		
-	}	
-	
-	public void initCommands(CommandLog commandLog)
-	{
-		cutCommand = new CutCommand(model,textBox,commandLog);
-		copyCommand = new CopyCommand(model,textBox,commandLog);
-		pasteCommand = new PasteCommand(model,textBox,commandLog);
-		majCommand = new MajCommand(model,textBox,commandLog);
-		minCommand = new MinCommand(model,textBox,commandLog);
-		twitCommand = new TwitCommand(model,textBox,commandLog);
-		
-		togInsCommand = new ToggleInsertCommand(insert,model);
-		
-		undoCommand = new UndoCommand(commandLog);
-		
+		model = doc;
+	}
+
+	public void initCommands() {
+
+		commandFactory = CommandFactory.getInstance(model, textBox, insert);
+
+		cutCommand = commandFactory.createCutCommand();
+		copyCommand = commandFactory.createCopyCommand();
+		pasteCommand = commandFactory.createPasteCommand();
+		majCommand = commandFactory.createMajCommand();
+		minCommand = commandFactory.createMinCommand();
+		twitCommand = commandFactory.createTwitCommand();
+
+		togInsertCommand = commandFactory.createToggleInsertCommand();
+
+		undoCommand = commandFactory.createUndoCommand();
+
 		copyButton.storeCommand(copyCommand);
 		cutButton.storeCommand(cutCommand);
 		pasteButton.storeCommand(pasteCommand);
 		majButton.storeCommand(majCommand);
 		minButton.storeCommand(minCommand);
 		twitButton.storeCommand(twitCommand);
-		
-		insert.storeCommand(togInsCommand);
-		
+
+		insert.storeCommand(togInsertCommand);
+
 		undo.storeCommand(undoCommand);
-		
+
 		KeyboardShortcut shorti = new KeyboardShortcut(KeyEvent.VK_C, true);
 		shorti.storeCommand(copyCommand);
 		shortcuts.addShortcut(shorti);
-		
-		
+
 		shorti = new KeyboardShortcut(KeyEvent.VK_V, true);
 		shorti.storeCommand(pasteCommand);
 		shortcuts.addShortcut(shorti);
@@ -190,17 +181,13 @@ public class Editor extends JFrame{
 		shorti = new KeyboardShortcut(KeyEvent.VK_X, true);
 		shorti.storeCommand(cutCommand);
 		shortcuts.addShortcut(shorti);
-		
+
 		shorti = new KeyboardShortcut(KeyEvent.VK_Z, true);
 		shorti.storeCommand(undoCommand);
 		shortcuts.addShortcut(shorti);
-		
+
 		shortcuts.addShortcut(new KeyboardShortcut(KeyEvent.VK_Y, true));
-		
-		
-		
-		
-		
+
 	}
 
 }

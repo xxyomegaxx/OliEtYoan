@@ -7,8 +7,8 @@ import commands.EditDocumentCommand;
 import commands.Invoker;
 
 /*
- * Classe définissant un raccourci clavier.
- * Prévoit une méthode à être appelée lorsque le raccourci est déclenché.
+ * Classe dï¿½finissant un raccourci clavier.
+ * Prï¿½voit une mï¿½thode ï¿½ ï¿½tre appelï¿½e lorsque le raccourci est dï¿½clenchï¿½.
  */
 
 public class KeyboardShortcut implements Invoker {
@@ -37,7 +37,7 @@ public class KeyboardShortcut implements Invoker {
 		}
 
 		else
-			System.err.println("Erreur: Fonctionnalité non implantée");
+			System.err.println("Erreur: Fonctionnalitï¿½ non implantï¿½e");
 	}
 
 	@Override
