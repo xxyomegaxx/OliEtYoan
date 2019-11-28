@@ -17,4 +17,10 @@ public class TwitCommand extends EditDocumentCommand{
 		
 	}
 
+	@Override
+	protected void saveState() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -25,6 +25,7 @@ public abstract class EditDocumentCommand extends Command implements Cloneable {
 	public void execute()
 	{
 		savedText = editDoc.getText();
+		saveState();
 		implExecute();
 		String newText = editDoc.getText();
 		if(!savedText.equals(newText))
@@ -32,8 +33,6 @@ public abstract class EditDocumentCommand extends Command implements Cloneable {
 			commandLog.add(clone());
 		}
 	}
-
-	protected abstract void implExecute();
 
 	public EditDocumentCommand clone() {
 		try {
@@ -43,5 +42,9 @@ public abstract class EditDocumentCommand extends Command implements Cloneable {
 			throw new RuntimeException();
 		}
 	}
+	
+	protected abstract void implExecute();
+	protected abstract void saveState();
+
 
 }

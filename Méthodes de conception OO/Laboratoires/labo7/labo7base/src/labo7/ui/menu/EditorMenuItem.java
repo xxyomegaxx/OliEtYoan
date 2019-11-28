@@ -2,26 +2,37 @@ package labo7.ui.menu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import commands.Invoker;
 
 import javax.swing.JMenuItem;
 import javax.swing.JTextArea;
 
+import commands.Command;
 import labo7.model.EditableDocument;
 
-public abstract class EditorMenuItem extends JMenuItem implements ActionListener {
+public class EditorMenuItem extends JMenuItem implements Invoker, ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	protected EditableDocument model;
 	protected JTextArea textBox;
+	private Command command;
 
-	public EditorMenuItem(String label,EditableDocument doc,JTextArea txt){
+	public EditorMenuItem(String label, EditableDocument doc, JTextArea txt) {
 		super(label);
-		model=doc;
-		textBox=txt;
+		model = doc;
+		textBox = txt;
 		addActionListener(this);
 	}
 
 	@Override
-	public abstract void actionPerformed(ActionEvent evt);
+	public void storeCommand(Command c) {
+		command = c;
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		command.execute();
+	}
 
 }

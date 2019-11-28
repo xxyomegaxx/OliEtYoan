@@ -3,9 +3,9 @@ package labo7.model;
 import java.util.ArrayList;
 
 /*
- * Représente le modèle sur lequel l'interface veut faire des modifications.
- * Le modèle est actuellement un document de texte simple avec un presse-papiers
- * (clipboard) et un mode d'insertion (lorsqu'on colle, on écrase ou non?)
+ * Reprï¿½sente le modï¿½le sur lequel l'interface veut faire des modifications.
+ * Le modï¿½le est actuellement un document de texte simple avec un presse-papiers
+ * (clipboard) et un mode d'insertion (lorsqu'on colle, on ï¿½crase ou non?)
  * Le document est observable, par des DocumentObserver. C'est un lien 
  * observateur de type pull (l'observateur doit questionner la source).
  */
@@ -77,6 +77,10 @@ public class EditableDocument {
 	public void setText(String newVal) {
 		text = newVal;
 		notifyObservers();
+	}
+	
+	public String getClipBoard() {
+		return clipBoard;
 	}
 
 }

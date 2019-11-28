@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import commands.Command;
-import commands.EditDocumentCommand;
 import commands.Invoker;
 
 
@@ -31,7 +30,7 @@ public class EditorButton extends JButton implements ActionListener,Invoker{
 			command.execute();
 		}
 		
-		else System.err.println("Erreur: Fonctionnalité non implantée");
+		else System.err.println("Erreur: Fonctionnalitï¿½ non implantï¿½e");
 	}
 
 	@Override

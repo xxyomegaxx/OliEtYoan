@@ -22,6 +22,7 @@ import commands.TwitCommand;
 import commands.UndoCommand;
 import labo7.model.EditableDocument;
 import labo7.ui.buttons.EditorButton;
+import labo7.ui.menu.EditorMenuItem;
 import labo7.ui.shortcuts.KeyboardShortcut;
 import labo7.ui.shortcuts.ShortcutManager;
 
@@ -32,9 +33,12 @@ public class Editor extends JFrame {
 
 	private ShortcutManager shortcuts;
 
+//	private EditorMenuItem menuItem;
+
 	private EditorLabel charCount;
 	private EditorCheckBox insert;
 	private EditorTextArea textBox;
+
 	private EditorButton copyButton;
 	private EditorButton cutButton;
 	private EditorButton pasteButton;
@@ -145,8 +149,9 @@ public class Editor extends JFrame {
 	}
 
 	public void initCommands() {
-
-		commandFactory = CommandFactory.getInstance(model, textBox, insert);
+		
+		CommandFactory.initFactory(model, textBox, insert);
+		commandFactory = CommandFactory.getInstance();
 
 		cutCommand = commandFactory.createCutCommand();
 		copyCommand = commandFactory.createCopyCommand();

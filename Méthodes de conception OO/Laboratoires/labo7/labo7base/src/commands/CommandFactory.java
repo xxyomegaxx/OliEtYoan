@@ -8,73 +8,126 @@ public class CommandFactory {
 
 	private static CommandFactory INSTANCE = null;
 
-	private CommandLog commandLog = new CommandLog();
+	private static CommandLog commandLog = new CommandLog();
 
-	private EditableDocument doc;
-	private EditorTextArea txt;
+	private static EditableDocument doc;
+	private static EditorTextArea txt;
 
-	private EditorCheckBox box;
+	private static EditorCheckBox box;
 
-	private CopyCommand copyCommand;
-	private CutCommand cutCommand;
-	private MajCommand majCommand;
-	private MinCommand minCommand;
-	private PasteCommand pasteCommand;
-	private ToggleInsertCommand toggleInsertCommand;
-	private TwitCommand twitCommand;
-	private UndoCommand undoCommand;
+	private CopyCommand copyCommand = null;
+	private CutCommand cutCommand = null;
+	private MajCommand majCommand = null;
+	private MinCommand minCommand = null;
+	private PasteCommand pasteCommand = null;
+	private ToggleInsertCommand toggleInsertCommand = null;
+	private TwitCommand twitCommand = null;
+	private UndoCommand undoCommand = null;
 
-	private CommandFactory(EditableDocument d,EditorTextArea t,EditorCheckBox b) {
+	private CommandFactory(EditableDocument d, EditorTextArea t, EditorCheckBox b) {
 		doc = d;
 		txt = t;
 		box = b;
 	}
 
-	public static synchronized CommandFactory getInstance(EditableDocument d,EditorTextArea t,EditorCheckBox b) {
+	public static void initFactory(EditableDocument d, EditorTextArea t, EditorCheckBox b) {
+		doc = d;
+		txt = t;
+		box = b;
+
+	}
+
+	public static synchronized CommandFactory getInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new CommandFactory(d, t, b);
+			INSTANCE = new CommandFactory(doc, txt, box);
 		}
 		return INSTANCE;
 	}
+	
+	public CommandLog getCommandLog() {
+		return commandLog;
+	}
 
 	public CopyCommand createCopyCommand() {
-		copyCommand = new CopyCommand(doc, txt, commandLog);
-		return copyCommand;
+		if (copyCommand == null) {
+			return copyCommand = new CopyCommand(doc, txt, commandLog);
+		} else {
+			return copyCommand;
+		}
+
 	}
 
 	public PasteCommand createPasteCommand() {
-		pasteCommand = new PasteCommand(doc, txt, commandLog);
-		return pasteCommand;
+		if (pasteCommand == null) {
+			return pasteCommand = new PasteCommand(doc, txt, commandLog);
+
+		} else {
+			return pasteCommand;
+		}
+
 	}
 
 	public CutCommand createCutCommand() {
-		cutCommand = new CutCommand(doc, txt, commandLog);
-		return cutCommand;
+		if (cutCommand == null) {
+			return cutCommand = new CutCommand(doc, txt, commandLog);
+
+		} else {
+			return cutCommand;
+
+		}
 	}
 
 	public MajCommand createMajCommand() {
-		majCommand = new MajCommand(doc, txt, commandLog);
-		return majCommand;
+		if (majCommand == null) {
+			return majCommand = new MajCommand(doc, txt, commandLog);
+
+		} else {
+			return majCommand;
+
+		}
 	}
 
 	public MinCommand createMinCommand() {
-		minCommand = new MinCommand(doc, txt, commandLog);
-		return minCommand;
+		if (minCommand == null) {
+			return minCommand = new MinCommand(doc, txt, commandLog);
+
+		} else {
+			return minCommand;
+		}
 	}
 
 	public ToggleInsertCommand createToggleInsertCommand() {
-		toggleInsertCommand = new ToggleInsertCommand(box,doc);
-		return toggleInsertCommand;
+		if (toggleInsertCommand == null) {
+			return toggleInsertCommand = new ToggleInsertCommand(box, doc);
+
+		} else {
+			return toggleInsertCommand;
+
+		}
 	}
-	
+
 	public TwitCommand createTwitCommand() {
-		twitCommand = new TwitCommand(doc,txt,commandLog);
-		return twitCommand;
+		if (twitCommand == null) {
+			return twitCommand = new TwitCommand(doc, txt, commandLog);
+
+		} else {
+			return twitCommand;
+
+		}
 	}
-	
+
 	public UndoCommand createUndoCommand() {
-		undoCommand = new UndoCommand(commandLog);
-		return undoCommand;
+		if (undoCommand == null) {
+			return undoCommand = new UndoCommand(commandLog);
+
+		} else {
+			return undoCommand;
+
+		}
 	}
+
+//	public RedoCommand createRedoCommand() {
+//		
+//	}
 
 }

@@ -3,27 +3,29 @@ package commands;
 import java.util.Stack;
 
 public class CommandLog {
-	
-	Stack<EditDocumentCommand> list;
-	
-	public CommandLog()
-	{
-		list = new Stack<EditDocumentCommand>();
+
+	Stack<EditDocumentCommand> undolist;
+	Stack<EditDocumentCommand> redolist;
+
+	public CommandLog() {
+		undolist = new Stack<EditDocumentCommand>();
+		redolist = new Stack<EditDocumentCommand>();
+	}
+
+	public void add(EditDocumentCommand c) {
+		undolist.push(c);
+	}
+
+	public EditDocumentCommand removeLast() {
+		System.out.println(undolist);
+		if (undolist.size() > 0) {
+			return undolist.pop();
+		} else
+			return null;
 	}
 	
-	public void add(EditDocumentCommand c)
-	{
-		list.push(c);
+	public Stack<EditDocumentCommand> getUndolist() {
+		return undolist;
 	}
-	
-	public EditDocumentCommand removeLast()
-	{
-		System.out.println(list);
-		if(list.size()>0) {
-			return list.pop();
-		}
-		else return null;
-	}
-	
 
 }

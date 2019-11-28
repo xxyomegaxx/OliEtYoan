@@ -15,4 +15,10 @@ public class CopyCommand extends EditDocumentCommand{
 		
 	}
 
+	@Override
+	protected void saveState() {
+		editDoc.copy(editTextArea.getSelectionStart(),editTextArea.getSelectionEnd());
+		
+	}
+
 }
