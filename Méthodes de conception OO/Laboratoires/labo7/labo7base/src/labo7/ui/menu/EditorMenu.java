@@ -1,7 +1,5 @@
 package labo7.ui.menu;
 
-import java.awt.event.ActionEvent;
-
 import javax.swing.JPopupMenu;
 
 import commands.CommandFactory;
@@ -10,6 +8,7 @@ import commands.CopyCommand;
 import commands.MajCommand;
 import commands.MinCommand;
 import commands.PasteCommand;
+import commands.RedoCommand;
 import commands.UndoCommand;
 import labo7.model.EditableDocument;
 import labo7.ui.EditorTextArea;
@@ -36,11 +35,12 @@ public class EditorMenu extends JPopupMenu {
 		
 		CommandLog command = CommandFactory.getInstance().getCommandLog();
 		UndoCommand undo = CommandFactory.getInstance().createUndoCommand();
+		RedoCommand redo = CommandFactory.getInstance().createRedoCommand();
 		
 
 		EditorMenuItem menuItem = null;
 
-		System.out.println(command.getUndolist());
+		System.out.println(command.getCommandList());
 		
 		if (textArea.getSelectionStart() != textArea.getSelectionEnd()) {
 
@@ -70,11 +70,18 @@ public class EditorMenu extends JPopupMenu {
 		}
 		
 		
-		if(command.getUndolist().size() != 0) {
+		if(command.getCommandList().size() != 0) {
 			this.add(menuItem = new EditorMenuItem("Undo", editableDoc, textArea) {
 				
 			});
 			menuItem.storeCommand(undo);
+		}
+		
+		if(command.hasRedoCommands()) {
+			this.add(menuItem = new EditorMenuItem("Redo", editableDoc, textArea) {
+				
+			});
+			menuItem.storeCommand(redo);
 		}
 		return menuItem;
 		

@@ -37,8 +37,13 @@ public class CommandLog {
 
 	}
 
-	public ArrayList<EditDocumentCommand> getUndolist() {
+	public ArrayList<EditDocumentCommand> getCommandList() {
 		return commandList;
+	}
+	
+	public boolean hasRedoCommands() {
+		boolean retour = commandList.size() !=  lastCommand;
+		return retour;
 	}
 
 	public void trim() {
