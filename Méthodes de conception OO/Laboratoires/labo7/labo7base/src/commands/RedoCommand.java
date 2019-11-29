@@ -14,12 +14,6 @@ public class RedoCommand extends Command {
 	@Override
 	public void execute() {
 		
-		EditDocumentCommand c = commandLog.removeLast();
-		if (c != null) {
-
-			c.undo();
-
-		}
 		
 	}
 

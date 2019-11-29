@@ -11,12 +11,7 @@ public class UndoCommand extends Command {
 	@Override
 	public void execute() {
 
-		EditDocumentCommand c = commandLog.removeLast();
-		if (c != null) {
-
-			c.undo();
-
-		}
+		commandLog.undo();
 
 	}
 

@@ -1,31 +1,35 @@
 package commands;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class CommandLog {
 
-	Stack<EditDocumentCommand> undolist;
-	Stack<EditDocumentCommand> redolist;
+	ArrayList<EditDocumentCommand> commandList;
+	int lastCommand= 0;
 
 	public CommandLog() {
-		undolist = new Stack<EditDocumentCommand>();
-		redolist = new Stack<EditDocumentCommand>();
+		commandList = new ArrayList<EditDocumentCommand>();
 	}
 
 	public void add(EditDocumentCommand c) {
-		undolist.push(c);
+		commandList.add(c);
+		lastCommand++;
 	}
 
-	public EditDocumentCommand removeLast() {
-		System.out.println(undolist);
-		if (undolist.size() > 0) {
-			return undolist.pop();
-		} else
-			return null;
+	public void undo() {
+		
+		if(lastCommand > 0)
+		{
+			lastCommand--;
+			
+			commandList.get(lastCommand).undo();
+		}
+		
 	}
 	
-	public Stack<EditDocumentCommand> getUndolist() {
-		return undolist;
+	public ArrayList<EditDocumentCommand> getUndolist() {
+		return commandList;
 	}
 
 }
