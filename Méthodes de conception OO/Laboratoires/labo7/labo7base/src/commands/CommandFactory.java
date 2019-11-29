@@ -24,6 +24,7 @@ public class CommandFactory {
 	private TwitCommand twitCommand = null;
 	private UndoCommand undoCommand = null;
 	private RedoCommand redoCommand = null;
+	private EditTextCommand editTextCommand = null;
 
 	private CommandFactory(EditableDocument d, EditorTextArea t, EditorCheckBox b) {
 		doc = d;
@@ -132,6 +133,16 @@ public class CommandFactory {
 
 		} else {
 			return redoCommand;
+
+		}
+	}
+	
+	public EditTextCommand createEditTextCommand() {
+		if (editTextCommand == null) {
+			return editTextCommand = new EditTextCommand(doc, txt, commandLog);
+
+		} else {
+			return editTextCommand;
 
 		}
 	}

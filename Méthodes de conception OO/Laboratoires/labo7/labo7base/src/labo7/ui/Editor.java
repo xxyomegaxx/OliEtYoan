@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import commands.CommandFactory;
 import commands.CopyCommand;
 import commands.CutCommand;
+import commands.EditTextCommand;
 import commands.MajCommand;
 import commands.MinCommand;
 import commands.PasteCommand;
@@ -59,6 +60,8 @@ public class Editor extends JFrame {
 	private ToggleInsertCommand togInsertCommand;
 	private UndoCommand undoCommand;
 	private RedoCommand redoCommand;
+	
+	private EditTextCommand editTextCommand;
 
 	public Editor(EditableDocument doc) {
 
@@ -164,6 +167,10 @@ public class Editor extends JFrame {
 
 		undoCommand = commandFactory.createUndoCommand();
 		redoCommand = commandFactory.createRedoCommand();
+		
+		editTextCommand = commandFactory.createEditTextCommand();
+		
+		textBox.storeCommand(editTextCommand);
 
 		copyButton.storeCommand(copyCommand);
 		cutButton.storeCommand(cutCommand);
