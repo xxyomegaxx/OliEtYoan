@@ -23,6 +23,7 @@ public class CommandFactory {
 	private ToggleInsertCommand toggleInsertCommand = null;
 	private TwitCommand twitCommand = null;
 	private UndoCommand undoCommand = null;
+	private RedoCommand redoCommand = null;
 
 	private CommandFactory(EditableDocument d, EditorTextArea t, EditorCheckBox b) {
 		doc = d;
@@ -122,6 +123,15 @@ public class CommandFactory {
 
 		} else {
 			return undoCommand;
+
+		}
+	}
+	public RedoCommand createRedoCommand() {
+		if (redoCommand == null) {
+			return redoCommand = new RedoCommand(commandLog);
+
+		} else {
+			return redoCommand;
 
 		}
 	}

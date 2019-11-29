@@ -11,18 +11,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import commands.CommandFactory;
-import commands.CommandLog;
 import commands.CopyCommand;
 import commands.CutCommand;
 import commands.MajCommand;
 import commands.MinCommand;
 import commands.PasteCommand;
+import commands.RedoCommand;
 import commands.ToggleInsertCommand;
 import commands.TwitCommand;
 import commands.UndoCommand;
 import labo7.model.EditableDocument;
 import labo7.ui.buttons.EditorButton;
-import labo7.ui.menu.EditorMenuItem;
 import labo7.ui.shortcuts.KeyboardShortcut;
 import labo7.ui.shortcuts.ShortcutManager;
 
@@ -59,6 +58,7 @@ public class Editor extends JFrame {
 	private TwitCommand twitCommand;
 	private ToggleInsertCommand togInsertCommand;
 	private UndoCommand undoCommand;
+	private RedoCommand redoCommand;
 
 	public Editor(EditableDocument doc) {
 
@@ -163,6 +163,7 @@ public class Editor extends JFrame {
 		togInsertCommand = commandFactory.createToggleInsertCommand();
 
 		undoCommand = commandFactory.createUndoCommand();
+		redoCommand = commandFactory.createRedoCommand();
 
 		copyButton.storeCommand(copyCommand);
 		cutButton.storeCommand(cutCommand);
@@ -174,6 +175,7 @@ public class Editor extends JFrame {
 		insert.storeCommand(togInsertCommand);
 
 		undo.storeCommand(undoCommand);
+		redo.storeCommand(redoCommand);
 
 		KeyboardShortcut shorti = new KeyboardShortcut(KeyEvent.VK_C, true);
 		shorti.storeCommand(copyCommand);
@@ -191,7 +193,9 @@ public class Editor extends JFrame {
 		shorti.storeCommand(undoCommand);
 		shortcuts.addShortcut(shorti);
 
-		shortcuts.addShortcut(new KeyboardShortcut(KeyEvent.VK_Y, true));
+		shorti = new KeyboardShortcut(KeyEvent.VK_Y, true);
+		shorti.storeCommand(redoCommand);
+		shortcuts.addShortcut(shorti);
 
 	}
 

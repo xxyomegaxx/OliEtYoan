@@ -13,7 +13,7 @@ public class RedoCommand extends Command {
 	
 	@Override
 	public void execute() {
-		
+		commandLog.redo();
 		
 	}
 

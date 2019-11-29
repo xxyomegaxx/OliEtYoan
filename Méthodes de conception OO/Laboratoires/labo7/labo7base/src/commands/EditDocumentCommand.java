@@ -8,7 +8,8 @@ public abstract class EditDocumentCommand extends Command implements Cloneable {
 	EditableDocument editDoc;
 	EditorTextArea editTextArea;
 	CommandLog commandLog;
-	String savedText = "";
+	String oldText = "";
+	String newText = "";
 
 	public EditDocumentCommand(EditableDocument doc, EditorTextArea txt,CommandLog com) {
 		editDoc = doc;
@@ -18,17 +19,22 @@ public abstract class EditDocumentCommand extends Command implements Cloneable {
 	
 	public void undo()
 	{
-		editDoc.setText(savedText);
+		editDoc.setText(oldText);
+	}
+	public void redo()
+	{
+		editDoc.setText(newText);
 	}
 	
 	@Override
 	public void execute()
 	{
-		savedText = editDoc.getText();
+		commandLog.trim();
+		oldText = editDoc.getText();
 		saveState();
 		implExecute();
-		String newText = editDoc.getText();
-		if(!savedText.equals(newText))
+		newText = editDoc.getText();
+		if(!oldText.equals(newText))
 		{
 			commandLog.add(clone());
 		}
