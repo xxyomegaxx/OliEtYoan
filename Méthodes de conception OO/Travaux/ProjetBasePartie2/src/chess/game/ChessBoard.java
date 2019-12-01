@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import chess.rules.ChessRule;
 import chess.ui.BoardView;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -70,8 +71,7 @@ public class ChessBoard {
 		clear();
 		ChessRule rule;
 		for (int i = 0; i < mem.getSize(); i++) {
-			rule = new ChessRule(mem.getPiece(i));
-			putPiece(new ChessPiece(mem.getPiece(i),rule, this));
+			putPiece(new ChessPiece(mem.getPiece(i), this));
 		}
 
 	}

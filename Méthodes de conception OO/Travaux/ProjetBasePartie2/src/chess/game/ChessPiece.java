@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.io.Writer;
 import java.util.Scanner;
 
+import chess.rules.ChessRule;
 import chess.ui.PieceView;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
@@ -28,30 +29,35 @@ public class ChessPiece {
 		this.color = ChessUtils.COLORLESS;
 		gridPosX = x;
 		gridPosY = y;
+		
+		rule = new InvalidRule();
 
 	}
 
 	// Création d'une pièce normale. La position algébrique en notation d'échecs
 	// lui donne sa position sur la grille.
-	public ChessPiece(String name, String pos,ChessRule r, ChessBoard b) {
-		rule =r;
+	public ChessPiece(String name, String pos, ChessBoard b) {
+
 
 		color = ChessUtils.getColor(name);
 		type = ChessUtils.getType(name);
 		view = new PieceView(type, color, b);
 
 		setAlgebraicPos(pos);
+		
+		rule = ChessRule.createRulesForPiece(this);
 
 	}
 	
-	ChessPiece(PieceMemento mem,ChessRule r,ChessBoard b)
+	ChessPiece(PieceMemento mem,ChessBoard b)
 	{
-		rule = r;
 		color=mem.getColor();
 		type = mem.getType();
 		gridPosX = mem.getPos().x;
 		gridPosY = mem.getPos().y;
 		view = new PieceView(type, color, b);
+		
+		rule= ChessRule.createRulesForPiece(this);
 	}
 
 	// Règles de mouvements

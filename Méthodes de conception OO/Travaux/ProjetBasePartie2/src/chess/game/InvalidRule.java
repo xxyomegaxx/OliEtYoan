@@ -4,15 +4,10 @@ import java.awt.Point;
 
 import javax.xml.crypto.NoSuchMechanismException;
 
+import chess.rules.ChessRule;
+
 public class InvalidRule extends ChessRule {
 	
-	public InvalidRule(PieceMemento piece) {
-		super(piece);
-	}
-
-	public InvalidRule() {
-		super(ChessUtils.TYPE_NONE,ChessUtils.COLORLESS);
-	}
 
 	@Override
 	public boolean veriyMove(Point gridPos, Point newGridPos) {

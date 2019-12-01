@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.io.Writer;
 import java.util.Scanner;
 
+import chess.rules.ChessRule;
+
 public class PieceMemento {
 	private int type; 
 	private int color;
@@ -34,7 +36,7 @@ public class PieceMemento {
 			throw new IllegalArgumentException("Badly formed Chess Piece description: " + pieceDescription);
 		}
 
-		return new ChessPiece(pieceDescription.substring(3, 5), pieceDescription.substring(0, 2),new ChessRule(ChessUtils.getType(pieceDescription.substring(3, 5)),ChessUtils.getColor(pieceDescription.substring(3, 5))), b);
+		return new ChessPiece(pieceDescription.substring(3, 5), pieceDescription.substring(0, 2), b);
 
 	}
 	
