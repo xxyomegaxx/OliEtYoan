@@ -16,11 +16,14 @@ public class ChessPiece {
 
 	private int type;
 	private int color;
+	
+	ChessRule rule;
 
 	private PieceView view;
 
 	// Pour créer des pièces à mettre sur les cases vides
 	public ChessPiece(int x, int y, ChessBoard b) {
+		rule = new InvalidRule();
 		this.type = ChessUtils.TYPE_NONE;
 		this.color = ChessUtils.COLORLESS;
 		gridPosX = x;
@@ -30,7 +33,8 @@ public class ChessPiece {
 
 	// Création d'une pièce normale. La position algébrique en notation d'échecs
 	// lui donne sa position sur la grille.
-	public ChessPiece(String name, String pos, ChessBoard b) {
+	public ChessPiece(String name, String pos,ChessRule r, ChessBoard b) {
+		rule =r;
 
 		color = ChessUtils.getColor(name);
 		type = ChessUtils.getType(name);
@@ -40,62 +44,20 @@ public class ChessPiece {
 
 	}
 	
-	ChessPiece(PieceMemento mem,ChessBoard b)
+	ChessPiece(PieceMemento mem,ChessRule r,ChessBoard b)
 	{
+		rule = r;
 		color=mem.getColor();
 		type = mem.getType();
 		gridPosX = mem.getPos().x;
 		gridPosY = mem.getPos().y;
 		view = new PieceView(type, color, b);
 	}
-	
-	public void clearView()
-	{
-		view = null;
-	}
-
-
 
 	// Règles de mouvements
 	public boolean verifyMove(Point gridPos, Point newGridPos) {
 
-		int distanceX = newGridPos.x - gridPos.x;
-		int distanceY = newGridPos.y - gridPos.y;
-		switch (type) {
-
-		case ChessUtils.TYPE_PAWN:
-
-			if (color == ChessUtils.WHITE) {
-				return (distanceX == 0 && distanceY == -1);
-			} else if (color == ChessUtils.BLACK) {
-				return (distanceX == 0 && distanceY == 1);
-			}
-
-		case ChessUtils.TYPE_BISHOP:
-
-			return (Math.abs(distanceX) == Math.abs(distanceY));
-
-		case ChessUtils.TYPE_KING:
-
-			return (Math.abs(distanceX) <= 1 && Math.abs(distanceY) <= 1);
-
-		case ChessUtils.TYPE_ROOK:
-
-			return (distanceX != 0 && distanceY == 0) || (distanceX == 0 && distanceY != 0);
-
-		case ChessUtils.TYPE_QUEEN:
-
-			return (Math.abs(distanceX) == Math.abs(distanceY)) || (distanceX != 0 && distanceY == 0)
-					|| (distanceX == 0 && distanceY != 0);
-
-		case ChessUtils.TYPE_KNIGHT:
-
-			return (Math.abs(distanceX) == 1 && Math.abs(distanceY) == 2
-					|| Math.abs(distanceX) == 2 && Math.abs(distanceY) == 1);
-
-		}
-
-		return false;
+		return rule.veriyMove(gridPos,newGridPos);
 	}
 
 	public void setAlgebraicPos(String pos) {

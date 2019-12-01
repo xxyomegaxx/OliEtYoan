@@ -2,10 +2,8 @@ package chess.game;
 
 import java.awt.Point;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,12 +44,12 @@ public class ChessBoard {
 
 	}
 
-	public ChessBoard(BoardMemento mem) {
+	/*public ChessBoard(BoardMemento mem) {
 		this(200, 100);
 		for (int i = 0; i < mem.getSize(); i++) {
 			putPiece(new ChessPiece(mem.getPiece(i), this));
 		}
-	}
+	}*/
 
 	public void clear() {
 
@@ -70,8 +68,10 @@ public class ChessBoard {
 
 	public void loadMemento(BoardMemento mem) {
 		clear();
+		ChessRule rule;
 		for (int i = 0; i < mem.getSize(); i++) {
-			putPiece(new ChessPiece(mem.getPiece(i), this));
+			rule = new ChessRule(mem.getPiece(i));
+			putPiece(new ChessPiece(mem.getPiece(i),rule, this));
 		}
 
 	}
