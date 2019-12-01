@@ -4,7 +4,6 @@ import java.awt.Point;
 
 import chess.game.ChessPiece;
 import chess.game.ChessUtils;
-import chess.game.PieceMemento;
 
 public abstract class ChessRule {
 	
@@ -37,18 +36,26 @@ public abstract class ChessRule {
 			return new RookBasicRule();
 
 		case ChessUtils.TYPE_QUEEN:
-
-			return new QueenBasicRule();
+			return or(new BishopBasicRule(),new RookBasicRule());
 
 		case ChessUtils.TYPE_KNIGHT:
 
 			return new KnightBasicRule();
 
 		}
+		
+		
 	    return null;
 	}
 
+	public static ChessRule and(ChessRule r1,ChessRule r2) {
+		
+		return new AndChessRule(r1,r2);
+		}
 	
+		public static ChessRule or(ChessRule r1,ChessRule r2) {
+		return new OrChessRule(r1,r2);
+		}
 	
 
 }
