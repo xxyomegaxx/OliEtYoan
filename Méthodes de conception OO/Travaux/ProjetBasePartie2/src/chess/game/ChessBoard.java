@@ -27,6 +27,8 @@ public class ChessBoard {
 	private ArrayList<ChessMove> redoMoves = new ArrayList<ChessMove>();
 
 	private static BoardMemento initialState;
+	
+	private ChessRule rule = ChessRule.createBoardRules(this);
 
 	// private Stack<BoardMemento>
 
@@ -127,19 +129,9 @@ public class ChessBoard {
 	public boolean doMove(ChessMove mov) {
 
 		ChessPiece toMove = getPiece(mov.getDep());
-
-		if (toMove.isNone()) {
-			return false;
-		}
-
-		if (!isValid(mov.getArr())) {
-			return false;
-		}
-
-		if (isSameColor(mov.getDep(), mov.getArr())) {
-			return false;
-		}
-
+		
+		if(!rule.veriyMove(mov.getDep(), mov.getArr())) return false;
+		
 		if (!toMove.verifyMove(mov.getDep(), mov.getArr())) {
 			return false;
 		}

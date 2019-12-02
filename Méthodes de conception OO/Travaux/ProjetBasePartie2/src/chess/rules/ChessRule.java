@@ -10,6 +10,12 @@ public abstract class ChessRule {
 	
 	public abstract boolean veriyMove(Point gridPos, Point newGridPos);
 	
+	public static ChessRule createBoardRules(ChessBoard board)
+	{
+		AndChessRule temp = new AndChessRule(new NoFriendlyFireRule(board),new HasPieceRule(board));
+		return new AndChessRule(temp,new ValidDestinationRule(board));
+	}
+	
 	public static ChessRule createRulesForPiece(ChessPiece piece,ChessBoard board)
 	{
 		int type = piece.getType();
