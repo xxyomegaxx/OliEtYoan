@@ -2,6 +2,7 @@ package chess.rules;
 
 import java.awt.Point;
 
+import chess.game.ChessBoard;
 import chess.game.ChessPiece;
 import chess.game.ChessUtils;
 
@@ -9,7 +10,7 @@ public abstract class ChessRule {
 	
 	public abstract boolean veriyMove(Point gridPos, Point newGridPos);
 	
-	public static ChessRule createRulesForPiece(ChessPiece piece)
+	public static ChessRule createRulesForPiece(ChessPiece piece,ChessBoard board)
 	{
 		int type = piece.getType();
 		int color = piece.getColor();
@@ -18,9 +19,19 @@ public abstract class ChessRule {
 		case ChessUtils.TYPE_PAWN:
 
 			if (color == ChessUtils.WHITE) {
-				return new WhitePawnBasicRule();
+				AndChessRule temp1 = new AndChessRule(new EmptyDestinationRule(board),new WhitePawnBasicRule());
+				AndChessRule temp2 = new AndChessRule(new EnemyDestinationRule(board),new WhitePawnCapture());				
+				OrChessRule or = new OrChessRule(temp1,temp2);
+				return new OrChessRule(or,new WhitePawnBigStep());
+				
+				
+				
 			} else if (color == ChessUtils.BLACK) {
-				return new BlackPawnBasicRule();
+				
+				AndChessRule temp1 = new AndChessRule(new EmptyDestinationRule(board),new BlackPawnBasicRule());
+				AndChessRule temp2 = new AndChessRule(new EnemyDestinationRule(board),new BlackPawnCapture());				
+				OrChessRule or = new OrChessRule(temp1,temp2);
+				return new OrChessRule(or,new BlackPawnBigStep());
 			}
 
 		case ChessUtils.TYPE_BISHOP:

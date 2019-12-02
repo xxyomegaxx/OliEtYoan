@@ -45,7 +45,7 @@ public class ChessPiece {
 
 		setAlgebraicPos(pos);
 		
-		rule = ChessRule.createRulesForPiece(this);
+		rule = ChessRule.createRulesForPiece(this,b);
 
 	}
 	
@@ -57,7 +57,7 @@ public class ChessPiece {
 		gridPosY = mem.getPos().y;
 		view = new PieceView(type, color, b);
 		
-		rule= ChessRule.createRulesForPiece(this);
+		rule= ChessRule.createRulesForPiece(this,b);
 	}
 
 	// Règles de mouvements
