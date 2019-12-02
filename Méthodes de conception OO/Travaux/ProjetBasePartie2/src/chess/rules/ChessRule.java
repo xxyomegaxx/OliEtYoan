@@ -27,22 +27,22 @@ public abstract class ChessRule {
 			if (color == ChessUtils.WHITE) {
 				AndChessRule temp1 = new AndChessRule(new EmptyDestinationRule(board),new WhitePawnBasicRule());
 				AndChessRule temp2 = new AndChessRule(new EnemyDestinationRule(board),new WhitePawnCapture());				
-				OrChessRule or = new OrChessRule(temp1,temp2);
-				return new OrChessRule(or,new WhitePawnBigStep());
-				
+				OrChessRule or = or(temp1,temp2);
+				OrChessRule or2 = or(or,new WhitePawnBigStep());
+				return and(or2,new PerpendicularLineOfSightRule(board));
 				
 				
 			} else if (color == ChessUtils.BLACK) {
 				
 				AndChessRule temp1 = new AndChessRule(new EmptyDestinationRule(board),new BlackPawnBasicRule());
 				AndChessRule temp2 = new AndChessRule(new EnemyDestinationRule(board),new BlackPawnCapture());				
-				OrChessRule or = new OrChessRule(temp1,temp2);
-				return new OrChessRule(or,new BlackPawnBigStep());
-			}
+				OrChessRule or = or(temp1,temp2);
+				OrChessRule or2 = or(or,new BlackPawnBigStep());
+				return and(or2,new PerpendicularLineOfSightRule(board));		}
 
 		case ChessUtils.TYPE_BISHOP:
 
-			return new BishopBasicRule();
+			return and(new BishopBasicRule(),new DiagonalLineOfSightRule(board));
 
 		case ChessUtils.TYPE_KING:
 
@@ -50,10 +50,12 @@ public abstract class ChessRule {
 
 		case ChessUtils.TYPE_ROOK:
 
-			return new RookBasicRule();
+			return and(new RookBasicRule(),new PerpendicularLineOfSightRule(board));
 
 		case ChessUtils.TYPE_QUEEN:
-			return or(new BishopBasicRule(),new RookBasicRule());
+			OrChessRule or = or(new BishopBasicRule(),new RookBasicRule());
+			AndChessRule and = and(or,new PerpendicularLineOfSightRule(board));
+			return and(and,new DiagonalLineOfSightRule(board));
 
 		case ChessUtils.TYPE_KNIGHT:
 
@@ -65,12 +67,12 @@ public abstract class ChessRule {
 	    return null;
 	}
 
-	public static ChessRule and(ChessRule r1,ChessRule r2) {
+	public static AndChessRule and(ChessRule r1,ChessRule r2) {
 		
 		return new AndChessRule(r1,r2);
 		}
 	
-		public static ChessRule or(ChessRule r1,ChessRule r2) {
+		public static OrChessRule or(ChessRule r1,ChessRule r2) {
 		return new OrChessRule(r1,r2);
 		}
 	
