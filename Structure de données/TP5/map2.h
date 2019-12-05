@@ -8,6 +8,7 @@
 
 #ifndef map2_h
 #define map2_h
+#include<algorithm>
 
 
 /////////////////////////////////////////////////
@@ -74,11 +75,76 @@ template <typename Tclef, typename Tvaleur>
 template <typename Tclef, typename Tvaleur>
 void map<Tclef,Tvaleur>::rotation_gauche_droite(noeud*& p){
   /*... a completer ...*/
+
+	noeud* x = p->GAUCHE;
+	noeud* T2 = x->DROITE;
+	noeud* parent = p->PARENT;
+
+	int ia = x->INDICE;
+	int ib = p->INDICE;
+	int nib = -ia - std::max(0, -ia) - 1 + ib;
+	int nia = ia - std::max(0, -nib) - 1;
+	x->INDICE = nia;
+	p->INDICE = nib;
+
+	// Perform rotation  
+	x->DROITE = p;
+	x->PARENT = p->PARENT;
+
+	p->GAUCHE = T2;
+	p->PARENT = x;
+	if (T2 != NULL)
+	{
+		T2->PARENT = p;
+	}
+
+	if (parent->GAUCHE == p)
+	{
+		parent->GAUCHE = x;
+	}
+	else if (parent->DROITE == p)
+	{
+		parent->DROITE = x;
+	}
+
+	p = x;
+
 }
 
 template <typename Tclef, typename Tvaleur>
 void map<Tclef,Tvaleur>::rotation_droite_gauche(noeud*& p){
-  /*... a completer ...*/
+	noeud* x = p->DROITE;
+	noeud* T2 = x->GAUCHE;
+	noeud* parent = p->PARENT;
+
+	int ia = x->INDICE;
+	int ib = p->INDICE;
+	int nib = -ia - std::max(0, -ia) - 1 + ib;
+	int nia = ia - std::max(0, -nib) - 1;
+	x->INDICE = nia;
+	p->INDICE = nib;
+
+	// Perform rotation  
+	x->GAUCHE = p;
+	x->PARENT = p->PARENT;
+
+	p->DROITE = T2;
+	p->PARENT = x;
+	if (T2 != NULL)
+	{
+		T2->PARENT = p;
+	}
+
+	if (parent->GAUCHE == p)
+	{
+		parent->GAUCHE = x;
+	}
+	else if (parent->DROITE == p)
+	{
+		parent->DROITE = x;
+	}
+
+	p = x;
 }
 
 
