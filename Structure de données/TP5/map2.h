@@ -119,8 +119,8 @@ void map<Tclef,Tvaleur>::rotation_droite_gauche(noeud*& p){
 
     int ix = x->INDICE;
     int ip = p->INDICE;
-    int nip = -ix - std::max(0, -ix) - 1 + ip;
-    int nix = ix - std::max(0, -nip) - 1;
+	int nip = ip + std::max(0, ix) + 1 - ix;
+    int nix = ix + std::max(0, nip) + 1 ;
     x->INDICE = nix;
     p->INDICE = nip;
     
