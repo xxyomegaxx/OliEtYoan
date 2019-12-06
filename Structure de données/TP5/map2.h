@@ -34,12 +34,18 @@ template <typename Tclef, typename Tvaleur>
                 return *it;
 
             }
+			if (c > root->GAUCHE->CONTENU->first)
+			{
+				it = new iterator(root);
+				return *it;
+			}
+
             root = root->GAUCHE;
         }
         else {
             if(root->DROITE == nullptr){
-                it = new iterator(root);
-                return *it;
+                
+				return end();
             }
             root = root->DROITE;
         }
@@ -49,14 +55,55 @@ template <typename Tclef, typename Tvaleur>
 
 
 template <typename Tclef, typename Tvaleur>
-  typename map<Tclef,Tvaleur>::iterator map<Tclef,Tvaleur>::insert(iterator j,const Tclef& c){
-  /*... a effacer et completer ...*/
-  return iterator();
+typename map<Tclef, Tvaleur>::iterator map<Tclef, Tvaleur>::insert(iterator j, const Tclef& c) {
+	iterator retour;
+	noeud *n = *j;
+	if (j != lower_bound(c)->first)
+	{
+		insert(c);
+	}
+	else
+	{
+		if (n->GAUCHE == NULL)
+		{
+			insert(c, n, retour);
+		}
+
+		else
+		{
+			n = n->GAUCHE;
+			while (n->DROITE != NULL)
+			{
+				n = n->DROITE;
+			}
+
+			insert(c, n, retour);
+
+		}
+
+	}
 }
+
+	 
 
 template <typename Tclef, typename Tvaleur>
   size_t map<Tclef,Tvaleur>::erase(const Tclef& c){
-  /*... a effacer et completer ...*/
+	  iterator it = new iterator(find (c));
+
+	  if (it == end())
+	  {
+		  return 0;
+	  }
+	  else  if (c != it->first)
+	  {
+		  return 0;
+	  }
+	  else if (c == it->first)
+	  {
+		  erase(it);
+		  return 1;
+	  }
+ 
   return 0;  
 }
 
