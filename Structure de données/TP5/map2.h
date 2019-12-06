@@ -52,14 +52,15 @@ template <typename Tclef, typename Tvaleur>
         }
 
     }
+    return iterator();
 }
 
 
 template <typename Tclef, typename Tvaleur>
 typename map<Tclef, Tvaleur>::iterator map<Tclef, Tvaleur>::insert(iterator j, const Tclef& c) {
 	iterator retour;
-	noeud *n = *j;
-	if (j != lower_bound(c)->first)
+	noeud *n = j.POINTEUR;
+	if (j != lower_bound(c))
 	{
 		insert(c);
 	}
