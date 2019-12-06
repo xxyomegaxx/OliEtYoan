@@ -86,23 +86,22 @@ typename map<Tclef, Tvaleur>::iterator map<Tclef, Tvaleur>::insert(iterator j, c
 			n = n->DROITE;
 
 		}
+		while (n->INDICE == 1 || n->INDICE == -1 || n->INDICE == 0) {
+			if (n->PARENT->GAUCHE == n)
+			{
+
+				allonger_a_gauche(n->PARENT);
+			}
+			else if (n->DROITE == n)
+			{
+				allonger_a_droite(n->PARENT);
+			}
+
+			n = n->PARENT;
+		}
+		return retour;
 	}
-
-    n = n->PARENT;
-
-	while(n->INDICE == 1 || n->INDICE == -1 || n->INDICE == 0){
-        if (n->GAUCHE == n)
-        {
-
-            allonger_a_gauche(n);
-        }
-        else if (n->DROITE == n)
-        {
-            allonger_a_droite(n);
-        }
-
-        n = n->PARENT;
-	}
+	
 }
 
 	 
@@ -130,8 +129,27 @@ template <typename Tclef, typename Tvaleur>
 
 template <typename Tclef, typename Tvaleur>
   typename map<Tclef,Tvaleur>::iterator map<Tclef,Tvaleur>::erase(iterator i){
-  /*... a effacer et completer ...*/
-  return iterator();
+	  iterator retour;
+	  noeud* n = i.POINTEUR;
+	  noeud* prec = i--;
+
+	  erase(i->first, prec, n);
+
+	  while (n->INDICE == 2 || n->INDICE == -2 || n->INDICE == 0) {
+		  if (n->PARENT->GAUCHE == n)
+		  {
+
+			  allonger_a_droite(n->PARENT);
+		  }
+		  else if (n->DROITE == n)
+		  {
+			  allonger_a_gauche(n->PARENT);
+		  }
+
+		  n = n->PARENT;
+	  }
+	  
+  
 }
 
 

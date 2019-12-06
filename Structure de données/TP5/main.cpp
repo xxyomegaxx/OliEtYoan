@@ -26,6 +26,10 @@ int main() {
 
     map<int,int>::iterator it = test.find(202);
 	test.insert(it, 201);
+	it = test.find(321);
+	test.insert(it, 321);
+	it = test.find(324);
+	test.insert(it, 324);
 
 	map<int, int>::iterator it2 = test.end();
 
