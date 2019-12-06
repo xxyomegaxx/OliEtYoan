@@ -1,6 +1,7 @@
 /**
 * \ file set2.h
-* \ author Aida Ouangraoua (Nov. 2019)
+* \ author Olivier Côté (coto2514)
+ *         Yoan David (davy3001) (Nov. 2019)
 * \ brief Ce fichier contient les fonctions 
 * \ du type map à coder
 */
