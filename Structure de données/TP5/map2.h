@@ -60,6 +60,8 @@ template <typename Tclef, typename Tvaleur>
 typename map<Tclef, Tvaleur>::iterator map<Tclef, Tvaleur>::insert(iterator j, const Tclef& c) {
 	iterator retour;
 	noeud *n = j.POINTEUR;
+	noeud *x = retour.POINTEUR;
+
 	if (j != lower_bound(c))
 	{
 		insert(c);
@@ -69,6 +71,7 @@ typename map<Tclef, Tvaleur>::iterator map<Tclef, Tvaleur>::insert(iterator j, c
 		if (n->GAUCHE == NULL)
 		{
 			insert(c, n, retour);
+			n = n->GAUCHE;
 		}
 
 		else
@@ -80,9 +83,25 @@ typename map<Tclef, Tvaleur>::iterator map<Tclef, Tvaleur>::insert(iterator j, c
 			}
 
 			insert(c, n, retour);
+			n = n->DROITE;
 
 		}
+	}
 
+    n = n->PARENT;
+
+	while(n->INDICE == 1 || n->INDICE == -1 || n->INDICE == 0){
+        if (n->GAUCHE == n)
+        {
+
+            allonger_a_gauche(n);
+        }
+        else if (n->DROITE == n)
+        {
+            allonger_a_droite(n);
+        }
+
+        n = n->PARENT;
 	}
 }
 
