@@ -25,9 +25,9 @@ int main() {
 	test2.insert(3);
 	test.afficher();
 
-    map<int,int>::iterator it = test.find(202);
-	test.insert(it, 201);
-
+    map<int,int>::iterator it = test.find(9);
+	test.insert(it, 9);
+	test.erase(50);
 	test.afficher();
 
 	it = test.find(321);
@@ -49,5 +49,6 @@ int main() {
 
 //    test.find(20);
     test.afficher();
+	system("PAUSE");
 
 }

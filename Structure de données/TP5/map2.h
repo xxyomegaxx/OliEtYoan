@@ -81,21 +81,25 @@ template <typename Tclef, typename Tvaleur>
 typename map<Tclef, Tvaleur>::iterator map<Tclef, Tvaleur>::insert(iterator j, const Tclef& c) {
 	iterator retour;
 	noeud *n = j.POINTEUR;
-
+	//3 cas possibles
 	if (j != lower_bound(c))
 	{
+		//cas 1 , l'iterator n'est pas le bon, on fait alors l'insertion à partir du haut de l'arbre
 		insert(c);
 	}
 	else
 	{
 		if (n->GAUCHE == NULL)
 		{
+
+			//cas 2 ,l,enfant gauche est nul, on insert au noeud actuel
 			insert(c, n, retour);
 			n = n->GAUCHE;
 		}
 
 		else
 		{
+			//cas 3 ,l,enfant gauche est pas nul, on insert au noeud le plus a droite de l'enfant gauche pour trouver le precedant
 			n = n->GAUCHE;
 			while (n->DROITE != NULL)
 			{
@@ -106,15 +110,20 @@ typename map<Tclef, Tvaleur>::iterator map<Tclef, Tvaleur>::insert(iterator j, c
 			n = n->DROITE;
 
 		}
+		//Ajustement des indices et rotations
 		n = n->PARENT;
-		while (n->INDICE == 1 || n->INDICE == -1) {
+		while ((n->INDICE == 1 || n->INDICE == -1)&& n->PARENT!=APRES) {
 			if (n->PARENT->GAUCHE == n)
 			{
+				//si on a ajoute a gauche, on augmente l'indice et fait les rotations en consequences
 				allonger_a_gauche(n->PARENT);
+
 			}
-			else if (n->DROITE == n)
+			else if (n->PARENT->DROITE == n)
 			{
+				//si on a retire a droite, on diminu l'indice et fait les rotations en consequences
 				allonger_a_droite(n->PARENT);
+
 			}
 
 			n = n->PARENT;
@@ -127,12 +136,12 @@ typename map<Tclef, Tvaleur>::iterator map<Tclef, Tvaleur>::insert(iterator j, c
 /**
 * \ brief Fonction de suppression d'un noeud avec la meme valeur
 * \ param [in] Une cle
-* | return un iterateur
+* | return un int disant si la supression a ete fait
 */
 template <typename Tclef, typename Tvaleur>
   size_t map<Tclef,Tvaleur>::erase(const Tclef& c){
-	  iterator it = new iterator(find (c));
-
+	  iterator it=(find (c));
+	  //On trouve c, si c est la, on le supprime , sinon on retourne 0
 	  if (it == end())
 	  {
 		  return 0;
@@ -150,28 +159,46 @@ template <typename Tclef, typename Tvaleur>
   return 0;  
 }
 
+
+  /**
+* \ brief Fonction de suppression d'un noeud a un iterateur donne
+* \ param [in] Un iterator
+* | return un iterateur
+*/
 template <typename Tclef, typename Tvaleur>
   typename map<Tclef,Tvaleur>::iterator map<Tclef,Tvaleur>::erase(iterator i){
 	  iterator retour;
 	  noeud* n = i.POINTEUR;
-	  noeud* prec = i--;
+	  noeud* prec = i--.POINTEUR;
 
 	  erase(i->first, prec, n);
-
-	  while (n->INDICE == 2 || n->INDICE == -2 || n->INDICE == 0) {
+	  // On efface le noeud
+	  bool exit = false; // condition pour sortir de la boucle
+	  //Ajustement des indices et rotations
+	  while (!exit && n->PARENT != NULL) {
 		  if (n->PARENT->GAUCHE == n)
 		  {
-
+			  //si on a retire a gauche, on diminue l'indice et fais les rotations en consequences
+			  if (n->PARENT->INDICE - 1 == -1)
+			  {
+				  exit = true;
+			  }
 			  allonger_a_droite(n->PARENT);
+
 		  }
 		  else if (n->DROITE == n)
 		  {
+			  //si on a retire a droite, on augmente l'indice et fais les rotations en consequences
+			  if (n->PARENT->INDICE + 1 == 1)
+			  {
+				  exit = true;
+			  }
 			  allonger_a_gauche(n->PARENT);
 		  }
 
 		  n = n->PARENT;
 	  }
-	  
+	  return retour;
   
 }
 
@@ -186,7 +213,6 @@ template <typename Tclef, typename Tvaleur>
 */
 template <typename Tclef, typename Tvaleur>
 void map<Tclef,Tvaleur>::rotation_gauche_droite(noeud*& p){
-  /*... a completer ...*/
 
     noeud* x = p->GAUCHE; //Noeud a gauche de p
 	noeud* T2 = x->DROITE; //Noeud a droite de T2
@@ -201,7 +227,7 @@ void map<Tclef,Tvaleur>::rotation_gauche_droite(noeud*& p){
 	x->INDICE = nix;
 	p->INDICE = nip;
 
-	// Perform rotation  
+	// faire rotation  
 	x->DROITE = p;
 	x->PARENT = p->PARENT;
 
@@ -245,13 +271,14 @@ void map<Tclef,Tvaleur>::rotation_droite_gauche(noeud*& p){
     x->INDICE = nix;
     p->INDICE = nip;
     
-	// Perform rotation
+	// faire rotation
 	x->GAUCHE = p;
-	x->PARENT = p->PARENT;
+	x->PARENT = parent;
+
 
 	//Associer T2 a la droite de p
 	p->DROITE = T2;
-	p->PARENT = x;
+	p->PARENT = x; // pour une raison qu<on ignore, cette ligne de code change parfois p en son parent, ce qui nous empeche de faire bien fonctionner le code.
 	if (T2 != NULL)
 	{
 		T2->PARENT = p;
