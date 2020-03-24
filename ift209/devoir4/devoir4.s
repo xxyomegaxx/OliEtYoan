@@ -25,34 +25,92 @@ main:
 	cmp x19,5
 	b.eq OperationCinq
 
-
-
+/*******************************************************************************
+  Opération 0
+  Usage: x19 - i    x21 -   NUM_LIGNES - 4
+         x20 - j    x22 - NUM_COLONNES - 4
+*******************************************************************************/
 OperationZero:
 
-	b 		End				// On va direct a la fin du programme
+	b 		End					// On va direct a la fin du programme
 
 
+
+
+/*******************************************************************************
+  Opération 1
+  Usage: x19 - i    x21 -   NUM_LIGNES - 4
+         x20 - j    x22 - NUM_COLONNES - 4
+*******************************************************************************/
 OperationUn:
 
-	b 		End				// On va direct a la fin du programme
+	b 		End					// On va direct a la fin du programme
 
 
-
+/*******************************************************************************
+  Opération 2
+  Usage: x19 - i    x21 -   NUM_LIGNES - 4
+         x20 - j    x22 - NUM_COLONNES - 4
+*******************************************************************************/
 OperationDeux:
 
-	b 		End				// On va direct a la fin du programme
+	b 		End					// On va direct a la fin du programme
 
 
 
+
+/*******************************************************************************
+  Opération 3
+  Usage: x19 - adresse du string
+         x20 - caractere lu transforme en sa valeur numerique decimale
+		 x21 - caractere precedant x20
+		 x22 - puissances de 2 qu'on multiplie
+		 x23 - nombre total (somme de tous le x20)
+		 x24 - registre contenant la valeur 2
+		 x25 - nombre de caractere -1
+*******************************************************************************/
 OperationTrois:
 
+	bl		CompterCarac
+	adr		x19, chaine
+	mov 	x25, x0				// x25 = CompterCarac-1
+	add		x25, x25, -1
+	add		x19, x19, x25		// On ajoute x25 a x19 pour commencer a la fin du string
+
+	mov		x22, 1				// On initialise le multiplicateur a 1
+	mov 	x23, 0				// On initialise le total a 0
+	mov		x24, 2				// On associe la valeur 2 a x24
+BoucleTrois:
+	ldrb	w20, [x19],-1		// Lit un caractere (On commence a la fin) dans x20
+	ldrb	w21, [x19]			// On met son precedant dans x21
+
+	add		x20, x20, -48		// Pour avoir les valeurs numeriques de 0 et 1
+	mul		x20, x20, x22		// On multiplie par la puissance de 2
+
+	cmp 	x21,98				// On regarde si le percedant est b
+	b.eq	TroisEnd			// Si oui fin de la boucle
+	add		x23, x23, x20		// Sinon on ajoute x20 au total x23
+	mul		x22, x22, x24
+	b		 BoucleTrois		// On recommence pour le caractere suivant
+TroisEnd:
+	sub		x23, x23, x20		//On soustrais la derniere puissance de 2 (entier signe)
+
+	adr		x0, fmtNombre		//On affiche le total	
+	mov		x1, x23
+	bl		printf
+
+	b 		End
 
 
 
-	b		 End			// On va direct a la fin du programme
-
-
-
+/*******************************************************************************
+  Opération 4
+  Usage: x19 - adresse du string
+  		 x20 - variable temporaire du caractere qu'on lit
+		 x21 - caractere resultant des operations
+		 x22 - registre temporaire pour separer les parties de x20
+		 x23 - IDEM x22
+*******************************************************************************/
 OperationQuatre:
 	adr		x19, chaine		//x19 Adressage de la chaine
 
@@ -74,7 +132,7 @@ BoucleQuatre:
 
 	add		x21, x21, -7	//On fait le deplacement de 7
 
-	cmp 	x21, 65			//Si plus haut que 41 (A)
+	cmp 	x21, 65			//Si plus haut que 65 (A)
 	b.hs	QuatreAffichage	//On va afficher
 	add		x21, x21, 26	//Sinon on ajoute 26 pour faire un bon circulaire
 
@@ -86,7 +144,10 @@ QuatreAffichage:
 
 
 
-
+/*******************************************************************************
+  Opération 5
+  Usage: x19 - adresse du string
+*******************************************************************************/
 OperationCinq:
 
 	mov		x0, 0			//On appelle la fonction permuter avec 0 comme argument
@@ -101,7 +162,20 @@ End:
 	mov		x0, 0
 	bl 		exit
 
-////////////////////////////////////////////
+/////////////////////////////    FONCTIONS   ///////////////////////////////////
+
+/*******************************************************************************
+  Fonction Permuter
+  Entrée: x0 Postion dans String
+  Sortie: -
+  Usage: x19 - Adresse chaine
+         x20 - Variable temporaire du caractere pour affichage
+		 x21 - Nombre de caractere -1
+		 x22 - Argument x0 Postion dans String
+		 x24 - Compteur pour tous les caracteres suivant x22
+		 x25 - Registre temporaire pour swap de 2 emplacements memoire
+		 x26 - IDEM x25
+*******************************************************************************/
 Permuter:
 
 	SAVE
@@ -136,10 +210,10 @@ BoucleRecursive:
 	strb	w26, [x19,x22]
 	strb	w25, [x19,x24]
 
-	cmp		x24, x21		//Tant que compteur < taille string
+	cmp		x24, x21		//Tant que compteur < taille string-1
 	add		x24,x24,1		//Incrementation du compteur
 	b.lo	BoucleRecursive
-	b EndQuestionCinq		//On va a la fin de la fonction
+	b EndPermuter			//On va a la fin de la fonction
 
 
 EndRecursive:				//lorsque postion dans string = taille string -1
@@ -155,13 +229,20 @@ EndRecursiveBoucle:			//On ne fait qu'afficher caractere par caractere
 
 	adr		x0, space		  //On ajoute un espace a la fin de chaque string
 	bl		printf
-	b EndQuestionCinq
+	b EndPermuter
 
-EndQuestionCinq:
+EndPermuter:
 	RESTORE
 	ret						//rien à retourner
 
-
+/*******************************************************************************
+  Fonction CompterCarac
+  Entrée: -
+  Sortie: Nombre de caractere dans chaine de caracteres
+  Usage: x19 - Adresse chaine
+         x20 - Variable temporaire du caractere pour compter
+		 x21 - Compteur du nombre de caractere
+*******************************************************************************/
 
 
 CompterCarac:
@@ -188,9 +269,9 @@ chaine: .skip 1024
 fmtLecture: .asciz "%[^\n]s"
 
 fmtAffichage: .asciz "%c"
-fmtNombre:    .asciz "%lu"
+fmtNombre:    .asciz "%ld"
 space:		  .asciz " "
-sautDeLigne:	  .asciz "\n"
+sautDeLigne:  .asciz "\n"
 
 .section ".bss"
 nombre:		.skip 1
