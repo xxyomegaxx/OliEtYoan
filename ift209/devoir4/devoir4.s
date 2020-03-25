@@ -39,13 +39,46 @@ OperationZero:
 
 /*******************************************************************************
   Opération 1
-  Usage: x19 - i    x21 -   NUM_LIGNES - 4
-         x20 - j    x22 - NUM_COLONNES - 4
+  Usage: x19 - Adresse du string
+		 x20 - Valeur de la variable
+		 x21 - Position de la variable
+		 x22 - Variable de retour isPair
+         x28 - Nombre de caracteres
+
 *******************************************************************************/
 OperationUn:
+	bl		CompterCarac
+	adr 	x19, chaine
+	mov 	x28, x0				// x20 = Nombre de caracteres
+	add		x20, x28, -1		
 
+	mov		x21, 1				// x21 = Position de l'element dans la string 
+
+BoucleOne:
+	ldrb	w20, [x19], 1		// Lit un caractere dans x20
+
+	mov		x0, x21				// Position passe en parametre a la fct PairOuImpaire
+	bl		IsPair
+	mov		x22, x0				// Variable Pair(1) ou Impaire(0)
+
+	mov		x0, x22				// Variable pair ou impaire passe en parametre
+	mov		x1, x20				// Valeur de la variable passe en parametre
+	bl		PairImpaire
+	mov		x20, x1				// Retourne la variable un fois change
+
+	mov		x0, x20				// variable passe en parametre
+	bl		Voyelles
+	mov		x20, x0				// Retourne la nouvelle variabale
+
+	adr		x0, fmtAffichage	// On affiche la string
+	mov		x1, x20
+	bl		printf
+
+	cmp		x21, x28			// Tant que x21 n'est pas egal a x28 refaire BoucleOne
+	add		x21, x21, 1			// Incremente la position de la variable
+
+	b.ne	BoucleOne
 	b 		End					// On va direct a la fin du programme
-
 
 /*******************************************************************************
   Opération 2
@@ -352,6 +385,53 @@ EndHexaConvert:
 	RESTORE
 	ret
 
+/*******************************************************************************
+  Fonction PairImpair
+  Entrée: x0 Valeur a verifier
+  		  x1 Valeur de la variable ASCII
+  Sortie: x0 Valeur de la nouvelle variable
+  Usage: x19 - Boolean Pair(1) ou Impaire(0)
+		 x20 - Valeur de la variable ASCII
+*******************************************************************************/
+PairImpaire:
+	SAVE
+
+	mov		x19, x0				// Boolean Pair(1) ou Impaire(0)
+	mov		x20, x1				// Valeur de la variable ASCII
+
+	cmp 	x20, 65				// Si(x20 < 65) {
+	b.lo	isWeird				// 		isWeird }
+	cmp		x20, 90				// Si(x20 > 90){
+	b.hi	isMinuscule			// 		isMinuscule }
+
+	cmp		x19, 1				// Si( position actuelle = pair){
+	b.eq	Fin					// 		Fin }
+
+MajToMin:						// Sinon {
+	add		x20, x20, 32		// 		Incrementer x20 de 32
+	mov		x1, x20				//		valeur a retourner
+	b		Fin					//		Fin }
+
+isMinuscule:					// Si x20 est une minuscule ou autre
+	cmp		x20, 97				// Si( x20 < 97 ){
+	b.lo	isWeird				//		isWeird }
+	cmp		x20, 122			// Si( x20 > 122 ) {
+	b.hi	isWeird				//		isWeird }
+
+	cmp		x19, 0				// Si( position acutelle = impair ){
+	b.eq	Fin					// 		Fin }
+
+MinToMaj:						// Sinon {
+	sub		x20, x20, 32		//		Soustraire 32 a x20
+	mov		x1, x20				//		Valeur de retour
+	b		Fin					//		Fin }
+
+isWeird:						// IsWeird = Tout se qui nest pas de l'alphabet
+	mov		x1, x20				// Valeur de retour
+
+Fin:
+	RESTORE
+	ret
 //////////////////////////////////////
 
 .section ".data"
