@@ -49,15 +49,46 @@ OperationUn:
 
 /*******************************************************************************
   Opération 2
-  Usage: x19 - i    x21 -   NUM_LIGNES - 4
-         x20 - j    x22 - NUM_COLONNES - 4
+  Usage: x19 - Adresse du string		x22 - Somme total en decimal
+         x20 - Longueur de la string	x23 - Multiplicateur de 16
+		 x21 - Variable puissance
 *******************************************************************************/
+
 OperationDeux:
+	bl		CompterCarac
+	adr 	x19, chaine
+	mov 	x20, x0				// x20 = CompterCarac-1
+	add		x20, x20, -1
+	add		x19, x19, x20		// On ajoute x20 a x19 pour commencer a la fin du string
+
+	mov		x21, 1				// La puissance (a incrementer)
+	mov		x22, 0				// Somme total
+	mov		x23, 16				// Multiplicateur de 16
+
+BoucleDeux:
+
+	ldrb	w20, [x19], -1		// Lit un caractere (On commence a la fin) dans x20
+	
+	cmp		x20, 120			// Si x20 = 120 soit x
+	b.eq	DeuxEnd				// Condition de sorti de la boucle
+
+	mov		x0, x20				// Mettre x20 comme parametre de HexaConvert
+	bl		HexaConvert			// Convertir le x20 en nombre decimal
+	mov		x20, x0				// Mettre la valeur de retour dans x20
+
+	mul		x20, x20, x21		// Multiplier par la puissance
+	add		x22, x22, x20		// Incrementer le total
+
+	mul		x21, x21, x23		// Mettre a jour la puissance
+
+	b		BoucleDeux
+
+DeuxEnd:
+	adr		x0, fmtNombre		//On affiche le total
+	mov		x1, x22
+	bl		printf
 
 	b 		End					// On va direct a la fin du programme
-
-
-
 
 /*******************************************************************************
   Opération 3
@@ -257,9 +288,71 @@ CompterCaracBoucle:			//met le nombres de caracteres dans x21
 	mov 	x0, x21
 	RESTORE
 	ret
+
+/*******************************************************************************
+  Fonction HexaConvert
+  Entrée: x0 caractere hexadecimal en ASCII
+  Sortie: x0 caractere en decimal
+  Usage: x20 - Variable du caractere
+		 x21 - Nombre en decimal
+*******************************************************************************/
+HexaConvert:
+
+	SAVE
+
+	mov		x20, x0
+	mov		x21, 0				// Nombre en decimal
+
+	cmp		x20, 58				// Si x20 est strictement plus petit que 58
+	b.lo	LessThanTen
+
+	cmp		x20, 65				// Si x20 = 65 soit A
+	b.eq	A
+
+	cmp		x20, 66				// Si x20 = 66 soit B
+	b.eq	B
+
+	cmp		x20, 67				// Si x20 = 67 soit C
+	b.eq	C
+
+	cmp		x20, 68				// Si x20 = 68 soit D
+	b.eq	D
+
+	cmp		x20, 69				// Si x20 = 69 soit E
+	b.eq	E
+
+	cmp		x20, 70				// Si x20 = 70 soit F
+	b.eq	F
+
+A:
+	add		x21, x21, 10		// x21 = 10
+	b		EndHexaConvert
+B:
+	add		x21, x21, 11		// x21 = 11
+	b		EndHexaConvert
+C:
+	add		x21, x21, 12		// x21 = 12
+	b		EndHexaConvert
+D:
+	add		x21, x21, 13		// x21 = 13
+	b		EndHexaConvert
+E:
+	add		x21, x21, 14		// x21 = 14
+	b		EndHexaConvert
+F:
+	add		x21, x21, 15		// x21 = 15
+	b		EndHexaConvert
+
+LessThanTen:
+	add		x21, x20, -48		// x21 = x20 - 48
+
+EndHexaConvert:
+	mov		x0, x21
+
+	RESTORE
+	ret
+
 //////////////////////////////////////
-
-
 
 .section ".data"
 // Mémoire allouée pour une chaîne de caractères d'au plus 1024 octets
