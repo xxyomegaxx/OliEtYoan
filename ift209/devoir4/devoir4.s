@@ -32,6 +32,17 @@ main:
 *******************************************************************************/
 OperationZero:
 
+
+	adr 	x19, chaine
+	ldrb	w20, [x19]
+
+	mov		x0, x20
+	bl		CompterUtfCarac
+	mov 	x28, x0				// x20 = CompterCarac-1
+
+
+
+
 	b 		End					// On va direct a la fin du programme
 
 
@@ -44,15 +55,14 @@ OperationZero:
 		 x21 - Position de la variable
 		 x22 - Variable de retour isPair
          x28 - Nombre de caracteres
-
 *******************************************************************************/
 OperationUn:
 	bl		CompterCarac
 	adr 	x19, chaine
-	mov 	x28, x0				// x20 = Nombre de caracteres
-	add		x20, x28, -1		
+	mov 	x28, x0				// x20 = CompterCarac-1
+	add		x20, x28, -1
 
-	mov		x21, 1				// x21 = Position de l'element dans la string 
+	mov		x21, 1
 
 BoucleOne:
 	ldrb	w20, [x19], 1		// Lit un caractere dans x20
@@ -76,9 +86,11 @@ BoucleOne:
 
 	cmp		x21, x28			// Tant que x21 n'est pas egal a x28 refaire BoucleOne
 	add		x21, x21, 1			// Incremente la position de la variable
-
 	b.ne	BoucleOne
+
 	b 		End					// On va direct a la fin du programme
+
+
 
 /*******************************************************************************
   Opération 2
@@ -101,7 +113,7 @@ OperationDeux:
 BoucleDeux:
 
 	ldrb	w20, [x19], -1		// Lit un caractere (On commence a la fin) dans x20
-	
+
 	cmp		x20, 120			// Si x20 = 120 soit x
 	b.eq	DeuxEnd				// Condition de sorti de la boucle
 
@@ -159,7 +171,7 @@ BoucleTrois:
 TroisEnd:
 	sub		x23, x23, x20		//On soustrais la derniere puissance de 2 (entier signe)
 
-	adr		x0, fmtNombre		//On affiche le total	
+	adr		x0, fmtNombre		//On affiche le total
 	mov		x1, x23
 	bl		printf
 
@@ -176,11 +188,11 @@ TroisEnd:
 		 x23 - IDEM x22
 *******************************************************************************/
 OperationQuatre:
-	adr		x19, chaine		//x19 Adressage de la chaine
+	adr		x19, chaine		// x19 Adressage de la chaine
 
 BoucleQuatre:
-	ldrb	w20, [x19],1	//On lit un caractere et on tasse le pointeur de un caractere
-	cmp 	x20,0			//si caractere null
+	ldrb	w20, [x19],1	// On lit un caractere et on tasse le pointeur de un caractere
+	cmp 	x20,0			// si caractere null
 	b.eq	End				// On va direct a la fin du programme
 
 
@@ -244,7 +256,6 @@ Permuter:
 
 	SAVE
 
-
 	mov		x22, x0			//x22 argument (position dans le string)
 	adr		x19, chaine		//x19 Adressage de la chaine
 
@@ -307,8 +318,6 @@ EndPermuter:
          x20 - Variable temporaire du caractere pour compter
 		 x21 - Compteur du nombre de caractere
 *******************************************************************************/
-
-
 CompterCarac:
 	SAVE
 	adr		x19, chaine
@@ -321,6 +330,112 @@ CompterCaracBoucle:			//met le nombres de caracteres dans x21
 	mov 	x0, x21
 	RESTORE
 	ret
+/*******************************************************************************
+  Fonction CheckLengthCharacter
+  Entrée: -
+  Sortie: Nombre de caractere dans chaine de caracteres
+  Usage: x19 - Adresse chaine
+         x20 - Variable temporaire du caractere pour compter
+		 x21 - Compteur du nombre de caractere
+*******************************************************************************/
+CompterUtfCarac:
+	SAVE
+	adr		x19, chaine
+	mov 	X21, -1
+
+	b		CaracUtfBoucle
+unOctet:
+	add		x21, x21, 1			//augmente le compteur
+	ldrb	w20, [x19], 1
+	b		EndCompterCarac
+deuxOctets:
+	add		x21, x21, 1
+	ldrb	w20, [x19], 2
+	b		EndCompterCarac
+troisOctets:
+	add		x21, x21, 1
+	ldrb	w20, [x19], 3
+	b		EndCompterCarac
+quatreOctets:
+	add		x21, x21, 1
+	ldrb	w20, [x19], 4
+	b		EndCompterCarac
+
+CaracUtfBoucle:				//met le nombres de caracteres dans x21\
+
+	mov		x0, x20
+	bl		CheckLengthCharacter
+	mov		x22, x0
+
+
+	cmp		x22, 1
+	b.eq	unOctet
+	cmp		x22, 2
+	b.eq	deuxOctets
+	cmp		x22, 3
+	b.eq	troisOctets
+	cmp		x22, 4
+	b.eq	quatreOctets
+
+EndCompterCarac:
+	cmp 	x20, 0
+	b.eq	FinCaract	//tant qu'on est pas au caractere null
+	b		CaracUtfBoucle
+FinCaract:
+
+	adr		x0, fmtNombre	// On affiche la string
+	mov		x1, x21
+	bl		printf
+	mov 	x0, x21
+	RESTORE
+	ret
+/*******************************************************************************
+  Fonction CheckLengthCharacter
+  Entrée: -
+  Sortie: Nombre de caractere dans chaine de caracteres
+  Usage: x19 - Adresse chaine
+         x20 - Variable temporaire du caractere pour compter
+		 x21 - Compteur du nombre de caractere
+*******************************************************************************/
+CheckLengthCharacter:
+	SAVE
+
+	mov 	x19, x0
+	ror		x21, x19, 3
+
+	mov		x24, 16
+	mov		x25, 2
+	mov		x26, 0
+
+LengthBoucle:
+	cmp		x24, 0
+	b.eq	EndCheckLength
+
+	and		x23, x21, x24
+
+	cmp		x26, 0
+	b.ne	Continu
+	cmp		x23, 0
+	b.eq	UnOctet
+
+Continu:
+	cmp		x23, 0
+	b.eq	EndCheckLength
+
+	udiv	x24, x24, x25
+	add		x26, x26, 1
+	b		LengthBoucle
+	b		EndCheckLength
+
+UnOctet:
+	add 	x26, x26, 1
+
+EndCheckLength:
+
+	mov		x0, x26
+
+	RESTORE
+	ret
 
 /*******************************************************************************
   Fonction HexaConvert
@@ -330,7 +445,6 @@ CompterCaracBoucle:			//met le nombres de caracteres dans x21
 		 x21 - Nombre en decimal
 *******************************************************************************/
 HexaConvert:
-
 	SAVE
 
 	mov		x20, x0
@@ -386,6 +500,41 @@ EndHexaConvert:
 	ret
 
 /*******************************************************************************
+  Fonction IsPair
+  Entrée: x0 Valeur a verifier
+  Sortie: x0 Boolean Pair(1) ou Impair(0)
+  Usage: x19 - Boolean Pair(1)
+		 x20 - Boolean Impair(0)
+		 x21 - Valeur a verifier
+		 x22 - Multiplicateur et diviseur
+		 x23 - Resultat de la division et multiplication
+*******************************************************************************/
+IsPair:
+	SAVE
+	mov 	x19, 1				// x19 = Boolean ... Vrai
+	mov		x20, 0				// x20 = Boolean ... Faux
+	mov 	x21, x0				// x21 = nombre a verifier
+	mov 	x22, 2				// x22 = Diviseur et multiplicateur
+
+	sdiv	x23, x21, x22		// Division de x21 par x22 dans x23
+	mul 	x23, x23, x22		// Multiplication de x23 par x22
+
+	cmp		x23, x21
+	b.eq	Pair				// Si le resultat est pair
+
+Impair:
+	mov		x0, x20
+	b		FinIsPair		//Sinon retourner 0
+
+Pair:
+	mov		x0, x19				// Retourner 1
+
+FinIsPair:
+
+	RESTORE
+	ret
+
+/*******************************************************************************
   Fonction PairImpair
   Entrée: x0 Valeur a verifier
   		  x1 Valeur de la variable ASCII
@@ -395,7 +544,6 @@ EndHexaConvert:
 *******************************************************************************/
 PairImpaire:
 	SAVE
-
 	mov		x19, x0				// Boolean Pair(1) ou Impaire(0)
 	mov		x20, x1				// Valeur de la variable ASCII
 
@@ -432,7 +580,60 @@ isWeird:						// IsWeird = Tout se qui nest pas de l'alphabet
 Fin:
 	RESTORE
 	ret
+
+/*******************************************************************************
+  Fonction Voyelles
+  Entrée: x0 Valeur a verifier
+  Sortie: x0 Valeur de la nouvelle variable
+  Usage: x19 - Valeur a verifier
+*******************************************************************************/
+Voyelles:
+	SAVE
+	mov 	x19, x0
+
+	cmp		x19, 65				// if(x19 = A(65)){
+	b.eq	isVoyelleAa			//	 isVoyelleAa}
+	cmp		x19, 97				// if(x19 = a(97)){
+	b.eq	isVoyelleAa			//	 isVoyelleAa }
+
+	cmp		x19, 69				// if(x19 = E(69)){
+	b.eq	isVoyelleEe			//	 isVoyelleEe }
+	cmp		x19, 101			// if(x19 = e(101)){
+	b.eq	isVoyelleEe			//	 isVoyelleEe }
+
+	cmp		x19, 73				// if(x19 = I(73)){
+	b.eq	isVoyelleIi			//	 isVoyelleIi }
+	cmp		x19, 105			// if(x19 = i(105)){
+	b.eq	isVoyelleIi			//	 isVoyelleIi }
+
+	cmp		x19, 79				// if(x19 = O(79)){
+	b.eq	isVoyelleOo			//	 isVoyelleOo }
+	cmp		x19, 111			// if(x19 = o(111)){
+	b.eq	isVoyelleOo			//	 isVoyelleOo }
+
+	b		FinVoyelles			// Sinon {FinVoyelles}
+
+isVoyelleAa:
+	mov		x19, 52				// x19 = 4(52)
+	b		FinVoyelles
+isVoyelleEe:
+	mov		x19, 51				// x19 = 3(51)
+	b		FinVoyelles
+isVoyelleIi:
+	mov		x19, 49				// x19 = 1(49)
+	b		FinVoyelles
+isVoyelleOo:
+	mov		x19, 48				// x19 = 1(48)
+
+FinVoyelles:
+
+	mov 	x0, x19
+
+	RESTORE
+	ret
 //////////////////////////////////////
+
+
 
 .section ".data"
 // Mémoire allouée pour une chaîne de caractères d'au plus 1024 octets
