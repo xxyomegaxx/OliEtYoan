@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+{% block main %}
+<style>
+    h2{
+        background-color:rgb(0, 153, 0);
+        color: white;
+        text-align: center;
+        font-size: 40px;
+    }
+
+    h3{
+        color:black;
+        text-align: center;
+    }
+
+    p{
+        color:black;
+        text-align: center;
+    }
+
+
+
+
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <h2> Profile Etudiant</h2>
+      <hr>
+      <div class="card">
+        <div class="card-body">
+          <h3> <strong>Cip:</strong> &ensp; {{ etudiant["cip"] }}</h3>
+          <p> <strong>Email:</strong> &ensp; {{etudiant["email"] }}</p>
+          <p class="text-muted"> <strong>Programme d'études:</strong> &ensp; {{ etudiant["programme"] }}</p>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+</html>

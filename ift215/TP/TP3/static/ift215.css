@@ -1,0 +1,62 @@
+.tuile {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+    display: inline-block;
+    background-color: black;
+    box-sizing: border-box;
+}
+
+.tuile-btn {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+    display: inline;
+    background-color: black;
+    box-sizing: border-box;
+}
+
+.type0 {
+    background-color: rgb(255, 128, 128);
+}
+
+.type1 {
+    background-color: rgb(128, 255, 128);
+}
+
+.type2 {
+    background-color: rgb(128, 128, 255);
+}
+
+.type3 {
+    background-color: rgb(255, 255, 128);
+}
+
+.type4 {
+    background-color: rgb(255, 128, 255);
+}
+
+.type5 {
+    background-color: rgb(128, 255, 255);
+}
+
+.selected {
+    border: 2px solid red;
+}
+
+div.col {
+    width: 50%;
+    float: left;
+}
+
+form.form-tuile {
+    display:inline-block;
+}
+
+.mb {
+    margin-bottom: 10px;
+}

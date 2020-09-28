@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>IFT215</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ift215.css') }}"/>
+    <script>document.addEventListener("DOMContentLoaded", app.py.init)</script>
+</head>
+<body>
+<h1>Jeu de {{ nom }}</h1>
+<div class="mb">
+    <!--lier l'action du bouton Démarrer une nouvelle partie au route '/demarrer/' -->
+    <a href="/demarrer"><input type="button" name="Demarrer" value="Démarrer une nouvelle partie"></a>
+    
+</div>
+<div class="col">
+    {% for row in niveau.grille %}
+        {% set rowIndex = loop.index0 %}
+        <div>
+            {% for col in row %}
+                {%  %}
+                <div id="tuile type{{ col.type }}" data-ligne="{{ rowIndex }}" data-colonne="{{ loop.index0 }}"></div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>
